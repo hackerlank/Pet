@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/color_255_255_255">
+
+    <ImageView
+        android:id="@+id/ivBg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorPrimary"/>
+
+    <com.pet.widgets.RoundRectImageView
+        android:id="@+id/ivAvater"
+        android:layout_width="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="170dp"
+        app:round_radius="30"/>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivBg"
+        android:layout_toRightOf="@id/ivAvater"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="迟迟"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivAvater"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:paddingBottom="20dp"
+        android:text="今天貌似比昨天听话~"
+        android:textColor="@color/color_33_33_33"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/background_color"
+        android:layout_below="@id/tvContent"/>
+
+</RelativeLayout>

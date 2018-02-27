@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_255_255_255">
+
+    <com.pet.widgets.RoundRectImageView
+        android:id="@+id/ivPet"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        app:round_radius="5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/ivPet"
+        android:layout_marginLeft="10dp"
+        android:paddingRight="15dp"
+        android:orientation="vertical"
+        android:layout_height="120dp">
+
+        <TextView
+            android:id="@+id/tvPetName"
+            android:layout_width="match_parent"
+            android:textSize="17sp"
+            android:maxLines="1"
+            android:text="宠物在基地的编号"
+            android:textColor="@color/color_33_33_33"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvPetType"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:text="哈士奇"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/color_99_99_99"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/male"/>
+
+            <TextView
+                android:id="@+id/tvPetAge"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:text="2岁"
+                android:textColor="@color/color_99_99_99"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:textSize="15sp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:maxLines="3"
+            android:text="哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇..."
+            android:textColor="@color/color_99_99_99"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@id/ivPet"
+        android:layout_marginTop="15dp"
+        android:background="@color/background_color"
+        android:layout_height="10dp"/>
+</RelativeLayout>

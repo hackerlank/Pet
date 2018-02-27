@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">宠宝</string>
+
+    <!-- HomeActivity -->
+    <string name="home_page">首页</string>
+    <string name="pet_center">宠物中心</string>
+    <string name="pet_friend">宠友圈</string>
+    <string name="location_ring">定位环</string>
+    <string name="me">我的</string>
+
+    <!-- HomeFragment -->
+    <string name="pet_guid">宠物指南</string>
+    <string name="pet_encyclopedia">宠物百科</string>
+    <string name="pet_public_welfare">宠物公益</string>
+    <string name="pet_hospital">宠物医院</string>
+    <string name="choice_article">精选推文</string>
+
+    <!-- MeFragment -->
+    <string name="my_movement">我的动态</string>
+    <string name="my_pet">我的宠物</string>
+    <string name="attention_people">关注的人</string>
+    <string name="my_collection">我的收藏</string>
+    <string name="pet_report">宠物告示</string>
+    <string name="jiling_guanli">寄领管理</string>
+    <string name="order">订单</string>
+    <string name="account">账户</string>
+    <string name="suggest">意见</string>
+    <string name="about">关于</string>
+
+    <!-- PetCenterFragment -->
+    <string name="pet_lingyang">宠物领养</string>
+    <string name="pet_shide">宠物拾得</string>
+    <string name="pet_zoushi">宠物走失</string>
+    <string name="pet_jiyang">宠物寄养</string>
+
 </resources>
