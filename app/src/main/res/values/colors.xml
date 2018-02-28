@@ -4,15 +4,18 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="background_color">#f0f0f0</color>
+    <color name="background_color">#f4f5f7</color>
     <color name="color_255_255_255">#ffffff</color>
     <color name="color_93_93_93">#5d5d5d</color>
     <color name="color_187_187_187">#b1b1b1</color>
 
+    <color name="color_11_11_11">#171717</color>
     <color name="color_66_66_66">#666666</color>
     <color name="color_33_33_33">#333333</color>
     <color name="color_99_99_99">#999999</color>
     <color name="color_ae_7c_2e">#ae7c2e</color>
     <color name="half_black">#55000000</color>
+    <color name="color_ff_73_73">#FF7373</color>
+    <color name="color_cc_cc_cc">#CCCCCC</color>
 
 </resources>

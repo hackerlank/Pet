@@ -9,6 +9,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import com.pet.R;
+import com.pet.fragment.FindPasFragment;
+import com.pet.fragment.LoginFragment;
+import com.pet.fragment.RegisterFragment;
+
 import java.util.ArrayList;
 
 /**
@@ -79,10 +83,10 @@ public class SplashActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-//                        Intent intent = new Intent(SplashActivity.this, EmptyActivity.class);
-//                        intent.putExtra("FRAGMENT_NAME", LoginFragment.class.getName());
-//                        startActivity(intent);
+//                        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                        Intent intent = new Intent(SplashActivity.this, EmptyActivity.class);
+                        intent.putExtra("FRAGMENT_NAME", LoginFragment.class.getName());
+                        startActivity(intent);
                         finish();
                     }
                 });

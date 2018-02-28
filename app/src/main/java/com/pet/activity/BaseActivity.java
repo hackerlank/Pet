@@ -79,11 +79,11 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
 
     public void setTopBar(String title, int rightRes) {
         ((TextView) findViewById(R.id.tvTitle)).setText(title);
-        if (rightRes > 0) {
-            ImageView ivRight = findViewById(R.id.ivRight);
-            ivRight.setVisibility(View.VISIBLE);
-            ivRight.setImageResource(rightRes);
-        }
+//        if (rightRes > 0) {
+//            ImageView ivRight = findViewById(R.id.ivRight);
+//            ivRight.setVisibility(View.VISIBLE);
+//            ivRight.setImageResource(rightRes);
+//        }
     }
 
     public void showLoadingDialog() {

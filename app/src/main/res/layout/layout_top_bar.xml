@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="64dp">
+    android:layout_height="wrap_content">
 
-    <ImageView
+    <View
+        android:id="@+id/status_bar"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:scaleType="centerCrop"
-      />
+        android:layout_height="24dp"
+        android:background="@color/color_255_255_255"
+        android:alpha="0.5"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:layout_height="44dp"
+        android:layout_below="@id/status_bar"
+        android:background="@color/color_255_255_255"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
 
         <ImageView
             android:id="@+id/ivLeft"
@@ -22,25 +24,27 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingRight="30dp"
-            android:onClick="onBackClick"
-         />
+            android:src="@drawable/red_back"
+            android:onClick="onBackClick"/>
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:textColor="@color/color_11_11_11"
+            android:text="@string/find_pas"
+            android:textSize="18sp" />
 
-            android:textColor="@color/color_ae_7c_2e"
-            android:textSize="19sp" />
-
-        <ImageView
-            android:id="@+id/ivRight"
+        <TextView
+            android:id="@+id/tvRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:visibility="gone" />
+            android:layout_centerVertical="true"
+            android:textColor="@color/color_11_11_11"
+            android:text="@string/submit"
+            android:textSize="16sp" />
     </RelativeLayout>
 
 </RelativeLayout>
