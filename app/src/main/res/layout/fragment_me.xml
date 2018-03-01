@@ -37,7 +37,7 @@
         android:layout_marginTop="45dp"
         android:src="@drawable/xiaoxi"/>
 
-    <com.pet.widgets.RoundRectImageView
+    <com.gzcbkj.chongbao.widgets.RoundRectImageView
         android:id="@+id/ivAvater"
         android:layout_width="60dp"
         android:layout_marginLeft="20dp"

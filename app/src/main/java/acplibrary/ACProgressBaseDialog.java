@@ -7,7 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.view.Display;
 import android.view.WindowManager;
-import com.pet.R;
+import com.gzcbkj.chongbao.R;
 
 public abstract class ACProgressBaseDialog extends Dialog {
 

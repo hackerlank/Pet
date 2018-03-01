@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_255_255_255">
 
-    <com.pet.widgets.RoundRectImageView
+    <com.gzcbkj.chongbao.widgets.RoundRectImageView
         android:id="@+id/ivPet"
         android:layout_width="120dp"
         android:layout_height="120dp"

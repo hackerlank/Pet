@@ -10,7 +10,7 @@
         android:layout_height="200dp"
         android:background="@color/colorPrimary"/>
 
-    <com.pet.widgets.RoundRectImageView
+    <com.gzcbkj.chongbao.widgets.RoundRectImageView
         android:id="@+id/ivAvater"
         android:layout_width="60dp"
         android:layout_marginLeft="20dp"

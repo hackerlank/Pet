@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.pet.widgets.RatioImageView
+    <com.gzcbkj.chongbao.widgets.RatioImageView
         android:id="@+id/ivPet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
