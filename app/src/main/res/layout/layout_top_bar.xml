@@ -42,9 +42,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:visibility="invisible"
             android:textColor="@color/color_11_11_11"
             android:text="@string/submit"
-            android:textSize="16sp" />
+            android:textSize="13sp" />
     </RelativeLayout>
 
 </RelativeLayout>

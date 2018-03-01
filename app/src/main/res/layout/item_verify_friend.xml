@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+
+    <com.gzcbkj.chongbao.widgets.RoundRectImageView
+        android:id="@+id/ivAvater"
+        android:layout_below="@id/view1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:round_radius="25"/>
+
+    <TextView
+        android:id="@+id/tvOperator"
+        android:layout_width="50dp"
+        android:layout_height="24dp"
+        android:text="@string/pass"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:background="@drawable/bg_verify_friend"
+        android:textColor="@color/color_255_255_255"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/ivAvater"
+        android:layout_alignTop="@id/ivAvater"
+        android:layout_alignBottom="@id/ivAvater"
+        android:layout_toLeftOf="@id/tvOperator"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="佳佳"
+            android:singleLine="true"
+            android:textColor="@color/color_11_11_11"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:singleLine="true"
+            android:text="你好可以添加你为我的好友吗？"
+            android:textColor="@color/color_66_66_66"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@id/ivAvater"
+        android:layout_height="5dp"/>
+
+
+
+</RelativeLayout>

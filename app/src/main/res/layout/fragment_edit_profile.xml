@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/layout_top_bar"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+
+    <RelativeLayout
+        android:id="@+id/rlAvater"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="@color/color_255_255_255">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/avater"
+            android:textColor="@color/color_33_33_33"
+            android:textSize="15sp" />
+
+        <com.gzcbkj.chongbao.widgets.RoundRectImageView
+            android:id="@+id/ivAvater"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:round_radius="23"
+            android:src="@drawable/touxiang" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+
+    <RelativeLayout
+        android:id="@+id/rlNickname"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="@color/color_255_255_255">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/nickname"
+            android:textColor="@color/color_33_33_33"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow" />
+
+        <TextView
+            android:id="@+id/tvNick"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/iv"
+            android:layout_toRightOf="@id/tv"
+            android:gravity="right|center_vertical"
+            android:text="@string/nickname"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/color_66_66_66"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

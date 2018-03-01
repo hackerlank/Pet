@@ -64,4 +64,84 @@
     <string name="agree_pet_privacy_and_register">同意服务条款并注册</string>
     <string name="pet_privacy">《宠宝服务条款》</string>
 
+    <!-- ComplaintFragment -->
+    <string name="complaint">投诉</string>
+    <string name="select_complaint">请选择投诉的原因：</string>
+    <string name="complaint_content_1">发布不适当内容对我骚扰</string>
+    <string name="complaint_content_2">存在欺诈骗钱行为</string>
+    <string name="complaint_content_3">侵权行为</string>
+    <string name="complaint_content_4">发布仿冒品信息</string>
+
+    <!-- ComplaintFragment -->
+    <string name="search_content">搜索指定内容... ...</string>
+    <string name="search_content_1">商品</string>
+    <string name="search_content_2">文章</string>
+    <string name="search_content_3">用户</string>
+    <string name="search_content_4">动态</string>
+    <string name="search_content_5">宠友圈</string>
+    <string name="search_content_6">聊天</string>
+
+    <!-- RaisePetAdvisoryFragment -->
+    <string name="raise_pet_advisory">养宠咨询</string>
+    <string name="follow_wechat_get_more">关注微信，了解更多资讯</string>
+    <string name="leave_message">留个言吧... ...</string>
+
+    <!-- UserProfileFragment -->
+    <string name="detail_msg">详细信息</string>
+    <string name="area">地区</string>
+    <string name="album">相册</string>
+    <string name="send_msg">发消息</string>
+    <string name="pass_verify">通过验证</string>
+    <string name="add_friend">加好友</string>
+    <string name="follow_he">关注他</string>
+
+    <!-- VerifyFriendFragment -->
+    <string name="verify_friend">验证好友</string>
+    <string name="pass">通过</string>
+    <string name="added">已添加</string>
+
+    <!-- MessageFragment -->
+    <string name="message">消息</string>
+
+    <!-- PublishFrigment -->
+    <string name="publish">发布</string>
+    <string name="picture">图片</string>
+    <string name="video">视频</string>
+    <string name="article">文章</string>
+
+    <!-- PublishVideoFrigment -->
+    <string name="publish_video">发布视频</string>
+    <string name="add_video_des">添加视频描述... ...</string>
+    <string name="record_video">拍摄</string>
+    <string name="select_video">选择视频</string>
+
+    <!-- PublishArticleFrigment -->
+    <string name="publish_article">发布文章</string>
+    <string name="article_type">文章类型</string>
+    <string name="publish_article_pic">上传封面</string>
+    <string name="article_title">文章标题</string>
+    <string name="write_something">写点什么... ...</string>
+
+    <!-- PublishPictureFrigment -->
+    <string name="publish_picture">发布照片</string>
+    <string name="add_picture_des">添加照片描述... ...</string>
+    <string name="album_select">相册选择</string>
+
+    <!-- EditProfileFragment -->
+    <string name="personal_prdfile">个人资料</string>
+    <string name="avater">头像</string>
+
+    <!-- EditNicknameFragment -->
+    <string name="edit_nickname">修改昵称</string>
+    <string name="please_input_nickname_2">请填写昵称</string>
+
+    <!-- SettingFragment -->
+    <string name="setting">设置</string>
+    <string name="modify_pas">修改密码</string>
+    <string name="clear_cache">清理缓存</string>
+
+    <!-- EditPasswordFragment -->
+    <string name="init_pas">原密码</string>
+    <string name="please_input_init_pas">请输入帐号的原密码</string>
+
 </resources>

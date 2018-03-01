@@ -22,7 +22,7 @@ public class BaseApplication extends Application {
         SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-                layout.setPrimaryColorsId(android.R.color.white, R.color.color_33_33_33);//全局设置主题颜色
+                layout.setPrimaryColorsId(R.color.background_color, R.color.color_33_33_33);//全局设置主题颜色
                 return new ClassicsHeader(context).setSpinnerStyle(SpinnerStyle.Translate);//指定为经典Header，默认是 贝塞尔雷达Header
             }
         });

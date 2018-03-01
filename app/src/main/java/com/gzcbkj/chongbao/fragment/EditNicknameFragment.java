@@ -5,21 +5,20 @@ import android.view.View;
 import com.gzcbkj.chongbao.R;
 
 /**
- * Created by huangzhifeng on 2018/3/1.
+ * Created by huangzhifeng on 2018/3/2.
  */
 
-public class FindPasFragment extends BaseFragment {
+public class EditNicknameFragment extends BaseFragment {
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_find_password;
+        return R.layout.fragment_edit_nickname;
     }
 
     @Override
     protected void onViewCreated(View view) {
-        setText(R.id.tvTitle,R.string.find_pas);
-        setText(R.id.tvRight,R.string.submit);
+        setText(R.id.tvTitle,R.string.edit_nickname);
         setViewVisible(R.id.tvRight);
-        setViewsOnClickListener(R.id.tvRight);
+        setText(R.id.tvRight,R.string.submit);
     }
 
     @Override

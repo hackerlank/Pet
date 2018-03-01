@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <com.gzcbkj.chongbao.widgets.RoundRectImageView
+        android:id="@+id/ivAvater"
+        android:layout_below="@id/view1"
+        android:layout_marginTop="5dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        app:round_radius="21"/>
+
+    <ImageView
+        android:id="@+id/ivPic"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_below="@id/view1"
+        android:src="@drawable/default_2"
+        android:layout_alignParentRight="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/ivAvater"
+        android:layout_alignTop="@id/ivPic"
+        android:layout_alignBottom="@id/ivPic"
+        android:layout_toLeftOf="@id/ivPic"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="贝贝喵"
+            android:singleLine="true"
+            android:textColor="@color/color_00_55_87"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="喵喵越来越可爱了~"
+            android:singleLine="true"
+            android:textColor="@color/color_33_33_33"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23:36"
+            android:textColor="@color/color_99_99_99"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@id/ivPic"
+        android:layout_height="10dp"/>
+
+
+
+</RelativeLayout>

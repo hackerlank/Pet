@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/layout_top_bar"/>
+
+    <TextView
+        android:id="@+id/tvFollowWechat"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:text="@string/follow_wechat_get_more"
+        android:drawableLeft="@drawable/follow_wechat"
+        android:drawablePadding="10dp"
+        android:textColor="@color/color_11_11_11"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_255_255_255"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/etLeaveMessage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:gravity="left|top"
+        android:textColorHint="@color/color_99_99_99"
+        android:hint="@string/leave_message"
+        android:textColor="@color/color_11_11_11"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_leave_msg"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:text="@string/submit"
+        android:textColor="@color/color_255_255_255"
+        android:background="@drawable/bg_submit"
+        android:layout_marginTop="30dp"
+        android:textSize="15sp" />
+
+
+</LinearLayout>

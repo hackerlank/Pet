@@ -66,6 +66,11 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         tv.setText(text == null ? "" : text);
     }
 
+    protected void setText(int id, int strId) {
+        TextView tv = getView().findViewById(id);
+        tv.setText(getString(strId));
+    }
+
     protected void setImage(int id, int drawableId) {
         ImageView iv = (ImageView) getView().findViewById(id);
         iv.setImageResource(drawableId);

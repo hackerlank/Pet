@@ -17,5 +17,10 @@
     <color name="half_black">#55000000</color>
     <color name="color_ff_73_73">#FF7373</color>
     <color name="color_cc_cc_cc">#CCCCCC</color>
+    <color name="color_f4_f4_f4">#F4F4F4</color>
+    <color name="color_ee_ee_ee">#EEEEEE</color>
+    <color name="line">#DDDDDD</color>
+    <color name="color_ff_b5_4c">#FFB54C</color>
+    <color name="color_00_55_87">#005587</color>
 
 </resources>
