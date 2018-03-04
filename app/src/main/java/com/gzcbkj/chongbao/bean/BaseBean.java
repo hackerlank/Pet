@@ -7,4 +7,27 @@ import java.io.Serializable;
  */
 
 public class BaseBean implements Serializable {
+    private int code; // 0:成功;403:需要登录;300:参数错误;500:程序错误
+    private String msg; // 错误信息
+
+    public boolean isSuccess() {
+        // TODO Auto-generated method stub
+        return code == 0;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 }

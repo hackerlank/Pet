@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/layout_top_bar"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/money"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_66_66_66"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/reset_money"
+        android:layout_marginTop="30dp"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tvMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_ff_73_73"
+        android:layout_gravity="center_horizontal"
+        android:text="100"
+        android:layout_marginTop="10dp"
+        android:textSize="50sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_66_66_66"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/yuan"
+        android:layout_marginTop="5dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvCharge"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="@color/color_255_255_255"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="@string/charge"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:background="@drawable/bg_submit"
+        android:textSize="15sp" />
+
+</LinearLayout>

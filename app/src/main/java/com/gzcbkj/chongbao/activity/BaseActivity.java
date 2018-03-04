@@ -52,8 +52,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
 
     private boolean mIsFullScreen;
 
-    private HashMap<Integer, MyDialogFragment> mErrorDialogs;
-
     private static boolean isNotComeFromBG;  //改为静态的，防止多个Activity会调用背景到前景的方法
 
 
@@ -268,21 +266,15 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
 
     public void errorCodeDo(final int errorCode, final String message) {
         if (TextUtils.isEmpty(message)) {
-            if (mErrorDialogs == null) {
-                mErrorDialogs = new HashMap<>();
-            }
-            MyDialogFragment errorDialog = mErrorDialogs.get(errorCode);
-            if (errorDialog == null) {
-                errorDialog = new MyDialogFragment();
+                final MyDialogFragment errorDialog = new MyDialogFragment();
                 errorDialog.setLayout(R.layout.layout_one_btn_dialog);
-                mErrorDialogs.put(errorCode, errorDialog);
                 errorDialog.setOnMyDialogListener(new MyDialogFragment.OnMyDialogListener() {
                     @Override
                     public void initView(View view) {
                         view.findViewById(R.id.tv1).setVisibility(View.GONE);
                         ((TextView) view.findViewById(R.id.tv2)).setText(message);
-                        ((TextView) view.findViewById(R.id.btn2)).setText("Ok");
-                        mErrorDialogs.get(errorCode).setDialogViewsOnClickListener(view, R.id.btn2);
+                        ((TextView) view.findViewById(R.id.btn2)).setText(getString(R.string.ok));
+                        errorDialog.setDialogViewsOnClickListener(view, R.id.btn2);
                     }
 
                     @Override
@@ -295,11 +287,10 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
                 errorDialog.setOnDismiss(new MyDialogFragment.IDismissListener() {
                     @Override
                     public void onDismiss() {
-                        mErrorDialogs.remove(errorCode);
+
                     }
                 });
             }
-        }
     }
 
 

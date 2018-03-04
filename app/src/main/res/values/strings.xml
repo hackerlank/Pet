@@ -56,13 +56,16 @@
     <string name="sure_pas">确认密码</string>
     <string name="please_input_sure_pas">请输入确认密码</string>
     <string name="submit">提交</string>
+    <string name="new_pas_not_equal_sure_pas">确认密码与新密码不同</string>
 
     <!-- RegisterFragment -->
     <string name="nickname">昵称</string>
     <string name="please_input_nickname">请输入昵称</string>
     <string name="please_set_pas">请设置密码</string>
+    <string name="please_input_correct_phone">手机号格式不正确</string>
     <string name="agree_pet_privacy_and_register">同意服务条款并注册</string>
     <string name="pet_privacy">《宠宝服务条款》</string>
+    <string name="resend_code">%1$sS后重发</string>
 
     <!-- ComplaintFragment -->
     <string name="complaint">投诉</string>
@@ -139,9 +142,67 @@
     <string name="setting">设置</string>
     <string name="modify_pas">修改密码</string>
     <string name="clear_cache">清理缓存</string>
+    <string name="are_you_sure_clear_cache">确定清理缓存？</string>
+    <string name="clear_cache_suc">清理缓存成功</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
 
     <!-- EditPasswordFragment -->
     <string name="init_pas">原密码</string>
     <string name="please_input_init_pas">请输入帐号的原密码</string>
+
+    <!-- MyDynamicFragment -->
+    <string name="today">今天</string>
+
+    <!-- DynamicDetailFragment -->
+    <string name="detail">详情</string>
+
+
+    <!-- FriendOtherFragment -->
+    <string name="friend">好友</string>
+    <string name="followed">关注</string>
+    <string name="following">粉丝</string>
+
+    <!-- JilingguanliFragment -->
+    <string name="applying">申请中</string>
+    <string name="examine_suc">审核通过</string>
+    <string name="examine_failed">审核失败</string>
+
+    <!-- OrderListFragment -->
+    <string name="waiting_pay">待支付</string>
+    <string name="waiting_goods">待收货</string>
+    <string name="order_finished">已完成</string>
+    <string name="all">全部</string>
+    <string name="quantity">数量：%1$s</string>
+    <string name="delete_order">删除订单</string>
+    <string name="sure_get_goods">确认收货</string>
+    <string name="pay_now">立即支付</string>
+
+    <!-- MoneyAccountFragment -->
+    <string name="reset_money">您的账户余额（元）</string>
+    <string name="yuan">元</string>
+    <string name="charge">充值</string>
+
+    <!-- MoneyChargeFragment -->
+    <string name="account_charge">账户充值</string>
+    <string name="ali_pay">支付宝支付</string>
+    <string name="wechat_pay">微信支付</string>
+    <string name="charge_money">充值金额</string>
+    <string name="please_input_charge_money">请输入充值金额</string>
+    <string name="next_step">下一步</string>
+
+    <!-- SubmitSucFragment -->
+    <string name="pay_suc">支付成功</string>
+    <string name="submit_suc">提交成功</string>
+
+    <!-- SuggestionFragment -->
+    <string name="please_input_your_suggestion">输入你要提交的意见</string>
+
+    <!-- AboutUsFragment -->
+    <string name="version">版本%1$s</string>
+
+    <!-- MessageCenterFragment -->
+    <string name="message_center">消息中心</string>
+    <string name="system_message">系统消息</string>
 
 </resources>

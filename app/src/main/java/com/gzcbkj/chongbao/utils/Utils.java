@@ -15,12 +15,14 @@ import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
 import com.gzcbkj.chongbao.BaseApplication;
 
 import java.io.BufferedOutputStream;
@@ -29,6 +31,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -36,6 +39,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utils {
 
@@ -428,7 +433,7 @@ public class Utils {
     }
 
     public final static String getMessageDigest(byte[] buffer) {
-        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
         try {
             MessageDigest mdTemp = MessageDigest.getInstance("MD5");
             mdTemp.update(buffer);
@@ -484,6 +489,70 @@ public class Utils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean isPhoneCorrect(String phone) {
+        String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$";
+        if(TextUtils.isEmpty(phone) || phone.length() != 11){
+            return false;
+        }else{
+            Pattern p = Pattern.compile(regex);
+            Matcher m = p.matcher(phone);
+            return m.matches();
+        }
+    }
+
+    // 获取Glide磁盘缓存大小
+    public static String getCacheSize() {
+        try {
+            return getFormatSize(getFolderSize(new File(BaseApplication.getAppContext().getCacheDir() + "/"+ InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "0M";
+        }
+    }
+
+    // 获取指定文件夹内所有文件大小的和
+    private static long getFolderSize(File file) throws Exception {
+        long size = 0;
+        try {
+            File[] fileList = file.listFiles();
+            for (File aFileList : fileList) {
+                if (aFileList.isDirectory()) {
+                    size = size + getFolderSize(aFileList);
+                } else {
+                    size = size + aFileList.length();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return size;
+    }
+
+    // 格式化单位
+    private static String getFormatSize(double size) {
+        double kiloByte = size / 1024;
+        if (kiloByte < 1) {
+            return size + "B";
+        }
+        double megaByte = kiloByte / 1024;
+        if (megaByte < 1) {
+            BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
+            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB";
+        }
+        double gigaByte = megaByte / 1024;
+        if (gigaByte < 1) {
+            BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
+            return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "MB";
+        }
+        double teraBytes = gigaByte / 1024;
+        if (teraBytes < 1) {
+            BigDecimal result3 = new BigDecimal(Double.toString(gigaByte));
+            return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "GB";
+        }
+        BigDecimal result4 = new BigDecimal(teraBytes);
+        return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
     }
 }
 

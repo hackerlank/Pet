@@ -27,6 +27,10 @@ public interface IDataManager {
 
     public IWXAPI getWeChatApi(Context context);
 
+    public String getToken();
+
+    public boolean isLogin();
+
     public void saveMyUserInfo(UserInfoBean myUserInfo);
 
     public UserInfoBean getMyUserInfo();

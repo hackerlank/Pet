@@ -9,23 +9,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.fragment.ComplaintFragment;
-import com.gzcbkj.chongbao.fragment.EditNicknameFragment;
-import com.gzcbkj.chongbao.fragment.EditPasswordFragment;
-import com.gzcbkj.chongbao.fragment.EditProfileFragment;
 import com.gzcbkj.chongbao.fragment.LoginFragment;
-import com.gzcbkj.chongbao.fragment.MessageFragment;
-import com.gzcbkj.chongbao.fragment.PublishArticleFrigment;
-import com.gzcbkj.chongbao.fragment.PublishFrigment;
-import com.gzcbkj.chongbao.fragment.PublishPictureFrigment;
-import com.gzcbkj.chongbao.fragment.PublishVideoFrigment;
-import com.gzcbkj.chongbao.fragment.RaisePetAdvisoryFragment;
-import com.gzcbkj.chongbao.fragment.SearchFragment;
-import com.gzcbkj.chongbao.fragment.SettingFragment;
-import com.gzcbkj.chongbao.fragment.UnfamiliarUserProfileFragment;
-import com.gzcbkj.chongbao.fragment.UserProfileFragment;
-import com.gzcbkj.chongbao.fragment.VerifyFriendFragment;
-import com.gzcbkj.chongbao.fragment.VerifyFriendProfileFragment;
+import com.gzcbkj.chongbao.manager.DataManager;
 
 import java.util.ArrayList;
 
@@ -97,10 +82,13 @@ public class SplashActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                        Intent intent = new Intent(SplashActivity.this, EmptyActivity.class);
-                        intent.putExtra("FRAGMENT_NAME", EditPasswordFragment.class.getName());
-                        startActivity(intent);
+                        if(DataManager.getInstance().isLogin()) {
+                            startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                        }else {
+                            Intent intent = new Intent(SplashActivity.this, EmptyActivity.class);
+                            intent.putExtra("FRAGMENT_NAME", LoginFragment.class.getName());
+                            startActivity(intent);
+                        }
                         finish();
                     }
                 });

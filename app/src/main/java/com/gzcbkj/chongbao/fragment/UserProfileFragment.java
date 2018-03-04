@@ -18,6 +18,9 @@ public class UserProfileFragment extends BaseFragment {
     @Override
     protected void onViewCreated(View view) {
         setText(R.id.tvTitle,R.string.detail_msg);
+        setViewVisible(R.id.ivRight);
+        setImage(R.id.ivRight,R.drawable.more);
+        setViewsOnClickListener(R.id.tvBtn1,R.id.ivRight,R.id.llAlbum);
     }
 
     @Override
@@ -27,6 +30,15 @@ public class UserProfileFragment extends BaseFragment {
 
     @Override
     public void onClick(View view) {
-
+        int id=view.getId();
+        switch (id){
+            case R.id.tvBtn1:
+                break;
+            case R.id.ivRight:
+                break;
+            case R.id.llAlbum:
+                gotoPager(MyDynamicFragment.class,null);
+                break;
+        }
     }
 }

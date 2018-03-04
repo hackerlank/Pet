@@ -3,13 +3,13 @@ package com.gzcbkj.chongbao.bean;
 import com.google.gson.Gson;
 
 public class BasicResponse<T> {
-    private int code; // 返回的结果标志 200表示 成功
+    private int code; // 0:成功;403:需要登录;300:参数错误;500:程序错误
     private String msg; // 错误码 错误码 GBxxxxxxx
     private T data;
 
     public boolean isSuccess() {
         // TODO Auto-generated method stub
-        return code == 200;
+        return code == 0;
     }
 
     public void setCode(int code) {

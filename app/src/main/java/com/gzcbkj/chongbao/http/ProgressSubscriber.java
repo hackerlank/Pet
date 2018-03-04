@@ -8,6 +8,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.gzcbkj.chongbao.activity.BaseActivity;
+import com.gzcbkj.chongbao.bean.BaseBean;
 import com.gzcbkj.chongbao.bean.BasicResponse;
 
 import java.lang.reflect.ParameterizedType;
@@ -21,13 +22,12 @@ import rx.Subscriber;
  * 用于在Http请求开始时，自动显示一个ProgressDialog
  * 在Http请求结束是，关闭ProgressDialog
  */
-public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCancelListener {
+public class ProgressSubscriber extends Subscriber<BaseBean> implements ProgressCancelListener {
 
     private SubscriberOnNextListener mSubscriberOnNextListener;
     private OnHttpErrorListener mErrorListener;
     private boolean isShowDialog = true;
     private Context context;
-    private Class mDataClass;
     private int mRetryTime = 0;
     private Observable mObservable;
 
@@ -38,12 +38,6 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
         this.mSubscriberOnNextListener = mSubscriberOnNextListener;
         this.context = context;
         this.mErrorListener = errorListener;
-    }
-
-
-    public ProgressSubscriber<T> setDataClass(Class dataClass) {
-        mDataClass = dataClass;
-        return this;
     }
 
 
@@ -128,7 +122,6 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
             if (mRetryTime++ < 1 && mObservable != null && isConnected(context)) {  //当超时时重新链接服务器
                 ProgressSubscriber subscriber = new ProgressSubscriber(mSubscriberOnNextListener, context, isShowDialog, mErrorListener);
                 subscriber.setRetry(mRetryTime);
-                subscriber.setDataClass(mDataClass);
                 HttpMethods.getInstance().toSubscribe(mObservable, subscriber);
                 return;
             }
@@ -146,18 +139,15 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
      * @param responseObj 创建Subscriber时的泛型类型
      */
     @Override
-    public void onNext(Object responseObj) {
+    public void onNext(BaseBean responseObj) {
         if (responseObj != null) {
-
-            BasicResponse basicResponse = (BasicResponse) responseObj;
-            if (basicResponse.isSuccess()) {
+            if (responseObj.isSuccess()) {
                 if (mSubscriberOnNextListener != null) {
-                    Object data = basicResponse.getData();
-                    mSubscriberOnNextListener.onNext(data);
+                    mSubscriberOnNextListener.onNext(responseObj);
                 }
             } else {
                 //处理errorCode
-                onServerError(basicResponse.getCode(), basicResponse.getMsg());
+                onServerError(responseObj.getCode(), responseObj.getMsg());
             }
         }
     }

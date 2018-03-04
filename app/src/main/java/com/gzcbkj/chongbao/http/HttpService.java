@@ -1,7 +1,9 @@
 package com.gzcbkj.chongbao.http;
 
+import com.gzcbkj.chongbao.bean.BaseBean;
 import com.gzcbkj.chongbao.bean.BasicResponse;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
+import com.gzcbkj.chongbao.bean.ValiCodeBean;
 
 import java.util.HashMap;
 import retrofit2.http.Body;
@@ -15,14 +17,56 @@ import rx.Observable;
 public interface HttpService {
 
 
-
     /**
-     * 01 获取用户信息
+     * 获取验证码
      * @param map
      * @return
      */
-    @POST("getUserInfo")
-    Observable<BasicResponse<UserInfoBean>> getUserInfo(@Body HashMap<String, Object> map);
+    @POST("user/queryValiCode")
+    Observable<BaseBean> queryValiCode(@Body HashMap<String, Object> map);
+
+    /**
+     *注册
+     * @param map
+     * @return
+     */
+    @POST("user/register")
+    Observable<BaseBean> register(@Body HashMap<String, Object> map);
+
+    /**
+     * 登录
+     * @param map
+     * @return
+     */
+    @POST("user/login")
+    Observable<UserInfoBean> login(@Body HashMap<String, Object> map);
+
+
+    /**
+     *忘记密码
+     * @param map
+     * @return
+     */
+    @POST("user/forgetPassword")
+    Observable<BaseBean> forgetPassword(@Body HashMap<String, Object> map);
+
+    /**
+     *已登录修改密码
+     * @param map
+     * @return
+     */
+    @POST("user/modifyPassword")
+    Observable<BaseBean> modifyPassword(@Body HashMap<String, Object> map);
+
+    /**
+     *更新用户详细信息
+     * @param map
+     * @return
+     */
+    @POST("userInfo/updateUser")
+    Observable<BaseBean> updateUser(@Body HashMap<String, Object> map);
+
+
 
 
 
@@ -36,11 +80,4 @@ public interface HttpService {
 //    @POST("ordermeasure")
 //    Observable<BasicResponse> orderMeasure(@Part ArrayList<MultipartBody.Part> parts);
 
-    //    /**
-//     * 20获取每日一拍列表
-//     * @param map
-//     * @return
-//     */
-//    @POST("ordermeasure")
-//    Observable<BasicResponse> orderMeasure(@Body HashMap<String, Object> map);
 }

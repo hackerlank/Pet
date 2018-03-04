@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="40dp"
+    android:layout_height="35dp">
+
+    <com.gzcbkj.chongbao.widgets.RoundRectImageView
+        android:id="@+id/ivAvater"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/touxiang"
+        app:round_radius="17"/>
+</RelativeLayout>

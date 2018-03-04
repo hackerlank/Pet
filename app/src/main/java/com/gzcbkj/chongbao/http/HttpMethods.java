@@ -1,16 +1,24 @@
 package com.gzcbkj.chongbao.http;
 
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.gzcbkj.chongbao.BaseApplication;
+import com.gzcbkj.chongbao.bean.BaseBean;
 import com.gzcbkj.chongbao.bean.BasicResponse;
+import com.gzcbkj.chongbao.manager.DataManager;
 import com.gzcbkj.chongbao.utils.Utils;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -36,18 +44,35 @@ public class HttpMethods {
 
     private static HttpMethods INSTANCE;
 
-
     private HttpMethods() {
         //手动创建一个OkHttpClient并设置超时时间
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
                 Log.i(TAG, message);
             }
         });
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        Interceptor interceptor=new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                 Request request;
+                 if(!TextUtils.isEmpty(DataManager.getInstance().getToken())){
+                     request = chain.request()
+                             .newBuilder()
+                             .addHeader("token", DataManager.getInstance().getToken())
+                             .build();
+                 }else{
+                     request = chain.request()
+                             .newBuilder()
+                             .build();
+                 }
+                return chain.proceed(request);
+            }
+        };
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .addInterceptor(loggingInterceptor)
                 .addInterceptor(interceptor);
         mRetrofit = new Retrofit.Builder()
                 .client(builder.build())
@@ -71,35 +96,30 @@ public class HttpMethods {
     }
 
     public String getBaseUrl() {
-        return "http://v15y626799.iask.in/zfb/app/";
+        return "http://120.79.189.98:8080/chongbao/api/";
     }
 
-    private HashMap<String, Object> getDataMap(Object data) {
+    private HashMap<String, Object> getDataMap() {
         HashMap<String, Object> dataMap = new HashMap<>();
-        dataMap.put("appver", Utils.getVersionName(BaseApplication.getAppContext()));
-        dataMap.put("devicetype", "android");
-        dataMap.put("rows", 10);
-        dataMap.put("page", 1);
-        dataMap.put("sorttype", "");
-        if (data != null) {
-            dataMap.put("data", data);
+        if(!TextUtils.isEmpty(DataManager.getInstance().getToken())) {
+            //dataMap.put("token", DataManager.getInstance().getToken());
         }
+
         return dataMap;
     }
 
 
-
-
     /**
-     * 获取用户信息
      *
-     * @param userid     用户id
+     * @param mobile
+     * @param type  register:注册 modify:忘记密码
      * @param subscriber
      */
-    public void getUserInfo(String userid, ProgressSubscriber<BasicResponse> subscriber) {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("userid", userid);
-        Observable observable = mRetrofit.create(HttpService.class).getUserInfo(map);
+    public void queryValiCode(String mobile,String type, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = getDataMap();
+        map.put("mobile", mobile);
+        map.put("type", type);
+        Observable observable = mRetrofit.create(HttpService.class).queryValiCode(map);
         toSubscribe(observable, subscriber);
 
         //        if (!TextUtils.isEmpty(filePath)) {
@@ -110,6 +130,82 @@ public class HttpMethods {
 //
 //            ArrayList<MultipartBody.Part> parts = new ArrayList<>();
 //            parts.add(part);
+    }
+
+    /**
+     *
+     * @param mobile
+     * @param valiCode
+     * @param nickname
+     * @param password
+     * @param province
+     * @param city
+     * @param subscriber
+     */
+    public void register(String mobile,String valiCode,String nickname,String password,String province,String city,ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = getDataMap();
+        map.put("mobile", mobile);
+        map.put("valiCode", valiCode);
+        map.put("username", nickname);
+        map.put("password", password);
+        map.put("province", province);
+        map.put("city", city);
+        Observable observable = mRetrofit.create(HttpService.class).register(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param mobile
+     * @param password
+     * @param subscriber
+     */
+    public void login(String mobile,String password,ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = getDataMap();
+        map.put("mobile", mobile);
+        map.put("password", password);
+        Observable observable = mRetrofit.create(HttpService.class).login(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param mobile
+     * @param password
+     * @param valiCode
+     * @param subscriber
+     */
+    public void forgetPassword(String mobile,String password,String valiCode,ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = getDataMap();
+        map.put("mobile", mobile);
+        map.put("password", password);
+        map.put("valiCode", valiCode);
+        Observable observable = mRetrofit.create(HttpService.class).forgetPassword(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param password
+     * @param subscriber
+     */
+    public void modifyPassword(String password,ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = getDataMap();
+        map.put("password", password);
+        Observable observable = mRetrofit.create(HttpService.class).modifyPassword(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param nick
+     * @param subscriber
+     */
+    public void updateUserName(String nick,ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = getDataMap();
+        map.put("username", nick);
+        Observable observable = mRetrofit.create(HttpService.class).updateUser(map);
+        toSubscribe(observable, subscriber);
     }
 
 

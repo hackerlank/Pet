@@ -39,6 +39,7 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
         listView.addHeaderView(topView);
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
+        setViewsOnClickListener(R.id.ivAdvisory,R.id.ivSearch);
     }
 
     @Override
@@ -48,7 +49,15 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
 
     @Override
     public void onClick(View view) {
-
+        int id=view.getId();
+        switch (id){
+            case R.id.ivAdvisory:
+                gotoPager(RaisePetAdvisoryFragment.class,null);
+                break;
+            case R.id.ivSearch:
+                gotoPager(SearchFragment.class,null);
+                break;
+        }
     }
 
     private ArticleAdapter getAdapter(){

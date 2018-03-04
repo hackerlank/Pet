@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_255_255_255"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <com.gzcbkj.chongbao.widgets.RoundRectImageView
+        android:id="@+id/ivAvater"
+        android:layout_below="@id/view1"
+        android:layout_marginTop="5dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:src="@drawable/touxiang"
+        app:round_radius="21"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/ivAvater"
+        android:layout_alignBottom="@id/ivAvater"
+        android:layout_alignTop="@id/ivAvater"
+        android:layout_marginLeft="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="贝贝喵"
+            android:singleLine="true"
+            android:textColor="@color/color_33_33_33"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvPetType"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="哈士奇"
+            android:singleLine="true"
+            android:background="@drawable/bg_pet_type"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/color_255_255_255"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvPetTime"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="2个月"
+            android:layout_toRightOf="@id/tvPetType"
+            android:singleLine="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/color_ff_73_73"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@id/ivAvater"
+        android:layout_height="10dp"/>
+
+
+
+</RelativeLayout>

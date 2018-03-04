@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gzcbkj.chongbao.BaseApplication;
+import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
 
 /**
@@ -327,6 +328,10 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     public void showToast(String text) {
         Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show();
+    }
+
+    public void showToast(int stringId) {
+        Toast.makeText(getActivity(), getString(stringId), Toast.LENGTH_LONG).show();
     }
 
 }

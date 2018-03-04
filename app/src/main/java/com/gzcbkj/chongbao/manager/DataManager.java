@@ -64,6 +64,17 @@ public class DataManager implements IDataManager {
         return mMyUserInfo;
     }
 
+    public String getToken(){
+        if(getMyUserInfo()==null){
+            return "";
+        }
+        return getMyUserInfo().getToken();
+    }
+
+    public boolean isLogin(){
+        return getMyUserInfo()!=null;
+    }
+
 
     @Override
     public IWXAPI getWeChatApi(Context context) {

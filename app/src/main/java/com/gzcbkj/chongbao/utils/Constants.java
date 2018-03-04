@@ -21,4 +21,6 @@ public class Constants {
      * 回调接口
      */
     public static final String WECHAT_NOTIFY_URL = "http://member.daqunli.cn:9090/billingws/ipn/wechat";
+
+    public static final String KEY_BASE_BEAN = "key_base_bean";
 }

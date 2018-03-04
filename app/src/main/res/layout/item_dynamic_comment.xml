@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    
+    <com.gzcbkj.chongbao.widgets.RoundRectImageView
+        android:id="@+id/ivAvater"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:round_radius="17"
+        android:src="@drawable/touxiang"/>
+
+    <TextView
+        android:id="@+id/tvComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="一把勺子  拍的很好看。"
+        android:textColor="@color/color_33_33_33"
+        android:layout_toRightOf="@id/ivAvater"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="45dp"
+        android:background="@color/line"/>
+
+
+</LinearLayout>

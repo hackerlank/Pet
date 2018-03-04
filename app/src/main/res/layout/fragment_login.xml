@@ -10,6 +10,16 @@
         android:scaleType="centerCrop"/>
 
     <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="34dp"
+        android:src="@drawable/white_back"
+        android:onClick="onBackClick"/>
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"

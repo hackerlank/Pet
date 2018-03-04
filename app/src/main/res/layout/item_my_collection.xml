@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:background="@color/color_255_255_255">
+
+    <RelativeLayout
+        android:id="@+id/rlCollect1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="10dp">
+
+        <com.gzcbkj.chongbao.widgets.RoundRectImageView
+            android:id="@+id/ivAvater"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="15dp"
+            android:scaleType="centerCrop"
+            app:round_radius="20"
+            android:src="@drawable/touxiang"/>
+
+        <LinearLayout
+            android:id="@+id/llDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ivAvater"
+            android:orientation="vertical"
+            android:paddingRight="15dp"
+            android:paddingLeft="5dp">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/ivAvater"
+            android:singleLine="true"
+            android:text="酥饼大人"
+            android:textColor="@color/color_00_55_87"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/ivAvater"
+            android:text="说好的今天包粽子给我吃，怎么一言不合就变成包酥饼了？！"
+            android:textColor="@color/color_33_33_33"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp" />
+
+        <com.gzcbkj.chongbao.widgets.DynamicDetailPhotosView
+            android:id="@+id/dynamicDetailPhotosView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+        </com.gzcbkj.chongbao.widgets.DynamicDetailPhotosView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingRight="15dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="30分钟前"
+                android:textColor="@color/color_66_66_66"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tvLikeNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="23"
+                android:textColor="@color/color_66_66_66"
+                android:drawableLeft="@drawable/like"/>
+
+            <TextView
+                android:id="@+id/tvCommentNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="10"
+                android:layout_marginLeft="25dp"
+                android:textColor="@color/color_66_66_66"
+                android:drawableLeft="@drawable/comment_icon"/>
+
+        </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlCollect2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <com.gzcbkj.chongbao.widgets.RatioImageView
+            android:id="@+id/ivAvater2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="15dp"
+            app:round_radius="20"
+            android:src="@drawable/touxiang"/>
+
+        <TextView
+            android:id="@+id/tvTime2"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="30分钟前"
+            android:gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/color_66_66_66"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvName2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/ivAvater2"
+            android:layout_toLeftOf="@id/tvTime2"
+            android:singleLine="true"
+            android:text="酥饼大人"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/color_00_55_87"
+            android:textSize="15sp" />
+
+
+        <ImageView
+            android:id="@+id/ivPic"
+            android:layout_width="140dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/ivAvater2"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_1"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ivPic"
+            android:layout_alignTop="@id/ivPic"
+            android:paddingRight="15dp"
+            android:layout_below="@id/ivAvater2"
+            android:maxLines="2"
+            android:text="铲屎官须知：关于清理猫毛的那些事。"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/color_11_11_11"
+            android:textStyle="bold"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tvContent2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ivPic"
+            android:paddingRight="15dp"
+            android:maxLines="3"
+            android:text="到了夏天，猫掉毛是非常厉害的，这是猫咪的生物调节机制，没有办法改变的。只能通过一些措施来改善... ..."
+            android:layout_marginLeft="10dp"
+            android:layout_alignBottom="@id/ivPic"
+            android:textColor="@color/color_66_66_66"
+            android:textSize="12sp" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/ivPic"
+            android:background="@color/line"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_below="@id/line2"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvShareNum2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="213"
+                android:textColor="@color/color_66_66_66"
+                android:drawableLeft="@drawable/share_grey"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tvCollectNum2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="56"
+                android:textColor="@color/color_66_66_66"
+                android:drawableLeft="@drawable/collect_grey"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tvLikeNum2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="23"
+                android:textColor="@color/color_66_66_66"
+                android:drawableLeft="@drawable/like"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tvCommentNum2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="10"
+                android:textColor="@color/color_66_66_66"
+                android:drawableLeft="@drawable/comment_icon"/>
+        </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/background_color"/>
+
+
+</LinearLayout>
