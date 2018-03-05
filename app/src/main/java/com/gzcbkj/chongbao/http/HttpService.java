@@ -7,6 +7,7 @@ import com.gzcbkj.chongbao.bean.ValiCodeBean;
 
 import java.util.HashMap;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -65,6 +66,13 @@ public interface HttpService {
      */
     @POST("userInfo/updateUser")
     Observable<BaseBean> updateUser(@Body HashMap<String, Object> map);
+
+    /**
+     * 查询用户详细信息
+     * @return
+     */
+    @GET("userInfo/queryUserInfo")
+    Observable<BaseBean> queryUserInfo();
 
 
 

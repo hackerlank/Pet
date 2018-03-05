@@ -208,6 +208,15 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    /**
+     *
+     * @param subscriber
+     */
+    public void queryUserInfo(ProgressSubscriber subscriber) {
+        Observable observable = mRetrofit.create(HttpService.class).queryUserInfo();
+        toSubscribe(observable, subscriber);
+    }
+
 
     public <T> void toSubscribe(Observable<T> o, Subscriber<T> s) {
         if (s instanceof ProgressSubscriber) {
