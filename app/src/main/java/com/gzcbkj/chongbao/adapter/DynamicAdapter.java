@@ -6,14 +6,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.widgets.DynamicPhotosView;
 
 /**
  * Created by huangzhifeng on 2018/3/4.
  */
 
-public class DynamicAdapter extends MyBaseAdapter<BaseBean> {
+public class DynamicAdapter extends MyBaseAdapter<ResponseBean> {
     public DynamicAdapter(Context context) {
         super(context);
     }

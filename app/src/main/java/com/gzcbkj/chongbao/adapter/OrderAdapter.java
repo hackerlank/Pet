@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 
 import java.util.Random;
 
@@ -15,7 +15,7 @@ import java.util.Random;
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class OrderAdapter extends MyBaseAdapter<BaseBean> {
+public class OrderAdapter extends MyBaseAdapter<ResponseBean> {
 
     private int mOrderType;
 

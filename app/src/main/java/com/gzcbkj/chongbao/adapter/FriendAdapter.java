@@ -7,14 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.bean.BaseBean;
-import com.gzcbkj.chongbao.utils.Utils;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 
 /**
  * Created by huangzhifeng on 2018/3/4.
  */
 
-public class FriendAdapter extends MyBaseAdapter<BaseBean> {
+public class FriendAdapter extends MyBaseAdapter<ResponseBean> {
     public FriendAdapter(Context context) {
         super(context);
     }

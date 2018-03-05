@@ -8,10 +8,9 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.adapter.DynamicAdapter;
 import com.gzcbkj.chongbao.adapter.DynamicCommentAdapter;
 import com.gzcbkj.chongbao.adapter.LikeCommentAdapter;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -36,9 +35,9 @@ public class DynamicDetailFragment extends BaseFragment implements OnRefreshList
         setText(R.id.tvTitle,R.string.detail);
         ListView listView = fv(R.id.listView);
         listView.setAdapter(getAdapter());
-        ArrayList<BaseBean> list=new ArrayList<>();
+        ArrayList<ResponseBean> list=new ArrayList<>();
         for(int i=0;i<5;++i){
-            list.add(new BaseBean());
+            list.add(new ResponseBean());
         }
         getAdapter().setDataList(list);
         View topView= LayoutInflater.from(getActivity()).inflate(R.layout.dynamic_detail_top_layout,null);
@@ -54,9 +53,9 @@ public class DynamicDetailFragment extends BaseFragment implements OnRefreshList
         recyclerView.setLayoutManager(layoutManager);
         layoutManager.setOrientation(OrientationHelper.HORIZONTAL);
         recyclerView.setAdapter(getLikeCommentAdapter());
-        ArrayList<BaseBean> list=new ArrayList<>();
+        ArrayList<ResponseBean> list=new ArrayList<>();
         for(int i=0;i<20;++i){
-            list.add(new BaseBean());
+            list.add(new ResponseBean());
         }
         getLikeCommentAdapter().setDataList(list);
     }

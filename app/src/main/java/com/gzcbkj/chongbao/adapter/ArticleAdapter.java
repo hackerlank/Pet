@@ -5,13 +5,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class ArticleAdapter extends MyBaseAdapter<BaseBean> {
+public class ArticleAdapter extends MyBaseAdapter<ResponseBean> {
     public ArticleAdapter(Context context) {
         super(context);
     }

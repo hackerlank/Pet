@@ -5,7 +5,7 @@ import android.widget.ListView;
 
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.adapter.MessageAdapter;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -31,9 +31,9 @@ public class MessageFragment extends BaseFragment implements OnRefreshListener,O
         setText(R.id.tvTitle,R.string.message);
         ListView listView = fv(R.id.listView);
         listView.setAdapter(getAdapter());
-        ArrayList<BaseBean> list=new ArrayList<>();
+        ArrayList<ResponseBean> list=new ArrayList<>();
         for(int i=0;i<10;++i){
-            list.add(new BaseBean());
+            list.add(new ResponseBean());
         }
         getAdapter().setDataList(list);
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);

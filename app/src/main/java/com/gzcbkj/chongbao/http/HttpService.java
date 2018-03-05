@@ -1,10 +1,9 @@
 package com.gzcbkj.chongbao.http;
 
-import com.gzcbkj.chongbao.bean.BaseBean;
-import com.gzcbkj.chongbao.bean.BasicResponse;
+import com.gzcbkj.chongbao.bean.BannerListResponse;
+import com.gzcbkj.chongbao.bean.ArticleListResponse;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
-import com.gzcbkj.chongbao.bean.ValiCodeBean;
-
 import java.util.HashMap;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -24,7 +23,7 @@ public interface HttpService {
      * @return
      */
     @POST("user/queryValiCode")
-    Observable<BaseBean> queryValiCode(@Body HashMap<String, Object> map);
+    Observable<ResponseBean> queryValiCode(@Body HashMap<String, Object> map);
 
     /**
      *注册
@@ -32,7 +31,7 @@ public interface HttpService {
      * @return
      */
     @POST("user/register")
-    Observable<BaseBean> register(@Body HashMap<String, Object> map);
+    Observable<ResponseBean> register(@Body HashMap<String, Object> map);
 
     /**
      * 登录
@@ -49,7 +48,7 @@ public interface HttpService {
      * @return
      */
     @POST("user/forgetPassword")
-    Observable<BaseBean> forgetPassword(@Body HashMap<String, Object> map);
+    Observable<ResponseBean> forgetPassword(@Body HashMap<String, Object> map);
 
     /**
      *已登录修改密码
@@ -57,7 +56,7 @@ public interface HttpService {
      * @return
      */
     @POST("user/modifyPassword")
-    Observable<BaseBean> modifyPassword(@Body HashMap<String, Object> map);
+    Observable<ResponseBean> modifyPassword(@Body HashMap<String, Object> map);
 
     /**
      *更新用户详细信息
@@ -65,14 +64,60 @@ public interface HttpService {
      * @return
      */
     @POST("userInfo/updateUser")
-    Observable<BaseBean> updateUser(@Body HashMap<String, Object> map);
+    Observable<ResponseBean> updateUser(@Body HashMap<String, Object> map);
 
     /**
      * 查询用户详细信息
      * @return
      */
     @GET("userInfo/queryUserInfo")
-    Observable<BaseBean> queryUserInfo();
+    Observable<ResponseBean> queryUserInfo();
+
+
+    /**
+     * 用户发表文章
+     * @return
+     */
+    @POST("apparticle/saveApparticle")
+    Observable<ResponseBean> saveApparticle(@Body HashMap<String, Object> map);
+
+//    /**
+//     * 根据类型查询文章
+//     * @return
+//     */
+//    @POST("apparticle/firstArticleList")
+//    Observable<ArticleListResponse> firstArticleList(@Body HashMap<String, Object> map);
+//
+//    /**
+//     * 收藏文章
+//     * @return
+//     */
+//    @POST("apparticle/articleList")
+//    Observable<ArticleListResponse> articleList(@Body HashMap<String, Object> map);
+
+
+
+
+    /**
+     * banner图和精选文章
+     * @return
+     */
+    @POST("appbanner/bannerList")
+    Observable<BannerListResponse> bannerList(@Body HashMap<String, Object> map);
+
+    /**
+     * 其它推文
+     * @return
+     */
+    @POST("apparticle/firstArticleList")
+    Observable<ArticleListResponse> firstArticleList(@Body HashMap<String, Object> map);
+
+    /**
+     * 资讯
+     * @return
+     */
+    @POST("apparticle/articleList")
+    Observable<ArticleListResponse> articleList(@Body HashMap<String, Object> map);
 
 
 

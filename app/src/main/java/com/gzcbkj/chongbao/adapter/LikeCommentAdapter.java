@@ -6,11 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 
 import java.util.ArrayList;
 
@@ -20,13 +19,13 @@ import java.util.ArrayList;
 
 public class LikeCommentAdapter extends RecyclerView.Adapter<LikeCommentAdapter.ViewHolder> {
     private Context mContext;
-    private ArrayList<BaseBean> mDataList;
+    private ArrayList<ResponseBean> mDataList;
 
     public LikeCommentAdapter(Context context) {
         mContext = context;
     }
 
-    public void setDataList(ArrayList<BaseBean> dataList) {
+    public void setDataList(ArrayList<ResponseBean> dataList) {
         mDataList = dataList;
         notifyDataSetChanged();
     }
@@ -59,7 +58,7 @@ public class LikeCommentAdapter extends RecyclerView.Adapter<LikeCommentAdapter.
             ivAvater = itemView.findViewById(R.id.ivAvater);;
         }
 
-        public void setData(BaseBean bean) {
+        public void setData(ResponseBean bean) {
         }
 
     }

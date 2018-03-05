@@ -1,30 +1,18 @@
 package com.gzcbkj.chongbao.fragment;
 
-import android.graphics.Color;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
-import com.gzcbkj.chongbao.bean.BaseBean;
-import com.gzcbkj.chongbao.bean.BasicResponse;
-import com.gzcbkj.chongbao.bean.ValiCodeBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
 import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
 import com.gzcbkj.chongbao.utils.Utils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import okhttp3.Call;
 
 /**
  * Created by huangzhifeng on 2018/3/1.
@@ -85,9 +73,9 @@ public class RegisterFragment extends BaseFragment {
                 }
                 hideKeyBoard();
                 HttpMethods.getInstance().register(phone,verCode,nick,Utils.getMessageDigest(password.getBytes()),"广东","深圳",
-                        new ProgressSubscriber(new SubscriberOnNextListener<BaseBean>() {
+                        new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                     @Override
-                    public void onNext(BaseBean bean) {
+                    public void onNext(ResponseBean bean) {
                         if(!TextUtils.isEmpty(bean.getMsg())){
                             showToast(bean.getMsg());
                         }
@@ -120,9 +108,9 @@ public class RegisterFragment extends BaseFragment {
         if(type.equals("register")) {
             tvGetcode.setTextColor(getResources().getColor(R.color.color_ff_73_73));
         }
-        HttpMethods.getInstance().queryValiCode(phone,type,new ProgressSubscriber(new SubscriberOnNextListener<BaseBean>() {
+        HttpMethods.getInstance().queryValiCode(phone,type,new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
             @Override
-            public void onNext(BaseBean bean) {
+            public void onNext(ResponseBean bean) {
                 if(!TextUtils.isEmpty(bean.getMsg())){
                     showToast(bean.getMsg());
                 }

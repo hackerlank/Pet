@@ -2,21 +2,14 @@ package com.gzcbkj.chongbao.fragment;
 
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
-import com.gzcbkj.chongbao.activity.HomeActivity;
-import com.gzcbkj.chongbao.bean.BaseBean;
-import com.gzcbkj.chongbao.bean.UserInfoBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
 import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
-import com.gzcbkj.chongbao.manager.DataManager;
 import com.gzcbkj.chongbao.utils.Utils;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by huangzhifeng on 2018/3/1.
@@ -75,9 +68,9 @@ public class FindPasFragment extends RegisterFragment {
                 }
                 hideKeyBoard();
                 HttpMethods.getInstance().forgetPassword(phone, Utils.getMessageDigest(newPas.getBytes()),verCode,
-                        new ProgressSubscriber(new SubscriberOnNextListener<BaseBean>() {
+                        new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                             @Override
-                            public void onNext(BaseBean bean) {
+                            public void onNext(ResponseBean bean) {
                                 if(!TextUtils.isEmpty(bean.getMsg())){
                                     showToast(bean.getMsg());
                                 }

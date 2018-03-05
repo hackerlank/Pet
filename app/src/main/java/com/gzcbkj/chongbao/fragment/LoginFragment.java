@@ -8,7 +8,6 @@ import android.widget.EditText;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.activity.HomeActivity;
-import com.gzcbkj.chongbao.bean.BaseBean;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
 import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;

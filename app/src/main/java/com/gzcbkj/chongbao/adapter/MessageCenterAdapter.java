@@ -3,17 +3,16 @@ package com.gzcbkj.chongbao.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class MessageCenterAdapter extends MyBaseAdapter<BaseBean> {
+public class MessageCenterAdapter extends MyBaseAdapter<ResponseBean> {
     public MessageCenterAdapter(Context context) {
         super(context);
     }

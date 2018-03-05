@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
 import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
@@ -60,9 +60,9 @@ public class EditPasswordFragment extends BaseFragment {
                 }
                 hideKeyBoard();
                 HttpMethods.getInstance().modifyPassword(Utils.getMessageDigest(newPas.getBytes()),
-                        new ProgressSubscriber(new SubscriberOnNextListener<BaseBean>() {
+                        new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                             @Override
-                            public void onNext(BaseBean bean) {
+                            public void onNext(ResponseBean bean) {
                                 if(!TextUtils.isEmpty(bean.getMsg())){
                                     showToast(bean.getMsg());
                                 }

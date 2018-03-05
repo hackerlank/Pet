@@ -7,13 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class JilingguanliAdapter extends MyBaseAdapter<BaseBean> {
+public class JilingguanliAdapter extends MyBaseAdapter<ResponseBean> {
     public JilingguanliAdapter(Context context) {
         super(context);
     }

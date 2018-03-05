@@ -7,13 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class MyPetAdapter extends MyBaseAdapter<BaseBean> {
+public class MyPetAdapter extends MyBaseAdapter<ResponseBean> {
     public MyPetAdapter(Context context) {
         super(context);
     }

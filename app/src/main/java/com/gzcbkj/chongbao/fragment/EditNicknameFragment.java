@@ -4,7 +4,7 @@ import android.text.TextUtils;
 import android.view.View;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
 import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
@@ -45,9 +45,9 @@ public class EditNicknameFragment extends BaseFragment {
                     return;
                 }
                 hideKeyBoard();
-                HttpMethods.getInstance().updateUserName(nick,new ProgressSubscriber(new SubscriberOnNextListener<BaseBean>() {
+                HttpMethods.getInstance().updateUserName(nick,new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                     @Override
-                    public void onNext(BaseBean bean) {
+                    public void onNext(ResponseBean bean) {
                         if(!TextUtils.isEmpty(bean.getMsg())){
                             showToast(bean.getMsg());
                         }

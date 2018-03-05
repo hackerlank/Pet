@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.adapter.DynamicAdapter;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
 import com.gzcbkj.chongbao.manager.DataManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -34,9 +34,9 @@ public class MyDynamicFragment extends BaseFragment implements OnRefreshListener
         setImage(R.id.ivRight,R.drawable.more);
         ListView listView = fv(R.id.listView);
         listView.setAdapter(getAdapter());
-        ArrayList<BaseBean> list=new ArrayList<>();
+        ArrayList<ResponseBean> list=new ArrayList<>();
         for(int i=0;i<5;++i){
-            list.add(new BaseBean());
+            list.add(new ResponseBean());
         }
         getAdapter().setDataList(list);
         View topView= LayoutInflater.from(getActivity()).inflate(R.layout.dynamic_top_layout,null);

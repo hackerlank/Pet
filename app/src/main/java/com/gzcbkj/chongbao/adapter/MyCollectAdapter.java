@@ -3,17 +3,15 @@ package com.gzcbkj.chongbao.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class MyCollectAdapter extends MyBaseAdapter<BaseBean> {
+public class MyCollectAdapter extends MyBaseAdapter<ResponseBean> {
     public MyCollectAdapter(Context context) {
         super(context);
     }

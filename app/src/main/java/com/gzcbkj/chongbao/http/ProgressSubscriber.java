@@ -8,7 +8,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.gzcbkj.chongbao.activity.BaseActivity;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.bean.BasicResponse;
 
 import java.lang.reflect.ParameterizedType;
@@ -22,7 +22,7 @@ import rx.Subscriber;
  * 用于在Http请求开始时，自动显示一个ProgressDialog
  * 在Http请求结束是，关闭ProgressDialog
  */
-public class ProgressSubscriber extends Subscriber<BaseBean> implements ProgressCancelListener {
+public class ProgressSubscriber extends Subscriber<ResponseBean> implements ProgressCancelListener {
 
     private SubscriberOnNextListener mSubscriberOnNextListener;
     private OnHttpErrorListener mErrorListener;
@@ -139,7 +139,7 @@ public class ProgressSubscriber extends Subscriber<BaseBean> implements Progress
      * @param responseObj 创建Subscriber时的泛型类型
      */
     @Override
-    public void onNext(BaseBean responseObj) {
+    public void onNext(ResponseBean responseObj) {
         if (responseObj != null) {
             if (responseObj.isSuccess()) {
                 if (mSubscriberOnNextListener != null) {

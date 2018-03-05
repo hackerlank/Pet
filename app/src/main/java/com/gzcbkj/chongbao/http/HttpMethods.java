@@ -2,13 +2,7 @@ package com.gzcbkj.chongbao.http;
 
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.TextView;
-
-import com.gzcbkj.chongbao.BaseApplication;
-import com.gzcbkj.chongbao.bean.BaseBean;
-import com.gzcbkj.chongbao.bean.BasicResponse;
 import com.gzcbkj.chongbao.manager.DataManager;
-import com.gzcbkj.chongbao.utils.Utils;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
@@ -99,15 +93,6 @@ public class HttpMethods {
         return "http://120.79.189.98:8080/chongbao/api/";
     }
 
-    private HashMap<String, Object> getDataMap() {
-        HashMap<String, Object> dataMap = new HashMap<>();
-        if(!TextUtils.isEmpty(DataManager.getInstance().getToken())) {
-            //dataMap.put("token", DataManager.getInstance().getToken());
-        }
-
-        return dataMap;
-    }
-
 
     /**
      *
@@ -116,7 +101,7 @@ public class HttpMethods {
      * @param subscriber
      */
     public void queryValiCode(String mobile,String type, ProgressSubscriber subscriber) {
-        HashMap<String, Object> map = getDataMap();
+        HashMap<String, Object> map = new HashMap<>();
         map.put("mobile", mobile);
         map.put("type", type);
         Observable observable = mRetrofit.create(HttpService.class).queryValiCode(map);
@@ -143,7 +128,7 @@ public class HttpMethods {
      * @param subscriber
      */
     public void register(String mobile,String valiCode,String nickname,String password,String province,String city,ProgressSubscriber subscriber) {
-        HashMap<String, Object> map = getDataMap();
+        HashMap<String, Object> map = new HashMap<>();
         map.put("mobile", mobile);
         map.put("valiCode", valiCode);
         map.put("username", nickname);
@@ -161,7 +146,7 @@ public class HttpMethods {
      * @param subscriber
      */
     public void login(String mobile,String password,ProgressSubscriber subscriber) {
-        HashMap<String, Object> map = getDataMap();
+        HashMap<String, Object> map = new HashMap<>();
         map.put("mobile", mobile);
         map.put("password", password);
         Observable observable = mRetrofit.create(HttpService.class).login(map);
@@ -176,7 +161,7 @@ public class HttpMethods {
      * @param subscriber
      */
     public void forgetPassword(String mobile,String password,String valiCode,ProgressSubscriber subscriber) {
-        HashMap<String, Object> map = getDataMap();
+        HashMap<String, Object> map = new HashMap<>();
         map.put("mobile", mobile);
         map.put("password", password);
         map.put("valiCode", valiCode);
@@ -190,7 +175,7 @@ public class HttpMethods {
      * @param subscriber
      */
     public void modifyPassword(String password,ProgressSubscriber subscriber) {
-        HashMap<String, Object> map = getDataMap();
+        HashMap<String, Object> map = new HashMap<>();
         map.put("password", password);
         Observable observable = mRetrofit.create(HttpService.class).modifyPassword(map);
         toSubscribe(observable, subscriber);
@@ -202,7 +187,7 @@ public class HttpMethods {
      * @param subscriber
      */
     public void updateUserName(String nick,ProgressSubscriber subscriber) {
-        HashMap<String, Object> map = getDataMap();
+        HashMap<String, Object> map = new HashMap<>();
         map.put("username", nick);
         Observable observable = mRetrofit.create(HttpService.class).updateUser(map);
         toSubscribe(observable, subscriber);
@@ -214,6 +199,49 @@ public class HttpMethods {
      */
     public void queryUserInfo(ProgressSubscriber subscriber) {
         Observable observable = mRetrofit.create(HttpService.class).queryUserInfo();
+        toSubscribe(observable, subscriber);
+    }
+
+
+    /**
+     * @param position
+     * @param subscriber
+     */
+    public void bannerList(String position, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("position",position);
+        Observable observable = mRetrofit.create(HttpService.class).bannerList(map);
+        toSubscribe(observable, subscriber);
+    }
+
+
+    /**
+     *
+     * @param page 页号
+     * @param limit 行号
+     * @param subscriber
+     */
+    public void firstArticleList(int page,int limit, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("page",page);
+        map.put("limit",limit);
+        Observable observable = mRetrofit.create(HttpService.class).firstArticleList(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param page 页号
+     * @param limit 行号
+     * @param type 文章类型;宠物指南:guide|宠物公益:welfare|宠物百科:encyclopedias
+     * @param subscriber
+     */
+    public void articleList(int page,int limit,String type, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("page",page);
+        map.put("limit",limit);
+        map.put("type",type);
+        Observable observable = mRetrofit.create(HttpService.class).articleList(map);
         toSubscribe(observable, subscriber);
     }
 

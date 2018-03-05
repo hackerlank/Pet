@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by gigabud on 18-2-2.
  */
 
-public class BaseBean implements Serializable {
+public class ResponseBean implements Serializable {
     private int code; // 0:成功;403:需要登录;300:参数错误;500:程序错误
     private String msg; // 错误信息
 

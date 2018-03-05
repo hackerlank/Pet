@@ -6,7 +6,7 @@ import android.widget.ListView;
 
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.adapter.ArticleAdapter;
-import com.gzcbkj.chongbao.bean.BaseBean;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -30,9 +30,9 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
     protected void onViewCreated(View view) {
         ListView listView = fv(R.id.listView);
         listView.setAdapter(getAdapter());
-        ArrayList<BaseBean> list=new ArrayList<>();
+        ArrayList<ResponseBean> list=new ArrayList<>();
         for(int i=0;i<10;++i){
-            list.add(new BaseBean());
+            list.add(new ResponseBean());
         }
         getAdapter().setDataList(list);
         View topView= LayoutInflater.from(getActivity()).inflate(R.layout.home_top_layout,null);
