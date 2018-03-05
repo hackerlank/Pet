@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -265,7 +266,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
     }
 
     public void errorCodeDo(final int errorCode, final String message) {
-        if (TextUtils.isEmpty(message)) {
+        if (!TextUtils.isEmpty(message)) {
                 final MyDialogFragment errorDialog = new MyDialogFragment();
                 errorDialog.setLayout(R.layout.layout_one_btn_dialog);
                 errorDialog.setOnMyDialogListener(new MyDialogFragment.OnMyDialogListener() {

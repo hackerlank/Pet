@@ -8,6 +8,7 @@ import java.util.HashMap;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -102,8 +103,8 @@ public interface HttpService {
      * banner图和精选文章
      * @return
      */
-    @POST("appbanner/bannerList")
-    Observable<BannerListResponse> bannerList(@Body HashMap<String, Object> map);
+    @GET("appbanner/bannerList")
+    Observable<BannerListResponse> bannerList(@Query("position") int position);
 
     /**
      * 其它推文

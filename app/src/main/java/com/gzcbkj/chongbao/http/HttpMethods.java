@@ -72,6 +72,8 @@ public class HttpMethods {
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
                         .setLenient()
+                        .setPrettyPrinting()
+                        .disableHtmlEscaping()
                         .create()))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(getBaseUrl())
@@ -207,10 +209,8 @@ public class HttpMethods {
      * @param position
      * @param subscriber
      */
-    public void bannerList(String position, ProgressSubscriber subscriber) {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("position",position);
-        Observable observable = mRetrofit.create(HttpService.class).bannerList(map);
+    public void bannerList(int position, ProgressSubscriber subscriber) {
+        Observable observable = mRetrofit.create(HttpService.class).bannerList(position);
         toSubscribe(observable, subscriber);
     }
 

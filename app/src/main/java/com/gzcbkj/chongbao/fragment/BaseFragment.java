@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputFilter;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.gzcbkj.chongbao.BaseApplication;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 /**
  * Fragment基类提供公共的页面跳转方面，公共弹窗等方法
@@ -318,11 +320,11 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     public void stopLoad() {
         if(getView()!=null){
-//            SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
-//            if(smartRefreshLayout!=null){
-//                smartRefreshLayout.finishRefresh();
-//                smartRefreshLayout.finishLoadmore();
-//            }
+            SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
+            if(smartRefreshLayout!=null){
+                smartRefreshLayout.finishRefresh();
+                smartRefreshLayout.finishLoadmore();
+            }
         }
     }
 

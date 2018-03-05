@@ -9,7 +9,6 @@ import android.util.Log;
 
 import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.bean.ResponseBean;
-import com.gzcbkj.chongbao.bean.BasicResponse;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -147,20 +146,17 @@ public class ProgressSubscriber extends Subscriber<ResponseBean> implements Prog
                 }
             } else {
                 //处理errorCode
-                onServerError(responseObj.getCode(), responseObj.getMsg());
+                try {
+                    if (mErrorListener != null) {
+                        mErrorListener.onServerError(responseObj.getCode(), responseObj.getMsg());
+                    }
+                } catch (Exception e) {
+
+                }
             }
         }
     }
 
-    public void onServerError(int errorCode, String errorMsg) {
-        try {
-            if (mErrorListener != null) {
-                mErrorListener.onServerError(errorCode, errorMsg);
-            }
-        } catch (Exception e) {
-
-        }
-    }
 
     private ParameterizedType type(final Class raw, final Type... args) {
         return new ParameterizedType() {

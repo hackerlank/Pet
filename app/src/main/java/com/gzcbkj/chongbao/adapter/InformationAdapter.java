@@ -11,15 +11,15 @@ import com.gzcbkj.chongbao.bean.ResponseBean;
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class ArticleAdapter extends MyBaseAdapter<ResponseBean> {
-    public ArticleAdapter(Context context) {
+public class InformationAdapter extends MyBaseAdapter<ResponseBean> {
+    public InformationAdapter(Context context) {
         super(context);
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view==null){
-            view=mLayoutInflater.inflate(R.layout.item_article,null);
+            view=mLayoutInflater.inflate(R.layout.item_other_article,null);
         }
         return view;
     }

@@ -9,6 +9,7 @@ android {
             storePassword '123456'
         }
     }
+
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.gzcbkj.chongbao"

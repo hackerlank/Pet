@@ -6,33 +6,38 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.utils.Constants;
+
 import java.util.ArrayList;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
+ *
+ * 资讯
  */
 
-public class PetCenterFragment extends BaseFragment {
-
+public class InformationFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_pet_center;
+        return R.layout.fragment_information;
     }
 
     @Override
     protected void onViewCreated(View view) {
-        setText(R.id.tvTitle,R.string.pet_center);
+        setText(R.id.tvTitle,R.string.information);
         initViewPager();
         setViewsOnClickListener(R.id.llTab1,R.id.llTab2,R.id.llTab3,R.id.llTab4);
     }
 
     private void initViewPager(){
+        int tab=getArguments().getInt(Constants.KEY_BASE_BEAN,0);
         ViewPager viewPager=fv(R.id.viewPager);
-        final ArrayList<PetCenterItemFragment> fragments=new ArrayList<>();
+        final ArrayList<InformationItemFragment> fragments=new ArrayList<>();
         for(int i=0;i<4;++i){
-            fragments.add(new PetCenterItemFragment());
+            fragments.add(new InformationItemFragment());
         }
         viewPager.setAdapter(new FragmentPagerAdapter(getActivity().getSupportFragmentManager()) {
             @Override
@@ -62,8 +67,8 @@ public class PetCenterFragment extends BaseFragment {
 
             }
         });
-        viewPager.setCurrentItem(0);
-        initTab(0);
+        viewPager.setCurrentItem(tab);
+        initTab(tab);
     }
 
     private void initTab(int pos){
