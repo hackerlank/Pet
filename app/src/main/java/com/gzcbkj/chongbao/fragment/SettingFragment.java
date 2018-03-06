@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.manager.DataManager;
 import com.gzcbkj.chongbao.utils.GBExecutionPool;
 import com.gzcbkj.chongbao.utils.Utils;
 
@@ -20,8 +21,8 @@ public class SettingFragment extends BaseFragment {
 
     @Override
     protected void onViewCreated(View view) {
-        setText(R.id.tvTitle,R.string.setting);
-        setViewsOnClickListener(R.id.rlPassword,R.id.rlClearCache);
+        setText(R.id.tvTitle, R.string.setting);
+        setViewsOnClickListener(R.id.rlPassword, R.id.rlClearCache, R.id.tvLogout);
         setText(R.id.tvCache, Utils.getCacheSize());
     }
 
@@ -31,13 +32,18 @@ public class SettingFragment extends BaseFragment {
 
     @Override
     public void onClick(View view) {
-        int id=view.getId();
-        switch (id){
+        int id = view.getId();
+        switch (id) {
             case R.id.rlPassword:
-                gotoPager(EditPasswordFragment.class,null);
+                gotoPager(EditPasswordFragment.class, null);
                 break;
             case R.id.rlClearCache:
                 showClearCacheDialog();
+                break;
+            case R.id.tvLogout:
+                gotoPager(LoginFragment.class, null);
+                getActivity().finish();
+                DataManager.getInstance().clearMyUserInfo();
                 break;
         }
     }

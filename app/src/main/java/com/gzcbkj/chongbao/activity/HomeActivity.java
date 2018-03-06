@@ -11,12 +11,12 @@ import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.fragment.BaseFragment;
 import com.gzcbkj.chongbao.fragment.HomeFragment;
 import com.gzcbkj.chongbao.fragment.LocationRingFragment;
+import com.gzcbkj.chongbao.fragment.LoginFragment;
 import com.gzcbkj.chongbao.fragment.MeFragment;
 import com.gzcbkj.chongbao.fragment.PetCenterFragment;
 import com.gzcbkj.chongbao.fragment.PetFriendGroupFragment;
-
+import com.gzcbkj.chongbao.manager.DataManager;
 import java.util.ArrayList;
-
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
@@ -51,15 +51,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 @Override
                 public void onClick(View view) {
                     int tag = (int) view.getTag();
-                    if(tag==2){
-                        gotoPager(PetFriendGroupFragment.class,null);
+                    if ((tag == 2 || tag == 4) && !DataManager.getInstance().isLogin()) {
+                        gotoPager(LoginFragment.class, null);
                         return;
                     }
-//                    if (tag == 4 && DataManager.getInstance().getMyUserInfo() == null) {
-//                        gotoPager(LoginFragment.class, null);
-//                        return;
-//                    }
-                    switchFragment(mBaseFragment.get(tag>2?tag-1:tag));
+                    if (tag == 2) {
+                        gotoPager(PetFriendGroupFragment.class, null);
+                        return;
+                    }
+                    switchFragment(mBaseFragment.get(tag > 2 ? tag - 1 : tag));
                     resetBottomBar(tag);
                 }
             });
@@ -91,7 +91,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             case 2:
                 return R.drawable.pet_friend;
             case 3:
-                return isCheck ? R.drawable.location_ring_select: R.drawable.location_ring_unselect;
+                return isCheck ? R.drawable.location_ring_select : R.drawable.location_ring_unselect;
             case 4:
                 return isCheck ? R.drawable.me_select : R.drawable.me_unselect;
         }
@@ -101,8 +101,13 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         if (mCurrentFragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.show(mCurrentFragment).commit();
+            if ((mCurrentFragment instanceof MeFragment) && !DataManager.getInstance().isLogin()) {
+                switchFragment(mBaseFragment.get(0));
+                resetBottomBar(0);
+            } else {
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.show(mCurrentFragment).commit();
+            }
         }
     }
 

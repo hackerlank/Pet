@@ -9,9 +9,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.fragment.LoginFragment;
-import com.gzcbkj.chongbao.manager.DataManager;
-
 import java.util.ArrayList;
 
 /**
@@ -82,13 +79,7 @@ public class SplashActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(DataManager.getInstance().isLogin()) {
-                            startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                        }else {
-                            Intent intent = new Intent(SplashActivity.this, EmptyActivity.class);
-                            intent.putExtra("FRAGMENT_NAME", LoginFragment.class.getName());
-                            startActivity(intent);
-                        }
+                        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                         finish();
                     }
                 });

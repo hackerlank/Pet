@@ -6,21 +6,20 @@
     android:background="@color/background_color"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/layout_top_bar"/>
+    <include layout="@layout/layout_top_bar" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"/>
+        android:background="@color/line" />
 
     <RelativeLayout
         android:id="@+id/rlPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/color_255_255_255"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:background="@color/color_255_255_255">
+        android:paddingRight="15dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -42,15 +41,15 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"/>
+        android:background="@color/line" />
 
     <RelativeLayout
         android:id="@+id/rlClearCache"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/color_255_255_255"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:background="@color/color_255_255_255">
+        android:paddingRight="15dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -64,14 +63,31 @@
             android:id="@+id/tvCache"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
             android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
             android:text="4.8M"
             android:textColor="@color/color_66_66_66"
             android:textSize="15sp" />
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line" />
+
+    <TextView
+        android:id="@+id/tvLogout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bg_logout"
+        android:gravity="center"
+        android:text="@string/logout"
+        android:textColor="@color/color_66_66_66"
+        android:textSize="13sp" />
 
 
 </LinearLayout>

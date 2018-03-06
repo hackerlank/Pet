@@ -79,7 +79,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@id/ivAvater"
                         android:drawableLeft="@drawable/bangdingshouji"
-                        android:drawablePadding="1dp"
+                        android:drawablePadding="3dp"
                         android:gravity="center"
                         android:text="18898352847"
                         android:textColor="@color/color_66_66_66"
