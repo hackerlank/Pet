@@ -554,6 +554,16 @@ public class Utils {
         BigDecimal result4 = new BigDecimal(teraBytes);
         return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
     }
+
+
+    // 获取Glide磁盘缓存大小
+    public static String replaceHtmlText(String text) {
+        return text.replaceAll("&lt;", "<")
+                .replaceAll("&gt;", ">")
+                .replaceAll("&gt;", ">")
+                .replaceAll("&#39;", "'")
+                .replaceAll("&quot;", "\"");
+    }
 }
 
 

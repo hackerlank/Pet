@@ -13,4 +13,15 @@
         <attr name="only_top_round" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="ScaleLayout">
+        <attr name="width_height_scale" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="PagerDotView">
+        <attr name="selectedPageDotColor" format="integer" />
+        <attr name="otherPageDotColor" format="integer" />
+        <attr name="totalPage" format="integer" />
+        <attr name="direction" format="integer" />
+    </declare-styleable>
+
 </resources>
