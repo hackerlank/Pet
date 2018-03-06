@@ -37,7 +37,7 @@ public class InformationFragment extends BaseFragment {
         ViewPager viewPager=fv(R.id.viewPager);
         final ArrayList<InformationItemFragment> fragments=new ArrayList<>();
         for(int i=0;i<4;++i){
-            fragments.add(new InformationItemFragment());
+            fragments.add(new InformationItemFragment().setArticleType(Constants.ARTICLE_TYPE[i]));
         }
         viewPager.setAdapter(new FragmentPagerAdapter(getActivity().getSupportFragmentManager()) {
             @Override

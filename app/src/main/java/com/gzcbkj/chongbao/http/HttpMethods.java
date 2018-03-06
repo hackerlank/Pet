@@ -245,6 +245,24 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    /**
+     *
+     * @param type 文章类型;宠物指南:guide|宠物公益:welfare|宠物百科:encyclopedias
+     * @param title
+     * @param content
+     * @param mainPic
+     * @param subscriber
+     */
+    public void saveApparticle(String type, String title,String content,String mainPic,  ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("title",title);
+        map.put("type",type);
+        map.put("content",content);
+        map.put("mainPic",mainPic);
+        Observable observable = mRetrofit.create(HttpService.class).saveApparticle(map);
+        toSubscribe(observable, subscriber);
+    }
+
 
     public <T> void toSubscribe(Observable<T> o, Subscriber<T> s) {
         if (s instanceof ProgressSubscriber) {

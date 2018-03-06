@@ -6,7 +6,7 @@
     android:background="@color/color_255_255_255"
     android:paddingTop="10dp">
 
-    <com.gzcbkj.chongbao.widgets.RatioImageView
+    <com.gzcbkj.chongbao.widgets.RoundRectImageView
         android:id="@+id/ivAvater"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -75,7 +75,7 @@
         android:layout_toRightOf="@id/ivPic"
         android:maxLines="3"
         android:paddingRight="15dp"
-        android:text="到了夏天，猫掉毛是非常厉害的，这是猫咪的生物调节机制，没有办法改变的。只能通过一些措施来改善... ..."
+        android:text="到了夏天，猫掉毛是非常厉害的，"
         android:textColor="@color/color_66_66_66"
         android:textSize="12sp" />
 
@@ -100,16 +100,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvShare"
+            <ImageView
+                android:id="@+id/ivShare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/share_grey"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/share_grey"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/share"
-                android:drawablePadding="5dp"
-                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/color_66_66_66"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -119,16 +124,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvCollect"
+            <ImageView
+                android:id="@+id/ivCollect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/collect_grey"
-                android:drawablePadding="5dp"
-                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/collect_grey"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/collection"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/color_66_66_66"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -138,16 +148,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvLike"
+            <ImageView
+                android:id="@+id/ivLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/like"
-                android:drawablePadding="5dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/like"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/liked"
-                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/color_66_66_66"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -157,16 +172,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvCommentNum"
+            <ImageView
+                android:id="@+id/ivComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/comment_icon"
-                android:drawablePadding="5dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/comment"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/comment"
-                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/color_66_66_66"
                 android:textSize="12sp" />
         </LinearLayout>

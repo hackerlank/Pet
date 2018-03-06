@@ -23,4 +23,11 @@ public class Constants {
     public static final String WECHAT_NOTIFY_URL = "http://member.daqunli.cn:9090/billingws/ipn/wechat";
 
     public static final String KEY_BASE_BEAN = "key_base_bean";
+
+    public static final String ARTICLE_TYPE[]=new String[]{"guide","welfare","encyclopedias","hospital"};
+
+    public static final String MAIN_PICS[]=new String[]{"http://n.sinaimg.cn/sports/transform/w650h460/20180306/MRcm-fxipenn6273765.jpg",
+            "http://n.sinaimg.cn/sports/transform/w640h427/20180306/P12y-fxipenn5101209.jpg",
+            "http://n.sinaimg.cn/sports/transform/w650h420/20180305/mfgL-fxipenm9222701.jpg"};
+
 }

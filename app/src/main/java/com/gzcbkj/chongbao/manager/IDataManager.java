@@ -34,4 +34,8 @@ public interface IDataManager {
     public void saveMyUserInfo(UserInfoBean myUserInfo);
 
     public UserInfoBean getMyUserInfo();
+
+    public void saveData(String key,Object value);
+
+    public Object getDate(String key,Class cls);
 }

@@ -132,6 +132,8 @@
     <string name="publish_article_pic">上传封面</string>
     <string name="article_title">文章标题</string>
     <string name="write_something">写点什么... ...</string>
+    <string name="please_input_title">请填写文章标题</string>
+    <string name="please_input_content">请填写文章内容</string>
 
     <!-- PublishPictureFrigment -->
     <string name="publish_picture">发布照片</string>

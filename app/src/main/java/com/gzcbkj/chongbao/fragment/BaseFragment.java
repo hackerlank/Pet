@@ -79,6 +79,9 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         iv.setImageResource(drawableId);
     }
 
+    protected void setImage(ImageView iv, int drawableId) {
+        iv.setImageResource(drawableId);
+    }
     protected InputMethodManager getInputMethodManager() {
         if (mInputMethodManager == null) {
             mInputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);

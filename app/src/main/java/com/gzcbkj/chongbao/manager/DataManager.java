@@ -75,6 +75,22 @@ public class DataManager implements IDataManager {
         return getMyUserInfo()!=null;
     }
 
+    @Override
+    public void saveData(String key,Object value){
+        Preferences.getInstacne().setValues(key, value == null ? "" : new Gson().toJson(value));
+    }
+
+
+
+    @Override
+    public Object getDate(String key,Class cls){
+        String dataStr = Preferences.getInstacne().getValues(key, "");
+        if (!TextUtils.isEmpty(dataStr)) {
+            return new Gson().fromJson(dataStr, cls);
+        }
+        return null;
+    }
+
 
     @Override
     public IWXAPI getWeChatApi(Context context) {

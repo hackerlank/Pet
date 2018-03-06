@@ -1,24 +1,22 @@
 package com.gzcbkj.chongbao.fragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
-
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
+import com.gzcbkj.chongbao.adapter.ArticleAdapter;
 import com.gzcbkj.chongbao.bean.ArticleBean;
 import com.gzcbkj.chongbao.bean.ArticleListResponse;
 import com.gzcbkj.chongbao.bean.BannerBean;
@@ -26,13 +24,13 @@ import com.gzcbkj.chongbao.bean.BannerListResponse;
 import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
 import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
+import com.gzcbkj.chongbao.manager.DataManager;
 import com.gzcbkj.chongbao.utils.Constants;
 import com.gzcbkj.chongbao.utils.Utils;
 import com.gzcbkj.chongbao.widgets.PagerDotView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 import java.util.ArrayList;
 
 /**
@@ -40,8 +38,8 @@ import java.util.ArrayList;
  */
 
 public class HomeFragment extends BaseFragment implements OnRefreshListener {
-
-
+    private ArticleAdapter mAdapter;
+    private  View mTopView;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home;
@@ -49,10 +47,19 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
 
     @Override
     protected void onViewCreated(View view) {
+        setViewsOnClickListener(R.id.ivAdvisory, R.id.ivSearch);
+        ListView listView = fv(R.id.listView);
+        listView.setAdapter(getAdapter());
+        mTopView=LayoutInflater.from(getActivity()).inflate(R.layout.layout_top_home,null);
+        listView.addHeaderView(mTopView);
+        initTopLayout();
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
-        setViewsOnClickListener(R.id.ivAdvisory, R.id.ivSearch, R.id.tvChangeABatch);
-        LinearLayout llInformation = view.findViewById(R.id.llInformation);
+    }
+
+    private void initTopLayout(){
+        mTopView.findViewById(R.id.tvChangeABatch).setOnClickListener(this);
+        LinearLayout llInformation = mTopView.findViewById(R.id.llInformation);
         int count = llInformation.getChildCount();
         View itemView;
         for (int i = 0; i < count; ++i) {
@@ -68,8 +75,26 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
                 }
             });
         }
-        smartRefreshLayout.autoRefresh();
-        //addArticles();
+        BannerListResponse response=(BannerListResponse)DataManager.getInstance().getDate(BannerListResponse.class.getName(),BannerListResponse.class);
+        if(response!=null) {
+            addBannerList((ConvenientBanner) mTopView.findViewById(R.id.convenientBanner1), (PagerDotView) mTopView.findViewById(R.id.pagerDotView1), response.getBannerList1());
+            addBannerList((ConvenientBanner) mTopView.findViewById(R.id.convenientBanner2), (PagerDotView) mTopView.findViewById(R.id.pagerDotView2), response.getBannerList2());
+            addChoiceArticles(response.getArticleList());
+        }
+
+        ArticleListResponse response1=(ArticleListResponse)DataManager.getInstance().getDate(ArticleListResponse.class.getName(),ArticleListResponse.class);
+        if(response1!=null) {
+            getAdapter().setDataList(response1.getArticleList());
+        }
+        if(response==null || response1==null){
+            ((SmartRefreshLayout) fv(R.id.smartLayout)).autoRefresh();
+        }
+    }
+
+    private ArticleAdapter getAdapter(){
+        if(mAdapter==null)
+            mAdapter=new ArticleAdapter(getActivity());
+        return mAdapter;
     }
 
     private void addBannerList(ConvenientBanner convenientBanner, final PagerDotView pagerDotView,
@@ -114,7 +139,7 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
 
     private void addChoiceArticles(ArrayList<ArticleBean> list) {
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-        LinearLayout ll = fv(R.id.llChoiceArticle);
+        LinearLayout ll = mTopView.findViewById(R.id.llChoiceArticle);
         int count = ll.getChildCount();
         for (int i = 0; i < count; ++i) {
             ll.getChildAt(i).setVisibility(View.GONE);
@@ -132,44 +157,11 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
                     ll.addView(itemView);
                 }
                 bean = list.get(i);
-                Log.e("aaaaaa", bean.getMainPic() + "\n" + bean.getUserHead() + ", " + bean.getContent());
                 Utils.loadImage(R.drawable.default_1, bean.getMainPic(), (ImageView) itemView.findViewById(R.id.ivBg));
                 Utils.loadImage(R.drawable.touxiang, bean.getUserHead(), (ImageView) itemView.findViewById(R.id.ivAvater));
                 ((TextView) itemView.findViewById(R.id.tvContent)).setText(Html.fromHtml(Utils.replaceHtmlText(bean.getContent())));
                 setText((TextView) itemView.findViewById(R.id.tvName), bean.getUserName());
                 setText((TextView) itemView.findViewById(R.id.tvTime), bean.getCreateTime());
-            }
-        }
-
-
-    }
-
-    private void addOtherArticle(ArticleListResponse response) {
-        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-        LinearLayout ll = fv(R.id.llChoiceArticle);
-        int count = ll.getChildCount();
-        for (int i = 0; i < count; ++i) {
-            ll.getChildAt(i).setVisibility(View.GONE);
-        }
-        ArrayList<ArticleBean> list = response.getArticleList();
-        if (list != null) {
-            count = list.size();
-            View itemView;
-            ArticleBean bean;
-            for (int i = 0; i < count; ++i) {
-                if (i < ll.getChildCount()) {
-                    itemView = ll.getChildAt(i);
-                    itemView.setVisibility(View.VISIBLE);
-                } else {
-                    itemView = layoutInflater.inflate(R.layout.item_other_article, null);
-                    ll.addView(itemView);
-                }
-                bean = list.get(i);
-                Utils.loadImage(R.drawable.default_1, bean.getMainPic(), (ImageView) fv(R.id.ivBg));
-                Utils.loadImage(R.drawable.touxiang, bean.getUserHead(), (ImageView) fv(R.id.ivAvater));
-                setText((TextView) fv(R.id.tvContent), bean.getContent());
-                setText((TextView) fv(R.id.tvName), bean.getUserName());
-                setText((TextView) fv(R.id.tvTime), bean.getCreateTime());
             }
         }
     }
@@ -205,12 +197,13 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
         HttpMethods.getInstance().bannerList(1, new ProgressSubscriber(new SubscriberOnNextListener<BannerListResponse>() {
             @Override
             public void onNext(BannerListResponse response) {
+                DataManager.getInstance().saveData(BannerListResponse.class.getName(),response);
                 if (getView() != null) {
                     refreshlayout.finishRefresh();
-                    addBannerList((ConvenientBanner) fv(R.id.convenientBanner1),
-                            (PagerDotView) fv(R.id.pagerDotView1), response.getBannerList1());
-                    addBannerList((ConvenientBanner) fv(R.id.convenientBanner2),
-                            (PagerDotView) fv(R.id.pagerDotView2), response.getBannerList2());
+                    addBannerList((ConvenientBanner) mTopView.findViewById(R.id.convenientBanner1),
+                            (PagerDotView) mTopView.findViewById(R.id.pagerDotView1), response.getBannerList1());
+                    addBannerList((ConvenientBanner) mTopView.findViewById(R.id.convenientBanner2),
+                            (PagerDotView) mTopView.findViewById(R.id.pagerDotView2), response.getBannerList2());
                     addChoiceArticles(response.getArticleList());
                 }
             }
@@ -218,10 +211,13 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
     }
 
     private void firstArticleList() {
-        HttpMethods.getInstance().firstArticleList(1, 3, new ProgressSubscriber(new SubscriberOnNextListener<ArticleListResponse>() {
+        HttpMethods.getInstance().firstArticleList(1, 10, new ProgressSubscriber(new SubscriberOnNextListener<ArticleListResponse>() {
             @Override
             public void onNext(ArticleListResponse response) {
-
+                DataManager.getInstance().saveData(ArticleListResponse.class.getName(),response);
+                if(getView()!=null) {
+                    getAdapter().setDataList(response.getArticleList());
+                }
             }
         }, getActivity(), false, (BaseActivity) getActivity()));
     }

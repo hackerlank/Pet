@@ -21,8 +21,8 @@ public class ArticleBean implements Serializable {
     private String createTime;  //发表时间
     private String type;  //文章类型;宠物指南:guide|宠物公益:welfare|宠物百科:encyclopedias
     private int shareFlag;  //是否分享过;1:是
-    private String praiseFlag;  //是否点赞过;1:是
-    private String collectionFlag;  //是否收藏过:1:是
+    private int praiseFlag;  //是否点赞过;1:是
+    private int collectionFlag;  //是否收藏过:1:是
 
 
     public String getMainPic() {
@@ -129,19 +129,19 @@ public class ArticleBean implements Serializable {
         this.shareFlag = shareFlag;
     }
 
-    public String getPraiseFlag() {
+    public int getPraiseFlag() {
         return praiseFlag;
     }
 
-    public void setPraiseFlag(String praiseFlag) {
+    public void setPraiseFlag(int praiseFlag) {
         this.praiseFlag = praiseFlag;
     }
 
-    public String getCollectionFlag() {
+    public int getCollectionFlag() {
         return collectionFlag;
     }
 
-    public void setCollectionFlag(String collectionFlag) {
+    public void setCollectionFlag(int collectionFlag) {
         this.collectionFlag = collectionFlag;
     }
 }
