@@ -216,11 +216,13 @@
     <string name="message_center">消息中心</string>
     <string name="system_message">系统消息</string>
 
-    <!-- ArticleTypeFragment -->
+    <!-- InformationFragment -->
     <string name="information">资讯</string>
     <string name="guid">指南</string>
     <string name="encyclopedia">百科</string>
     <string name="public_welfare">公益</string>
     <string name="hospital">医院</string>
 
+    <!-- ArticleDetailFragment -->
+    <string name="choice_comment">精选留言</string>
 </resources>
