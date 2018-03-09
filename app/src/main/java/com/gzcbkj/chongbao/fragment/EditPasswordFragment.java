@@ -59,7 +59,7 @@ public class EditPasswordFragment extends BaseFragment {
                     return;
                 }
                 hideKeyBoard();
-                HttpMethods.getInstance().modifyPassword(Utils.getMessageDigest(newPas.getBytes()),
+                HttpMethods.getInstance().modifyPassword(Utils.getMessageDigest(newPas.getBytes()),Utils.getMessageDigest(initPsw.getBytes()),
                         new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                             @Override
                             public void onNext(ResponseBean bean) {

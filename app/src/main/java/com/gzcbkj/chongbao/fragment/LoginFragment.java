@@ -8,6 +8,7 @@ import android.widget.EditText;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.activity.HomeActivity;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
 import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
@@ -76,13 +77,13 @@ public class LoginFragment extends BaseFragment {
                 }
                 hideKeyBoard();
                 HttpMethods.getInstance().login(phone, Utils.getMessageDigest(password.getBytes()),
-                        new ProgressSubscriber(new SubscriberOnNextListener<UserInfoBean>() {
+                        new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                             @Override
-                            public void onNext(UserInfoBean bean) {
+                            public void onNext(ResponseBean bean) {
                                 if(!TextUtils.isEmpty(bean.getMsg())){
                                     showToast(bean.getMsg());
                                 }
-                                DataManager.getInstance().saveMyUserInfo(bean);
+                                DataManager.getInstance().saveMyUserInfo(bean.getUser());
                                 gotoPager(HomeActivity.class,null);
                                 getActivity().finish();
                             }

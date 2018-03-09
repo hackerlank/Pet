@@ -21,6 +21,7 @@ import com.gzcbkj.chongbao.bean.ArticleBean;
 import com.gzcbkj.chongbao.bean.ArticleListResponse;
 import com.gzcbkj.chongbao.bean.BannerBean;
 import com.gzcbkj.chongbao.bean.BannerListResponse;
+import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
 import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
@@ -177,6 +178,12 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
         switch (id) {
             case R.id.ivAdvisory:
                 gotoPager(RaisePetAdvisoryFragment.class, null);
+//                HttpMethods.getInstance().uploadFile(new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+//                    @Override
+//                    public void onNext(ResponseBean o) {
+//
+//                    }
+//                },getActivity(),(BaseActivity)getActivity()));
                 break;
             case R.id.ivSearch:
                 gotoPager(SearchFragment.class, null);

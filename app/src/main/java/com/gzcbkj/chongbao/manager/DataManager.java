@@ -9,6 +9,7 @@ import com.gzcbkj.chongbao.utils.Constants;
 import com.gzcbkj.chongbao.utils.Preferences;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
 import java.util.ArrayList;
 
 /**
@@ -48,8 +49,11 @@ public class DataManager implements IDataManager {
 
     @Override
     public synchronized void saveMyUserInfo(UserInfoBean myUserInfo) {
-        Preferences.getInstacne().setValues(MY_USER_INFO, myUserInfo == null ? "" : new Gson().toJson(myUserInfo));
+        if (myUserInfo != null && mMyUserInfo != null && TextUtils.isEmpty(myUserInfo.getToken())) {
+            myUserInfo.setToken(mMyUserInfo.getToken());
+        }
         mMyUserInfo = myUserInfo;
+        Preferences.getInstacne().setValues(MY_USER_INFO, myUserInfo == null ? "" : new Gson().toJson(myUserInfo));
     }
 
     @Override
@@ -64,15 +68,15 @@ public class DataManager implements IDataManager {
         return mMyUserInfo;
     }
 
-    public String getToken(){
-        if(getMyUserInfo()==null){
+    public String getToken() {
+        if (getMyUserInfo() == null) {
             return "";
         }
         return getMyUserInfo().getToken();
     }
 
-    public boolean isLogin(){
-        return getMyUserInfo()!=null;
+    public boolean isLogin() {
+        return getMyUserInfo() != null;
     }
 
     @Override
