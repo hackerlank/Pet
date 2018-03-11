@@ -8,8 +8,10 @@ import java.io.Serializable;
  */
 
 public class ArticleBean implements Serializable {
+    private long id;
     private String articleGrade;  //文章等级
     private String mainPic;  //文章主图
+    private String userId;
     private String userName;  //用户名
     private String userHead;  //用户头像
     private String title;  //文章标题
@@ -23,7 +25,40 @@ public class ArticleBean implements Serializable {
     private int shareFlag;  //是否分享过;1:是
     private int praiseFlag;  //是否点赞过;1:是
     private int collectionFlag;  //是否收藏过:1:是
+    private long updateTime;
+    private String status;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public long getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(long updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getMainPic() {
         return mainPic;

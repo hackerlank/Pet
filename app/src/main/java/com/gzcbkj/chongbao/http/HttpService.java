@@ -1,5 +1,6 @@
 package com.gzcbkj.chongbao.http;
 
+import com.gzcbkj.chongbao.bean.ArticleBean;
 import com.gzcbkj.chongbao.bean.BannerListResponse;
 import com.gzcbkj.chongbao.bean.ArticleListResponse;
 import com.gzcbkj.chongbao.bean.ResponseBean;
@@ -75,6 +76,13 @@ public interface HttpService {
     Observable<ResponseBean> updateUser(@Body HashMap<String, Object> map);
 
     /**
+     * 查询自己空间主图像
+     * @return
+     */
+    @GET("userInfo/querySpace")
+    Observable<ResponseBean> querySpace();
+
+    /**
      * 查询用户详细信息
      * @return
      */
@@ -83,11 +91,41 @@ public interface HttpService {
 
 
     /**
+     * 查询自己空间发表的说说
+     * @return
+     */
+    @POST("appusersay/querySayList")
+    Observable<ResponseBean> querySayList(@Body HashMap<String, Object> map);
+
+
+    /**
+     * 查询说说详情
+     * @return
+     */
+    @GET("appusersay/querySayDetail")
+    Observable<ResponseBean> querySayDetail(@Query("sayId") long sayId);
+
+
+    /**
      * 用户发表文章
      * @return
      */
     @POST("apparticle/saveApparticle")
     Observable<ResponseBean> saveApparticle(@Body HashMap<String, Object> map);
+
+    /**
+     * 用户发表文章
+     * @return
+     */
+    @GET("apparticle/info")
+    Observable<ResponseBean> articleInfo(@Query("articleId") long articleId);
+
+    /**
+     * 点赞|分享|收藏文章
+     * @return
+     */
+    @POST("apparticle/updateArticle")
+    Observable<ResponseBean> updateArticle(@Body HashMap<String, Object> map);
 
 //    /**
 //     * 根据类型查询文章

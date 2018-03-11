@@ -1,15 +1,26 @@
 package com.gzcbkj.chongbao.fragment;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.adapter.DynamicAdapter;
 import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.bean.SayBean;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
+import com.gzcbkj.chongbao.http.HttpMethods;
+import com.gzcbkj.chongbao.http.ProgressSubscriber;
+import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
 import com.gzcbkj.chongbao.manager.DataManager;
+import com.gzcbkj.chongbao.utils.Constants;
+import com.gzcbkj.chongbao.utils.Utils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -23,6 +34,7 @@ import java.util.ArrayList;
 public class MyDynamicFragment extends BaseFragment implements OnRefreshListener {
 
     private DynamicAdapter mAdapter;
+    private View mTopView;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_my_dynamic;
@@ -34,34 +46,34 @@ public class MyDynamicFragment extends BaseFragment implements OnRefreshListener
         setImage(R.id.ivRight,R.drawable.more);
         ListView listView = fv(R.id.listView);
         listView.setAdapter(getAdapter());
-        ArrayList<ResponseBean> list=new ArrayList<>();
-        for(int i=0;i<5;++i){
-            list.add(new ResponseBean());
-        }
-        getAdapter().setDataList(list);
-        View topView= LayoutInflater.from(getActivity()).inflate(R.layout.dynamic_top_layout,null);
-        listView.addHeaderView(topView);
-        initTopView(topView);
+        mTopView= LayoutInflater.from(getActivity()).inflate(R.layout.dynamic_top_layout,null);
+        listView.addHeaderView(mTopView);
+        initTopView(DataManager.getInstance().getMyUserInfo());
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
+        ArrayList<SayBean> list= (ArrayList<SayBean>) DataManager.getInstance().getDate("sayList", new TypeToken<ArrayList<SayBean>>(){}.getType());
+        getAdapter().setDataList(list);
+        if(list==null || list.isEmpty()) {
+            smartRefreshLayout.autoRefresh();
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i==0){
-                    return;
+                if(i==1){
+                    gotoPager(PublishFrigment.class,null);
+                }else if(i>1) {
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable(Constants.KEY_BASE_BEAN,getAdapter().getItem(i-2));
+                    gotoPager(DynamicDetailFragment.class, bundle);
                 }
-                gotoPager(i==1?PublishFrigment.class:DynamicDetailFragment.class,null);
             }
         });
     }
 
-    private void initTopView(View topView){
-        topView.findViewById(R.id.ivAvater).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gotoPager(UserProfileFragment.class,null);
-            }
-        });
+    private void initTopView(UserInfoBean userInfo){
+        Utils.loadImage(R.drawable.default_1,userInfo.getSpaceImg(),(ImageView) mTopView.findViewById(R.id.ivBg));
+        Utils.loadImage(R.drawable.touxiang,userInfo.getSpaceImg(),(ImageView) mTopView.findViewById(R.id.ivAvater));
+        ((TextView) mTopView.findViewById(R.id.tvName)).setText(userInfo.getUsername());
     }
 
     private DynamicAdapter getAdapter(){
@@ -83,7 +95,31 @@ public class MyDynamicFragment extends BaseFragment implements OnRefreshListener
     }
 
     @Override
-    public void onRefresh(RefreshLayout refreshlayout) {
+    public void onRefresh(final RefreshLayout refreshlayout) {
+        HttpMethods.getInstance().querySpace(new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+            @Override
+            public void onNext(ResponseBean bean) {
+                if(getView()==null){
+                    return;
+                }
+                if(bean!=null) {
+                    initTopView(bean.getUserEntity());
+                }
+            }
+        },getActivity(),false,(BaseActivity)getActivity()));
 
+        HttpMethods.getInstance().querySayList(1, 20,1,new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+            @Override
+            public void onNext(ResponseBean bean) {
+                if(getView()==null){
+                    return;
+                }
+                refreshlayout.finishRefresh();
+                if(bean!=null){
+                    DataManager.getInstance().saveData("sayList",bean.getSayList());
+                    getAdapter().setDataList(bean.getSayList());
+                }
+            }
+        },getActivity(),false,(BaseActivity)getActivity()));
     }
 }

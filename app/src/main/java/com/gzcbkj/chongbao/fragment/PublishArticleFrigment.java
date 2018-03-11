@@ -54,11 +54,17 @@ public class PublishArticleFrigment extends BaseFragment {
                     showToast(R.string.please_input_title);
                     return;
                 }
-                String content=getTextById(R.id.etAddDes);
-                if(TextUtils.isEmpty(content)){
+                String content1="关于他在场上最合适的位置突然成为了外界讨论的焦点。就在此时，阿扎尔在主场迎战水晶宫的比赛中如脱胎换骨一般焕发了往日的风采，他在前场如鱼得水，盘活了蓝军的进攻体系，而唯一的变化便是他重新回到了左边锋的位置上。";
+                if(TextUtils.isEmpty(content1)){
                     showToast(R.string.please_input_title);
                     return;
                 }
+
+                String image="<img src=\"http://n.sinaimg.cn/sports/transform/w638h423/20180311/bl8J-fxpwyhw9073041.png\"/>";
+
+                String content2="客观的说，切尔西在此前几场比赛中，接连与巴塞罗那、曼城这样善于传控的球队进行比拼，孔蒂在舍弃对球权的控制后安排小快灵的三叉戟在前场寻求反击，也是无可厚非的决定。";
+
+                String content="<p>"+content1+"</p>"+"<p>"+image+"</p>"+"<p>"+content2+"</p>";
                 HttpMethods.getInstance().saveApparticle(Constants.ARTICLE_TYPE[index%3],title,content,Constants.MAIN_PICS[index%3],
                         new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                             @Override

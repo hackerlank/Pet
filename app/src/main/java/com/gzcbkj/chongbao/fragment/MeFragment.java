@@ -1,6 +1,7 @@
 package com.gzcbkj.chongbao.fragment;
 
 import android.view.View;
+import android.widget.ImageView;
 
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
@@ -10,6 +11,7 @@ import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
 import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
 import com.gzcbkj.chongbao.manager.DataManager;
+import com.gzcbkj.chongbao.utils.Utils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -30,7 +32,6 @@ public class MeFragment extends BaseFragment implements OnRefreshListener {
                 R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl4, R.id.rl5, R.id.rl6, R.id.rl7, R.id.rl8, R.id.rl9, R.id.rl10);
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
-        smartRefreshLayout.autoRefresh();
         setViewsOnClickListener(R.id.ivRight);
     }
 
@@ -40,9 +41,13 @@ public class MeFragment extends BaseFragment implements OnRefreshListener {
         if (bean != null) {
             setText(R.id.tvName, bean.getUsername());
             setText(R.id.tvPhone, bean.getMobile());
+            Utils.loadImage(R.drawable.touxiang,bean.getHeadPic(),(ImageView)fv(R.id.ivAvater));
+            Utils.loadImage(R.drawable.wall,bean.getHeadPic(),(ImageView)fv(R.id.ivWall));
         } else {
-            setText(R.id.tvName, "");
-            setText(R.id.tvPhone, "");
+            setText(R.id.tvName, R.string.not_login);
+            setText(R.id.tvPhone, R.string.not_login);
+            setImage(R.id.ivAvater,R.drawable.touxiang);
+            setImage(R.id.ivWall,R.drawable.wall);
         }
     }
 
@@ -51,42 +56,47 @@ public class MeFragment extends BaseFragment implements OnRefreshListener {
         int id = view.getId();
         switch (id) {
             case R.id.ivWall:
+//                if (!DataManager.getInstance().isLogin()) {
+//                    gotoPager(LoginFragment.class, null);
+//                    return;
+//                }
                 break;
             case R.id.ivSetting:
-                gotoPager(SettingFragment.class, null);
+                gotoPager(DataManager.getInstance().isLogin() ? SettingFragment.class : LoginFragment.class, null);
                 break;
             case R.id.ivMessage:
-                gotoPager(MessageCenterFragment.class, null);
+
+                    gotoPager(DataManager.getInstance().isLogin() ?MessageCenterFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rlProfile:
-                gotoPager(EditProfileFragment.class, null);
+                gotoPager(DataManager.getInstance().isLogin() ?EditProfileFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rl1:
-                gotoPager(MyDynamicFragment.class, null);
+                gotoPager(DataManager.getInstance().isLogin() ?MyDynamicFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rl2:
-                gotoPager(MyPetFragment.class, null);
+                gotoPager(DataManager.getInstance().isLogin() ?MyPetFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rl3:
-                gotoPager(FriendOtherFragment.class, null);
+                gotoPager(DataManager.getInstance().isLogin() ?FriendOtherFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rl4:
-                gotoPager(MyCollectFragment.class, null);
+                gotoPager(DataManager.getInstance().isLogin() ?MyCollectFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rl5:
-                gotoPager(PetNoticeFragment.class, null);
+                gotoPager(DataManager.getInstance().isLogin() ?PetNoticeFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rl6:
-                gotoPager(JilingguanliFragment.class, null);
+                gotoPager(DataManager.getInstance().isLogin() ?JilingguanliFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rl7:
-                gotoPager(OrderListFragment.class, null);
+                gotoPager(DataManager.getInstance().isLogin() ?OrderListFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rl8:
-                gotoPager(MoneyAccountFragment.class, null);
+                gotoPager(DataManager.getInstance().isLogin() ?MoneyAccountFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rl9:
-                gotoPager(SuggestionFragment.class, null);
+                gotoPager(DataManager.getInstance().isLogin() ?SuggestionFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rl10:
                 gotoPager(AboutUsFragment.class, null);

@@ -17,6 +17,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -563,6 +565,21 @@ public class Utils {
                 .replaceAll("&gt;", ">")
                 .replaceAll("&#39;", "'")
                 .replaceAll("&quot;", "\"");
+    }
+
+    public static Date stringToDate(String strTime)
+            throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date =  formatter.parse(strTime);
+        Log.e("aaaaaaa",date.toString()+", "+strTime);
+        return date;
+    }
+
+    /**
+     *
+     */
+    public static String getNewText(int num) {
+        return num<10?("0"+num):String.valueOf(num);
     }
 }
 

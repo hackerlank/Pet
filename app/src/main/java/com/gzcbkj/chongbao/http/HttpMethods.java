@@ -114,15 +114,6 @@ public class HttpMethods {
         map.put("type", type);
         Observable observable = mRetrofit.create(HttpService.class).queryValiCode(map);
         toSubscribe(observable, subscriber);
-
-        //        if (!TextUtils.isEmpty(filePath)) {
-//            File file = new File(filePath);
-//            RequestBody requestBody = RequestBody.create(MediaType.parse("image"), file);
-//            MultipartBody.Part part = MultipartBody.Part.
-//                    createFormData("image", file.getName(), requestBody);
-//
-//            ArrayList<MultipartBody.Part> parts = new ArrayList<>();
-//            parts.add(part);
     }
 
     /**
@@ -201,6 +192,14 @@ public class HttpMethods {
     /**
      * @param subscriber
      */
+    public void querySpace(ProgressSubscriber subscriber) {
+        Observable observable = mRetrofit.create(HttpService.class).querySpace();
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     * @param subscriber
+     */
     public void queryUserInfo(ProgressSubscriber subscriber) {
         Observable observable = mRetrofit.create(HttpService.class).queryUserInfo();
         toSubscribe(observable, subscriber);
@@ -213,6 +212,32 @@ public class HttpMethods {
      */
     public void bannerList(int position, ProgressSubscriber subscriber) {
         Observable observable = mRetrofit.create(HttpService.class).bannerList(position);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param page
+     * @param limit
+     * @param category 1:表示查询自己
+     * @param subscriber
+     */
+    public void querySayList(int page,int limit,int category, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("page", page);
+        map.put("limit", limit);
+        map.put("category", category);
+        Observable observable = mRetrofit.create(HttpService.class).querySayList(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param sayId
+     * @param subscriber
+     */
+    public void querySayDetail(long sayId, ProgressSubscriber subscriber) {
+        Observable observable = mRetrofit.create(HttpService.class).querySayDetail(sayId);
         toSubscribe(observable, subscriber);
     }
 
@@ -259,6 +284,26 @@ public class HttpMethods {
         map.put("content", content);
         map.put("mainPic", mainPic);
         Observable observable = mRetrofit.create(HttpService.class).saveApparticle(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param type   //操作类型;1:点赞；2：收藏;3:分享
+     * @param articleId
+     * @param subscriber
+     */
+    public void updateArticle(int type, long articleId, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("type", type);
+        map.put("articleId", articleId);
+        Observable observable = mRetrofit.create(HttpService.class).updateArticle(map);
+        toSubscribe(observable, subscriber);
+    }
+
+
+    public void articleInfo(long articleId, ProgressSubscriber subscriber) {
+        Observable observable = mRetrofit.create(HttpService.class).articleInfo(articleId);
         toSubscribe(observable, subscriber);
     }
 

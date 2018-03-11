@@ -51,7 +51,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 @Override
                 public void onClick(View view) {
                     int tag = (int) view.getTag();
-                    if ((tag == 2 || tag == 4) && !DataManager.getInstance().isLogin()) {
+                    if (tag == 2 && !DataManager.getInstance().isLogin()) {
                         gotoPager(LoginFragment.class, null);
                         return;
                     }
@@ -101,13 +101,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         if (mCurrentFragment != null) {
-            if ((mCurrentFragment instanceof MeFragment) && !DataManager.getInstance().isLogin()) {
-                switchFragment(mBaseFragment.get(0));
-                resetBottomBar(0);
-            } else {
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.show(mCurrentFragment).commit();
-            }
         }
     }
 

@@ -10,6 +10,7 @@ import com.gzcbkj.chongbao.utils.Preferences;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -87,10 +88,10 @@ public class DataManager implements IDataManager {
 
 
     @Override
-    public Object getDate(String key,Class cls){
+    public Object getDate(String key,Type type){
         String dataStr = Preferences.getInstacne().getValues(key, "");
         if (!TextUtils.isEmpty(dataStr)) {
-            return new Gson().fromJson(dataStr, cls);
+            return new Gson().fromJson(dataStr, type);
         }
         return null;
     }

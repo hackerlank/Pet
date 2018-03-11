@@ -5,12 +5,23 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.adapter.DynamicCommentAdapter;
-import com.gzcbkj.chongbao.adapter.LikeCommentAdapter;
+import com.gzcbkj.chongbao.adapter.LikeDynamicAdapter;
 import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.bean.SayBean;
+import com.gzcbkj.chongbao.bean.SayDetailResponse;
+import com.gzcbkj.chongbao.http.HttpMethods;
+import com.gzcbkj.chongbao.http.ProgressSubscriber;
+import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
+import com.gzcbkj.chongbao.utils.Constants;
+import com.gzcbkj.chongbao.utils.Utils;
+import com.gzcbkj.chongbao.widgets.DynamicDetailPhotosView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -24,7 +35,10 @@ import java.util.ArrayList;
 
 public class DynamicDetailFragment extends BaseFragment implements OnRefreshListener {
     private DynamicCommentAdapter mAdapter;
-    private LikeCommentAdapter mLikeCommentAdapter;
+    private LikeDynamicAdapter mLikeDynamicAdapter;
+    private SayBean mSayBean;
+    private ArrayList<SayDetailResponse.PraiseUser> mSayPraiseList;
+    private View mTopView;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_dynamic_detail;
@@ -33,6 +47,7 @@ public class DynamicDetailFragment extends BaseFragment implements OnRefreshList
     @Override
     protected void onViewCreated(View view) {
         setText(R.id.tvTitle,R.string.detail);
+        mSayBean=(SayBean) getArguments().getSerializable(Constants.KEY_BASE_BEAN);
         ListView listView = fv(R.id.listView);
         listView.setAdapter(getAdapter());
         ArrayList<ResponseBean> list=new ArrayList<>();
@@ -40,24 +55,25 @@ public class DynamicDetailFragment extends BaseFragment implements OnRefreshList
             list.add(new ResponseBean());
         }
         getAdapter().setDataList(list);
-        View topView= LayoutInflater.from(getActivity()).inflate(R.layout.dynamic_detail_top_layout,null);
-        listView.addHeaderView(topView);
-        initTopView(topView);
+        mTopView= LayoutInflater.from(getActivity()).inflate(R.layout.dynamic_detail_top_layout,null);
+        listView.addHeaderView(mTopView);
+        initTopView();
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
     }
 
-    private void initTopView(View topView){
-        RecyclerView recyclerView=topView.findViewById(R.id.recycleView);
+    private void initTopView(){
+        RecyclerView recyclerView=mTopView.findViewById(R.id.recycleView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         layoutManager.setOrientation(OrientationHelper.HORIZONTAL);
-        recyclerView.setAdapter(getLikeCommentAdapter());
-        ArrayList<ResponseBean> list=new ArrayList<>();
-        for(int i=0;i<20;++i){
-            list.add(new ResponseBean());
-        }
-        getLikeCommentAdapter().setDataList(list);
+        recyclerView.setAdapter(getLikeDynamicAdapter());
+        getLikeDynamicAdapter().setDataList(mSayPraiseList);
+        Utils.loadImage(R.drawable.touxiang,mSayBean.getUserHead(),(ImageView)mTopView.findViewById(R.id.ivAvater));
+        ((TextView)mTopView.findViewById(R.id.tvName)).setText(mSayBean.getUserName());
+        ((TextView)mTopView.findViewById(R.id.tvContent)).setText(mSayBean.getContent());
+        ((TextView)mTopView.findViewById(R.id.tvTime)).setText(mSayBean.getCreateTime());
+        ((DynamicDetailPhotosView)mTopView.findViewById(R.id.dynamicDetailPhotosView)).setImageList(mSayBean.getSayImgList());
     }
 
     private DynamicCommentAdapter getAdapter(){
@@ -66,10 +82,10 @@ public class DynamicDetailFragment extends BaseFragment implements OnRefreshList
         return mAdapter;
     }
 
-    private LikeCommentAdapter getLikeCommentAdapter(){
-        if(mLikeCommentAdapter==null)
-            mLikeCommentAdapter=new LikeCommentAdapter(getActivity());
-        return mLikeCommentAdapter;
+    private LikeDynamicAdapter getLikeDynamicAdapter(){
+        if(mLikeDynamicAdapter==null)
+            mLikeDynamicAdapter=new LikeDynamicAdapter(getActivity());
+        return mLikeDynamicAdapter;
     }
 
     @Override
@@ -83,7 +99,18 @@ public class DynamicDetailFragment extends BaseFragment implements OnRefreshList
     }
 
     @Override
-    public void onRefresh(RefreshLayout refreshlayout) {
-
+    public void onRefresh(final RefreshLayout refreshlayout) {
+        HttpMethods.getInstance().querySayDetail(mSayBean.getId(),new ProgressSubscriber(new SubscriberOnNextListener<SayDetailResponse>() {
+            @Override
+            public void onNext(SayDetailResponse bean) {
+                if(getView()==null){
+                    return;
+                }
+                refreshlayout.finishRefresh();
+                mSayBean=bean.getUserSayEntity();
+                mSayPraiseList=bean.getSayPraiseList();
+                initTopView();
+            }
+        },getActivity(),false,(BaseActivity)getActivity()));
     }
 }

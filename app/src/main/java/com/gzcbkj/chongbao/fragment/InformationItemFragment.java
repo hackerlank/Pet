@@ -1,5 +1,6 @@
 package com.gzcbkj.chongbao.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,6 +13,7 @@ import com.gzcbkj.chongbao.http.OnHttpErrorListener;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
 import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
 import com.gzcbkj.chongbao.manager.DataManager;
+import com.gzcbkj.chongbao.utils.Constants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -44,7 +46,9 @@ public class InformationItemFragment extends BaseFragment implements OnRefreshLi
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                Bundle bundle=new Bundle();
+                bundle.putSerializable(Constants.KEY_BASE_BEAN,getAdapter().getItem(i));
+                gotoPager(ArticleDetailFragment.class,bundle);
             }
         });
     }

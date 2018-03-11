@@ -10,6 +10,8 @@ import android.widget.ImageView;
 
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.bean.SayDetailResponse;
+import com.gzcbkj.chongbao.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -17,15 +19,15 @@ import java.util.ArrayList;
  * Created by gigabud on 17-7-5.
  */
 
-public class LikeCommentAdapter extends RecyclerView.Adapter<LikeCommentAdapter.ViewHolder> {
+public class LikeDynamicAdapter extends RecyclerView.Adapter<LikeDynamicAdapter.ViewHolder> {
     private Context mContext;
-    private ArrayList<ResponseBean> mDataList;
+    private ArrayList<SayDetailResponse.PraiseUser> mDataList;
 
-    public LikeCommentAdapter(Context context) {
+    public LikeDynamicAdapter(Context context) {
         mContext = context;
     }
 
-    public void setDataList(ArrayList<ResponseBean> dataList) {
+    public void setDataList(ArrayList<SayDetailResponse.PraiseUser> dataList) {
         mDataList = dataList;
         notifyDataSetChanged();
     }
@@ -58,7 +60,8 @@ public class LikeCommentAdapter extends RecyclerView.Adapter<LikeCommentAdapter.
             ivAvater = itemView.findViewById(R.id.ivAvater);;
         }
 
-        public void setData(ResponseBean bean) {
+        public void setData(SayDetailResponse.PraiseUser user) {
+            Utils.loadImage(R.drawable.touxiang,user.getUserHead(),ivAvater);
         }
 
     }
