@@ -3,7 +3,6 @@ package com.gzcbkj.chongbao.widgets;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.gzcbkj.chongbao.R;
@@ -35,7 +34,6 @@ public class ScaleLayout extends RelativeLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = (int) (width * mScale);
-        Log.e("aaaaaaaa", width + ", " + height + ", " + mScale);
         super.onMeasure(
                 MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));

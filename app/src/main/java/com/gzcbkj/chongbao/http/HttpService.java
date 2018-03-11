@@ -4,10 +4,17 @@ import com.gzcbkj.chongbao.bean.BannerListResponse;
 import com.gzcbkj.chongbao.bean.ArticleListResponse;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -40,7 +47,7 @@ public interface HttpService {
      * @return
      */
     @POST("user/login")
-    Observable<UserInfoBean> login(@Body HashMap<String, Object> map);
+    Observable<ResponseBean> login(@Body HashMap<String, Object> map);
 
 
     /**
@@ -122,7 +129,9 @@ public interface HttpService {
 
 
 
-
+    @Multipart
+    @POST("file/uploadFile")
+    Observable<ResponseBean> uploadFile(@Part ArrayList<MultipartBody.Part> part);
 
 
 //    /**

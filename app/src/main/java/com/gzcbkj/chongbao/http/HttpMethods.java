@@ -1,17 +1,24 @@
 package com.gzcbkj.chongbao.http;
 
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.gzcbkj.chongbao.manager.DataManager;
 import com.google.gson.GsonBuilder;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -47,20 +54,20 @@ public class HttpMethods {
                 Log.i(TAG, message);
             }
         });
-        Interceptor interceptor=new Interceptor() {
+        Interceptor interceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
-                 Request request;
-                 if(!TextUtils.isEmpty(DataManager.getInstance().getToken())){
-                     request = chain.request()
-                             .newBuilder()
-                             .addHeader("token", DataManager.getInstance().getToken())
-                             .build();
-                 }else{
-                     request = chain.request()
-                             .newBuilder()
-                             .build();
-                 }
+                Request request;
+                if (!TextUtils.isEmpty(DataManager.getInstance().getToken())) {
+                    request = chain.request()
+                            .newBuilder()
+                            .addHeader("token", DataManager.getInstance().getToken())
+                            .build();
+                } else {
+                    request = chain.request()
+                            .newBuilder()
+                            .build();
+                }
                 return chain.proceed(request);
             }
         };
@@ -97,12 +104,11 @@ public class HttpMethods {
 
 
     /**
-     *
      * @param mobile
-     * @param type  register:注册 modify:忘记密码
+     * @param type       register:注册 modify:忘记密码
      * @param subscriber
      */
-    public void queryValiCode(String mobile,String type, ProgressSubscriber subscriber) {
+    public void queryValiCode(String mobile, String type, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("mobile", mobile);
         map.put("type", type);
@@ -120,7 +126,6 @@ public class HttpMethods {
     }
 
     /**
-     *
      * @param mobile
      * @param valiCode
      * @param nickname
@@ -129,7 +134,7 @@ public class HttpMethods {
      * @param city
      * @param subscriber
      */
-    public void register(String mobile,String valiCode,String nickname,String password,String province,String city,ProgressSubscriber subscriber) {
+    public void register(String mobile, String valiCode, String nickname, String password, String province, String city, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("mobile", mobile);
         map.put("valiCode", valiCode);
@@ -142,12 +147,11 @@ public class HttpMethods {
     }
 
     /**
-     *
      * @param mobile
      * @param password
      * @param subscriber
      */
-    public void login(String mobile,String password,ProgressSubscriber subscriber) {
+    public void login(String mobile, String password, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("mobile", mobile);
         map.put("password", password);
@@ -156,13 +160,12 @@ public class HttpMethods {
     }
 
     /**
-     *
      * @param mobile
      * @param password
      * @param valiCode
      * @param subscriber
      */
-    public void forgetPassword(String mobile,String password,String valiCode,ProgressSubscriber subscriber) {
+    public void forgetPassword(String mobile, String password, String valiCode, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("mobile", mobile);
         map.put("password", password);
@@ -172,23 +175,23 @@ public class HttpMethods {
     }
 
     /**
-     *
      * @param password
+     * @param oldPassword
      * @param subscriber
      */
-    public void modifyPassword(String password,ProgressSubscriber subscriber) {
+    public void modifyPassword(String password, String oldPassword, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("password", password);
+        map.put("oldPassword", oldPassword);
         Observable observable = mRetrofit.create(HttpService.class).modifyPassword(map);
         toSubscribe(observable, subscriber);
     }
 
     /**
-     *
      * @param nick
      * @param subscriber
      */
-    public void updateUserName(String nick,ProgressSubscriber subscriber) {
+    public void updateUserName(String nick, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("username", nick);
         Observable observable = mRetrofit.create(HttpService.class).updateUser(map);
@@ -196,7 +199,6 @@ public class HttpMethods {
     }
 
     /**
-     *
      * @param subscriber
      */
     public void queryUserInfo(ProgressSubscriber subscriber) {
@@ -216,50 +218,80 @@ public class HttpMethods {
 
 
     /**
-     *
-     * @param page 页号
-     * @param limit 行号
+     * @param page       页号
+     * @param limit      行号
      * @param subscriber
      */
-    public void firstArticleList(int page,int limit, ProgressSubscriber subscriber) {
+    public void firstArticleList(int page, int limit, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("page",page);
-        map.put("limit",limit);
+        map.put("page", page);
+        map.put("limit", limit);
         Observable observable = mRetrofit.create(HttpService.class).firstArticleList(map);
         toSubscribe(observable, subscriber);
     }
 
     /**
-     *
-     * @param page 页号
-     * @param limit 行号
-     * @param type 文章类型;宠物指南:guide|宠物公益:welfare|宠物百科:encyclopedias
+     * @param page       页号
+     * @param limit      行号
+     * @param type       文章类型;宠物指南:guide|宠物公益:welfare|宠物百科:encyclopedias
      * @param subscriber
      */
-    public void articleList(int page,int limit,String type, ProgressSubscriber subscriber) {
+    public void articleList(int page, int limit, String type, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("page",page);
-        map.put("limit",limit);
-        map.put("type",type);
+        map.put("page", page);
+        map.put("limit", limit);
+        map.put("type", type);
         Observable observable = mRetrofit.create(HttpService.class).articleList(map);
         toSubscribe(observable, subscriber);
     }
 
     /**
-     *
-     * @param type 文章类型;宠物指南:guide|宠物公益:welfare|宠物百科:encyclopedias
+     * @param type       文章类型;宠物指南:guide|宠物公益:welfare|宠物百科:encyclopedias
      * @param title
      * @param content
      * @param mainPic
      * @param subscriber
      */
-    public void saveApparticle(String type, String title,String content,String mainPic,  ProgressSubscriber subscriber) {
+    public void saveApparticle(String type, String title, String content, String mainPic, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("title",title);
-        map.put("type",type);
-        map.put("content",content);
-        map.put("mainPic",mainPic);
+        map.put("title", title);
+        map.put("type", type);
+        map.put("content", content);
+        map.put("mainPic", mainPic);
         Observable observable = mRetrofit.create(HttpService.class).saveApparticle(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     * @param subscriber
+     */
+    public void uploadFile(ProgressSubscriber subscriber) {
+//        HashMap<String, Object> map = new HashMap<>();
+//        map.put("page",page);
+//        map.put("limit",limit);
+//        map.put("type",type);
+        ArrayList<MultipartBody.Part> parts = new ArrayList<>();
+        RequestBody requestBody;
+        MultipartBody.Part part;
+        File file = new File(Environment.getExternalStorageDirectory(), "1.jpg");
+        requestBody = RequestBody.create(MediaType.parse("image"), file);
+        part = MultipartBody.Part.
+                createFormData("files", file.getName(), requestBody);
+        parts.add(part);
+
+        file = new File(Environment.getExternalStorageDirectory(), "2.jpg");
+        requestBody = RequestBody.create(MediaType.parse("image"), file);
+        part = MultipartBody.Part.
+                createFormData("files", file.getName(), requestBody);
+        parts.add(part);
+
+        file = new File(Environment.getExternalStorageDirectory(), "3.jpg");
+        requestBody = RequestBody.create(MediaType.parse("image"), file);
+        part = MultipartBody.Part.
+                createFormData("files", file.getName(), requestBody);
+        parts.add(part);
+
+        Observable observable = mRetrofit.create(HttpService.class).uploadFile(parts);
         toSubscribe(observable, subscriber);
     }
 

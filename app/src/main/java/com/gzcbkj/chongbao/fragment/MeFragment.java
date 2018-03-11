@@ -101,7 +101,9 @@ public class MeFragment extends BaseFragment implements OnRefreshListener {
             public void onNext(ResponseBean bean) {
                 if (getView() != null) {
                     refreshlayout.finishRefresh();
+                    updateUIText();
                 }
+                DataManager.getInstance().saveMyUserInfo(bean.getUser());
             }
         }, getActivity(), false, (BaseActivity) getActivity()));
     }
