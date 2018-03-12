@@ -107,6 +107,19 @@
             android:background="@color/color_255_255_255"
             android:textSize="15sp" />
 
+        <EditText
+            android:id="@+id/etAddDes1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:gravity="left|top"
+            android:textColorHint="@color/color_cc_cc_cc"
+            android:hint="@string/write_something"
+            android:textColor="@color/color_11_11_11"
+            android:background="@color/color_255_255_255"
+            android:textSize="15sp" />
+
     </LinearLayout>
 
 

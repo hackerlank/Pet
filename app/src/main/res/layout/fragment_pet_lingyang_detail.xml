@@ -13,6 +13,7 @@
         android:id="@+id/smartLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:paddingTop="10dp">
 
 
@@ -25,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="30dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
 
@@ -294,26 +294,29 @@
                         android:text="哈士奇犬的典型性格为友好，温柔，警觉并喜欢交往。它不会呈现出护卫犬强烈的领地占有欲，不会对陌生人产生过多的怀疑，也不会攻击其他犬类。"
                         android:textColor="@color/color_33_33_33"
                         android:textSize="13sp" />
-
-
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
-
-                <TextView
-                    android:id="@+id/tvLingyang"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@drawable/bg_submit"
-                    android:gravity="center"
-                    android:text="@string/lingyang_pet"
-                    android:textColor="@color/color_255_255_255"
-                    android:textSize="15sp" />
-
             </LinearLayout>
         </ScrollView>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <TextView
+        android:id="@+id/tvLingyang"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_submit"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:text="@string/lingyang_pet"
+        android:textColor="@color/color_255_255_255"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 </LinearLayout>

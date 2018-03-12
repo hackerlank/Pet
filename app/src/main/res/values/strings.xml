@@ -34,6 +34,7 @@
     <string name="account">账户</string>
     <string name="suggest">意见</string>
     <string name="about">关于</string>
+    <string name="not_login">未登录</string>
 
     <!-- PetCenterFragment -->
     <string name="pet_lingyang">宠物领养</string>
@@ -58,20 +59,52 @@
     <string name="pet_jieshao">宠物介绍：</string>
     <string name="lingyang_pet">我要领养它</string>
     <string name="lingyang_detail">领养详情</string>
+    <string name="input_lingyang_ziliao">填写领养人资料</string>
     <string name="lingyangren_name">领养人姓名</string>
     <string name="please_input_your_name">请输入您的姓名</string>
+    <string name="contact_phone">联系号码</string>
     <string name="please_input_your_phone">请输入您的手机号</string>
     <string name="contact_address">联系住址</string>
+    <string name="please_input_your_address">请输入您的住址</string>
     <string name="rec_send_way">接送方式</string>
     <string name="please_select_rec_send_way">请选择接送方式</string>
+    <string name="rec_send_way_1">平台接送</string>
+    <string name="rec_send_way_2">自己接送</string>
+    <string name="rec_send_way_3">其它</string>
     <string name="lingyang_time">领养时间</string>
     <string name="please_input_start_time">请选择开始时间</string>
     <string name="please_input_end_time">请选择结束时间</string>
     <string name="lingyang_yuanyin">领养原因</string>
+    <string name="please_input_lingyang_yuanying">请选择领养原因</string>
     <string name="lingyang_yuanyin_1">家中老人需要陪伴</string>
     <string name="lingyang_yuanyin_2">守护家园</string>
     <string name="lingyang_yuanyin_3">增添生活乐趣</string>
     <string name="add_beizhu">添加备注</string>
+    <string name="pet_detail">宠物详情</string>
+    <string name="shide_time">拾得日期</string>
+    <string name="shide_address">拾得地址</string>
+    <string name="shide_pet_type">宠物类型</string>
+    <string name="shide_pet_sex">宠物性别</string>
+    <string name="shide_pet_miaoshu">宠物描述</string>
+    <string name="contact_person">联系人</string>
+    <string name="contact_way">联系方式</string>
+    <string name="please_select_time">请选择时间</string>
+    <string name="please_input_address">请输入地址</string>
+    <string name="shide_pet_gaoshi">拾宠告示</string>
+    <string name="pet_type_2">宠物品种</string>
+    <string name="please_select_pet_type">请选择宠物类型</string>
+    <string name="please_select_pet_type_2">请选择宠物品种</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="not_know_sex">不清楚</string>
+    <string name="add_pet_picture">添加图片</string>
+    <string name="sure_publish">确认发布</string>
+    <string name="please_input_name">请输入您的姓名</string>
+    <string name="please_input_contact_way">请输入联系方式</string>
+    <string name="add_pet_miaoshu">添加描述</string>
+    <string name="diushi_time">丢失日期</string>
+    <string name="diushi_address">丢失地址</string>
+    <string name="diushi_ai_chong">爱宠丢失</string>
 
 
     <!-- LoginFragment -->
@@ -151,6 +184,7 @@
     <string name="picture">图片</string>
     <string name="video">视频</string>
     <string name="article">文章</string>
+    <string name="month">月</string>
 
     <!-- PublishVideoFrigment -->
     <string name="publish_video">发布视频</string>
@@ -196,7 +230,6 @@
 
     <!-- MyDynamicFragment -->
     <string name="today">今天</string>
-    <string name="month">月</string>
 
     <!-- DynamicDetailFragment -->
     <string name="detail">详情</string>

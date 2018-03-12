@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_color">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="11dp"
+        android:gravity="center_vertical"
+        android:paddingBottom="11dp">
+
+        <com.gzcbkj.chongbao.widgets.RoundRectImageView
+            android:id="@+id/ivAvater"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            app:round_radius="20"
+            android:src="@drawable/touxiang"/>
+
+        <ImageView
+            android:id="@+id/ivLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/like"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/ivLike"
+            android:singleLine="true"
+            android:layout_toRightOf="@id/ivAvater"
+            android:layout_marginLeft="10dp"
+            android:text="酥饼大人"
+            android:textColor="@color/color_00_55_87"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018年1月8日"
+            android:layout_below="@id/tvName"
+            android:layout_toLeftOf="@id/ivLike"
+            android:singleLine="true"
+            android:layout_toRightOf="@id/ivAvater"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/color_99_99_99"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="铲屎官须知：关于清理猫毛的那些事。"
+        android:textColor="@color/color_11_11_11"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="到了夏天，猫掉毛是非常厉害的，"
+        android:textColor="@color/color_66_66_66"
+        android:textSize="13sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choice_comment"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/color_99_99_99"
+            android:textSize="15sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:background="@color/line"
+            android:layout_toLeftOf="@id/tv"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:background="@color/line"
+            android:layout_toRightOf="@id/tv"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/comment"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="right"
+        android:textColor="@color/color_11_11_11"
+        android:gravity="center"
+        android:drawablePadding="7dp"
+        android:drawableRight="@drawable/add_comment"
+        android:textSize="13sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+
+</LinearLayout>

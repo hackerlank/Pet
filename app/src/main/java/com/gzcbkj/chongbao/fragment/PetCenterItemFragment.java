@@ -57,6 +57,10 @@ public class PetCenterItemFragment extends BaseFragment implements OnRefreshList
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (mItemIndex == PetCenterFragment.PET_LINGYANG_INDEX) {
                     gotoPager(PetLingyangDetailFragment.class, null);
+                }else if(mItemIndex==PetCenterFragment.PET_SHIDE_INDEX){
+                    gotoPager(PetShideGaoshiFragment.class, null);
+                }else if(mItemIndex==PetCenterFragment.PET_ZOUSHI_INDEX){
+                    gotoPager(PetDiushiGaoshiFragment.class, null);
                 }
             }
         });

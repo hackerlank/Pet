@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_top_bar" />
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_marginTop="10dp"
+    android:scrollbars="none">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <com.gzcbkj.chongbao.widgets.ScaleLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:width_height_scale="0.5">
+
+            <com.bigkoo.convenientbanner.ConvenientBanner
+                android:id="@+id/convenientBanner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.gzcbkj.chongbao.widgets.PagerDotView
+                android:id="@+id/pagerDotView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"
+                app:otherPageDotColor="@color/color_255_255_255"
+                app:selectedPageDotColor="@color/color_ff_73_73" />
+        </com.gzcbkj.chongbao.widgets.ScaleLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_background"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shide_time"
+                    android:textColor="@color/color_33_33_33"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvShideTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_33_33_33"
+                    android:text="2018-01-08"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shide_address"
+                    android:textColor="@color/color_33_33_33"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvShideAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_33_33_33"
+                    android:text="南山区阳光小区"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shide_pet_type"
+                    android:textColor="@color/color_33_33_33"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvShidePetType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_33_33_33"
+                    android:text="哈士奇"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shide_pet_sex"
+                    android:textColor="@color/color_33_33_33"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/ivShidePetSex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/male" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_background"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shide_pet_miaoshu"
+                    android:textColor="@color/color_33_33_33"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvPetMiaoshu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="哈士奇犬的典型性格为友好，温柔，警觉 并喜欢交往。它不会呈现出护卫犬强烈的 领地占有欲，不会对陌生人产生过多的怀 疑，也不会攻击其他犬类。"
+                    android:textColor="@color/color_33_33_33"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_background_2"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contact_person"
+                    android:textColor="@color/color_255_255_255"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvContactPerson"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="梁大葱"
+                    android:textColor="@color/color_255_255_255"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contact_way"
+                    android:textColor="@color/color_255_255_255"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvContactPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="13711625070"
+                    android:textColor="@color/color_255_255_255"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>
+
+</LinearLayout>

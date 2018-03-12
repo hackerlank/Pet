@@ -24,6 +24,7 @@ public class PetLingyangDetailFragment extends BaseFragment implements OnRefresh
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
         smartRefreshLayout.setEnableLoadmore(false);
+        setViewsOnClickListener(R.id.tvLingyang);
     }
 
     @Override
@@ -35,7 +36,9 @@ public class PetLingyangDetailFragment extends BaseFragment implements OnRefresh
     public void onClick(View view) {
         int id = view.getId();
         switch (id) {
-
+            case R.id.tvLingyang:
+                gotoPager(PetLingyangziliaoFragment.class, null);
+                break;
         }
     }
 

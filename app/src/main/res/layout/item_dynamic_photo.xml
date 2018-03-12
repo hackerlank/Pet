@@ -2,67 +2,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/publish_camera"
+        android:scaleType="centerInside"
+        android:background="@color/color_55_55_55"/>
 
     <LinearLayout
         android:id="@+id/ll1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/iv1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:src="@drawable/default_1"/>
         <View
-            android:id="@+id/vLine1"
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
+            android:id="@+id/hLine1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
             android:background="@android:color/transparent"/>
 
         <ImageView
-            android:id="@+id/iv2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:id="@+id/iv3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:src="@drawable/default_1"/>
     </LinearLayout>
 
     <View
-        android:id="@+id/hLine"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:id="@+id/vLine"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
         android:background="@android:color/transparent"/>
 
     <LinearLayout
         android:id="@+id/ll2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/iv3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:id="@+id/iv2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:src="@drawable/default_1"/>
         <View
-            android:id="@+id/vLine2"
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
+            android:id="@+id/hLine2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
             android:background="@android:color/transparent"/>
 
         <ImageView
             android:id="@+id/iv4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:src="@drawable/default_1"/>
