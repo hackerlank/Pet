@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,72 +7,74 @@
 
     <com.gzcbkj.chongbao.widgets.RoundRectImageView
         android:id="@+id/ivPet"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="101dp"
+        android:layout_height="101dp"
         android:layout_marginLeft="15dp"
-        app:round_radius="5"/>
+        android:layout_marginTop="13dp"
+        app:round_radius="5" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="15dp"
-        android:layout_toRightOf="@id/ivPet"
+        android:layout_height="101dp"
         android:layout_marginLeft="10dp"
-        android:paddingRight="15dp"
+        android:layout_marginTop="13dp"
+        android:layout_toRightOf="@id/ivPet"
         android:orientation="vertical"
-        android:layout_height="120dp">
+        android:paddingRight="15dp">
 
         <TextView
             android:id="@+id/tvPetName"
             android:layout_width="match_parent"
-            android:textSize="17sp"
+            android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="宠物在基地的编号"
             android:textColor="@color/color_33_33_33"
-            android:layout_height="wrap_content" />
+            android:textSize="15sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvPetType"
                 android:layout_width="wrap_content"
-                android:textSize="15sp"
-                android:text="哈士奇"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:text="哈士奇"
                 android:textColor="@color/color_99_99_99"
-                android:layout_height="wrap_content" />
+                android:textSize="13sp" />
+
             <ImageView
+                android:id="@+id/ivPetSex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/male"/>
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/male" />
 
             <TextView
                 android:id="@+id/tvPetAge"
                 android:layout_width="wrap_content"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
                 android:text="2岁"
                 android:textColor="@color/color_99_99_99"
-                android:layout_height="wrap_content" />
+                android:textSize="13sp" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/tvContent"
             android:layout_width="match_parent"
-            android:textSize="15sp"
+            android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical"
             android:maxLines="3"
             android:text="哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇哈士奇..."
             android:textColor="@color/color_99_99_99"
-            android:layout_height="match_parent" />
+            android:textSize="13sp" />
 
 
     </LinearLayout>
@@ -81,8 +82,8 @@
 
     <View
         android:layout_width="match_parent"
+        android:layout_height="10dp"
         android:layout_below="@id/ivPet"
         android:layout_marginTop="15dp"
-        android:background="@color/background_color"
-        android:layout_height="10dp"/>
+        android:background="@color/background_color" />
 </RelativeLayout>

@@ -40,6 +40,38 @@
     <string name="pet_shide">宠物拾得</string>
     <string name="pet_zoushi">宠物走失</string>
     <string name="pet_jiyang">宠物寄养</string>
+    <string name="distance_me">离我:</string>
+    <string name="jiyang_hj">寄养环境</string>
+    <string name="danyuan_hj">单元住宅环境</string>
+    <string name="jiyang_zp">寄养照片</string>
+    <string name="fangjian_js">房间介绍</string>
+    <string name="qita_fw">其他服务</string>
+    <string name="jidi_ms">基地描述</string>
+    <string name="jidi_weizhi">基地位置</string>
+    <string name="apply_jiyang">申请寄养</string>
+    <string name="pet_type">种类：</string>
+    <string name="pet_name">名称：</string>
+    <string name="pet_sex">性别：</string>
+    <string name="pet_age">年龄：</string>
+    <string name="pet_lingyang_status">领养状态：</string>
+    <string name="pet_lingyang_require">领养要求</string>
+    <string name="pet_jieshao">宠物介绍：</string>
+    <string name="lingyang_pet">我要领养它</string>
+    <string name="lingyang_detail">领养详情</string>
+    <string name="lingyangren_name">领养人姓名</string>
+    <string name="please_input_your_name">请输入您的姓名</string>
+    <string name="please_input_your_phone">请输入您的手机号</string>
+    <string name="contact_address">联系住址</string>
+    <string name="rec_send_way">接送方式</string>
+    <string name="please_select_rec_send_way">请选择接送方式</string>
+    <string name="lingyang_time">领养时间</string>
+    <string name="please_input_start_time">请选择开始时间</string>
+    <string name="please_input_end_time">请选择结束时间</string>
+    <string name="lingyang_yuanyin">领养原因</string>
+    <string name="lingyang_yuanyin_1">家中老人需要陪伴</string>
+    <string name="lingyang_yuanyin_2">守护家园</string>
+    <string name="lingyang_yuanyin_3">增添生活乐趣</string>
+    <string name="add_beizhu">添加备注</string>
 
 
     <!-- LoginFragment -->
@@ -164,6 +196,7 @@
 
     <!-- MyDynamicFragment -->
     <string name="today">今天</string>
+    <string name="month">月</string>
 
     <!-- DynamicDetailFragment -->
     <string name="detail">详情</string>

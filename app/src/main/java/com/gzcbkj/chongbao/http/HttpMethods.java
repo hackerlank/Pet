@@ -295,7 +295,7 @@ public class HttpMethods {
      */
     public void updateArticle(int type, long articleId, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("type", type);
+        map.put("type", String.valueOf(type));
         map.put("articleId", articleId);
         Observable observable = mRetrofit.create(HttpService.class).updateArticle(map);
         toSubscribe(observable, subscriber);

@@ -35,4 +35,14 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <style name="PopupWindowAnimation">
+        <item name="android:windowEnterAnimation">@anim/popupwindow_enter</item>
+        <item name="android:windowExitAnimation">@anim/popupwindow_exit</item>
+    </style>
+
+    <style name="PopupWindowAnimation2">
+        <item name="android:windowEnterAnimation">@anim/popupwindow_enter_2</item>
+        <item name="android:windowExitAnimation">@anim/popupwindow_exit_2</item>
+    </style>
+
 </resources>

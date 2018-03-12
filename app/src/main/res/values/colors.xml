@@ -6,6 +6,7 @@
 
     <color name="background_color">#f4f5f7</color>
     <color name="color_255_255_255">#ffffff</color>
+    <color name="color_102_255_255_255">#67ffffff</color>
     <color name="color_254_255_255">#feffff</color>
     <color name="color_93_93_93">#5d5d5d</color>
     <color name="color_187_187_187">#b1b1b1</color>
