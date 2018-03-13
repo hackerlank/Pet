@@ -302,6 +302,11 @@ public class HttpMethods {
     }
 
 
+    /**
+     *
+     * @param articleId
+     * @param subscriber
+     */
     public void articleInfo(long articleId, ProgressSubscriber subscriber) {
         Observable observable = mRetrofit.create(HttpService.class).articleInfo(articleId);
         toSubscribe(observable, subscriber);

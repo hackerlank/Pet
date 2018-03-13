@@ -127,20 +127,6 @@ public interface HttpService {
     @POST("apparticle/updateArticle")
     Observable<ResponseBean> updateArticle(@Body HashMap<String, Object> map);
 
-//    /**
-//     * 根据类型查询文章
-//     * @return
-//     */
-//    @POST("apparticle/firstArticleList")
-//    Observable<ArticleListResponse> firstArticleList(@Body HashMap<String, Object> map);
-//
-//    /**
-//     * 收藏文章
-//     * @return
-//     */
-//    @POST("apparticle/articleList")
-//    Observable<ArticleListResponse> articleList(@Body HashMap<String, Object> map);
-
 
 
 
@@ -172,13 +158,42 @@ public interface HttpService {
     Observable<ResponseBean> uploadFile(@Part ArrayList<MultipartBody.Part> part);
 
 
-//    /**
-//     * 19每日一拍
-//     * @param map
-//     * @return
-//     */
-//    @Multipart
-//    @POST("ordermeasure")
-//    Observable<BasicResponse> orderMeasure(@Part ArrayList<MultipartBody.Part> parts);
+    /**
+     * 查询带领养的宠物
+     * @return
+     */
+    @POST("adoptpetapp/tobeAdoptList")
+    Observable<ResponseBean> tobeAdoptList();
+
+    /**
+     * 根据ID查询待领养宠物信息
+     * @return
+     */
+    @POST("adoptpetapp/tobeAdoptInfo")
+    Observable<ResponseBean> tobeAdoptInfo(@Body HashMap<String, Object> map);
+
+    /**
+     * 保存领养人信息
+     * @return
+     */
+    @POST("adoptpetapp/adpotPetSave")
+    Observable<ResponseBean> adpotPetSave(@Body HashMap<String, Object> map);
+
+
+    /**
+     * 查询宠物走失或拾得信息
+     * @return
+     */
+    @GET("findorlostInfo/findorlostInfoList")
+    Observable<ResponseBean> findorlostInfoList();
+
+
+
+    /**
+     * 根据ID查询宠物走失或拾得详细信息
+     * @return
+     */
+    @GET("findorlostInfo/findorlostInfoById")
+    Observable<ResponseBean> findorlostInfoById(@Query("Id") long id);
 
 }
