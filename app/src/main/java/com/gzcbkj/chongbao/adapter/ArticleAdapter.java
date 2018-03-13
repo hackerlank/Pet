@@ -66,8 +66,12 @@ public class ArticleAdapter extends MyBaseAdapter<ArticleBean> {
             @Override
             public void onClick(View view) {
                 ArticleBean bean = (ArticleBean) view.getTag();
-                bean.setShareFlag(1);
-                operatorArticle(bean.getId(), 3, (ImageView) ((ViewGroup) view).getChildAt(0), R.drawable.share);
+                if(bean.getShareFlag()==0) {
+                    bean.setShareFlag(1);
+                }else{
+                    bean.setShareFlag(0);
+                }
+                operatorArticle(bean.getId(), 1, (ImageView) ((ViewGroup) view).getChildAt(0),bean.getShareFlag()==0?R.drawable.share_grey: R.drawable.share);
             }
         });
         holder.llCollect.setTag(bean);
@@ -75,8 +79,12 @@ public class ArticleAdapter extends MyBaseAdapter<ArticleBean> {
             @Override
             public void onClick(View view) {
                 ArticleBean bean = (ArticleBean) view.getTag();
-                bean.setCollectionFlag(1);
-                operatorArticle(bean.getId(), 2, (ImageView) ((ViewGroup) view).getChildAt(0), R.drawable.collect);
+                if(bean.getCollectionFlag()==0) {
+                    bean.setCollectionFlag(1);
+                }else{
+                    bean.setCollectionFlag(0);
+                }
+                operatorArticle(bean.getId(), 3, (ImageView) ((ViewGroup) view).getChildAt(0),bean.getCollectionFlag()==0?R.drawable.collect_grey: R.drawable.collect);
             }
         });
         holder.llLike.setTag(bean);
@@ -84,8 +92,12 @@ public class ArticleAdapter extends MyBaseAdapter<ArticleBean> {
             @Override
             public void onClick(View view) {
                 ArticleBean bean = (ArticleBean) view.getTag();
-                bean.setPraiseFlag(1);
-                operatorArticle(bean.getId(), 1, (ImageView) ((ViewGroup) view).getChildAt(0), R.drawable.like);
+                if(bean.getPraiseFlag()==0) {
+                    bean.setPraiseFlag(1);
+                }else{
+                    bean.setPraiseFlag(0);
+                }
+                operatorArticle(bean.getId(), 2, (ImageView) ((ViewGroup) view).getChildAt(0),bean.getPraiseFlag()==0?R.drawable.like_grey: R.drawable.like);
             }
         });
 

@@ -131,7 +131,7 @@ public class ArticleDetailFragment extends BaseFragment implements OnRefreshList
                 refreshlayout.finishRefresh();
                 initTopView();
             }
-        },getActivity(),(BaseActivity)getActivity()));
+        },getActivity(),false,(BaseActivity)getActivity()));
     }
 
     Html.ImageGetter mImgGetter = new Html.ImageGetter() {

@@ -3,6 +3,12 @@ package com.gzcbkj.chongbao.fragment;
 import android.view.View;
 
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.activity.BaseActivity;
+import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.http.HttpMethods;
+import com.gzcbkj.chongbao.http.OnHttpErrorListener;
+import com.gzcbkj.chongbao.http.ProgressSubscriber;
+import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -41,6 +47,33 @@ public class PetJiyangFragment extends BaseFragment implements OnRefreshListener
 
     @Override
     public void onRefresh(final RefreshLayout refreshlayout) {
+        ProgressSubscriber subscriber=new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+            @Override
+            public void onNext(ResponseBean bean) {
+                if(getView()==null){
+                    return;
+                }
+                refreshlayout.finishRefresh();
+            }
+        }, getActivity(), false, new OnHttpErrorListener() {
+            @Override
+            public void onConnectError(Throwable e) {
+                if(getView()==null){
+                    return;
+                }
+                refreshlayout.finishRefresh();
+                ((BaseActivity) getActivity()).connectError(e);
+            }
 
+            @Override
+            public void onServerError(int errorCode, String errorMsg) {
+                if(getView()==null){
+                    return;
+                }
+                refreshlayout.finishRefresh();
+                ((BaseActivity) getActivity()).serverError(errorCode,errorMsg);
+            }
+        });
+        HttpMethods.getInstance().fosterPetList(subscriber);
     }
 }

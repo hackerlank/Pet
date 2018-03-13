@@ -163,7 +163,7 @@ public interface HttpService {
      * @return
      */
     @POST("adoptpetapp/tobeAdoptList")
-    Observable<ResponseBean> tobeAdoptList();
+    Observable<ResponseBean> tobeAdoptList(@Body HashMap<String, Object> map);
 
     /**
      * 根据ID查询待领养宠物信息
@@ -187,6 +187,13 @@ public interface HttpService {
     @GET("findorlostInfo/findorlostInfoList")
     Observable<ResponseBean> findorlostInfoList();
 
+    /**
+     * 查询宠物类型和品种
+     * @return
+     */
+    @GET("findorlostInfo/queryTypeInfoList")
+    Observable<ResponseBean> queryTypeInfoList();
+
 
 
     /**
@@ -194,6 +201,29 @@ public interface HttpService {
      * @return
      */
     @GET("findorlostInfo/findorlostInfoById")
-    Observable<ResponseBean> findorlostInfoById(@Query("Id") long id);
+    Observable<ResponseBean> findorlostInfoById(@Query("id") long id);
+
+
+    /**
+     * 保存发布的走失或拾得信息
+     * @return
+     */
+    @POST("findorlostInfo/findorlostInfoSave")
+    Observable<ResponseBean> findorlostInfoSave(@Body HashMap<String, Object> map);
+
+
+    /**
+     * 查询宠物中心信息
+     * @return
+     */
+    @POST("fosterPet/fosterPetList")
+    Observable<ResponseBean> fosterPetList();
+
+    /**
+     * 保存寄养信息
+     * @return
+     */
+    @POST("fosterPet/fosterPetSave")
+    Observable<ResponseBean> fosterPetSave(@Body HashMap<String, Object> map);
 
 }

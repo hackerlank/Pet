@@ -409,9 +409,31 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
         }
     }
 
+    public void connectError(Throwable e) {
+        stopHttpLoad();
+        if (!NetUtil.isConnected(this)) {
+            //     errorCodeDo("pub_err_nointernet", e.toString());
+        } else if (e instanceof UnknownHostException
+                || e instanceof JSONException
+                || e instanceof retrofit2.adapter.rxjava.HttpException) {
+            //          errorCodeDo("GB2411057", e.toString());
+        } else if (e instanceof SocketTimeoutException
+                || e instanceof ConnectException
+                || e instanceof TimeoutException) {
+            //        errorCodeDo("GB2411059", e.toString());
+        } else {
+            //      errorCodeDo("", e.toString());
+        }
+    }
+
 
     @Override
     public void onServerError(int errorCode, String errorMsg) {
+        stopHttpLoad();
+        errorCodeDo(errorCode, errorMsg);
+    }
+
+    public void serverError(int errorCode, String errorMsg) {
         stopHttpLoad();
         errorCodeDo(errorCode, errorMsg);
     }

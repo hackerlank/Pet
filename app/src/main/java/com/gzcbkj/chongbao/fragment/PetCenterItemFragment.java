@@ -5,10 +5,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.adapter.JilingguanliAdapter;
 import com.gzcbkj.chongbao.adapter.PetLingyangAdapter;
 import com.gzcbkj.chongbao.adapter.PetShideAdapter;
 import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.http.HttpMethods;
+import com.gzcbkj.chongbao.http.OnHttpErrorListener;
+import com.gzcbkj.chongbao.http.ProgressSubscriber;
+import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
+import com.gzcbkj.chongbao.utils.Constants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -38,16 +44,10 @@ public class PetCenterItemFragment extends BaseFragment implements OnRefreshList
     @Override
     protected void onViewCreated(View view) {
         ListView listView = fv(R.id.listView);
-        ArrayList<ResponseBean> list = new ArrayList<>();
-        for (int i = 0; i < 5; ++i) {
-            list.add(new ResponseBean());
-        }
         if (mItemIndex == 0) {
             listView.setAdapter(getAdapter1());
-            getAdapter1().setDataList(list);
         } else {
             listView.setAdapter(getAdapter2());
-            getAdapter2().setDataList(list);
         }
 
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
@@ -89,7 +89,41 @@ public class PetCenterItemFragment extends BaseFragment implements OnRefreshList
     }
 
     @Override
-    public void onRefresh(RefreshLayout refreshlayout) {
+    public void onRefresh(final RefreshLayout refreshlayout) {
+        ProgressSubscriber subscriber=new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+            @Override
+            public void onNext(ResponseBean bean) {
+                if(getView()==null){
+                    return;
+                }
+                refreshlayout.finishRefresh();
+            }
+        }, getActivity(), false, new OnHttpErrorListener() {
+            @Override
+            public void onConnectError(Throwable e) {
+                if(getView()==null){
+                    return;
+                }
+                refreshlayout.finishRefresh();
+                ((BaseActivity) getActivity()).connectError(e);
+            }
 
+            @Override
+            public void onServerError(int errorCode, String errorMsg) {
+                if(getView()==null){
+                    return;
+                }
+                refreshlayout.finishRefresh();
+                ((BaseActivity) getActivity()).serverError(errorCode,errorMsg);
+            }
+        });
+        if(mItemIndex==PetCenterFragment.PET_LINGYANG_INDEX){
+            HttpMethods.getInstance().tobeAdoptList(1, 30,subscriber);
+        }else if(mItemIndex==PetCenterFragment.PET_SHIDE_INDEX){
+            //HttpMethods.getInstance().findorlostInfoList(subscriber);
+            HttpMethods.getInstance().queryTypeInfoList(subscriber);
+        }else if(mItemIndex==PetCenterFragment.PET_ZOUSHI_INDEX){
+
+        }
     }
 }

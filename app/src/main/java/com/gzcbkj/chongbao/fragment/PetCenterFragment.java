@@ -30,6 +30,7 @@ public class PetCenterFragment extends BaseFragment {
     @Override
     protected void onViewCreated(View view) {
         setText(R.id.tvTitle, R.string.pet_center);
+        setViewInvisible(R.id.ivLeft);
         initViewPager();
         setViewsOnClickListener(R.id.llTab1, R.id.llTab2, R.id.llTab3, R.id.llTab4);
     }

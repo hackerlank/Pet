@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -56,6 +57,16 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
         initTopLayout();
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i>0){
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable(Constants.KEY_BASE_BEAN,getAdapter().getItem(i-1));
+                    gotoPager(ArticleDetailFragment.class,bundle);
+                }
+            }
+        });
     }
 
     private void initTopLayout(){
@@ -158,6 +169,15 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
                     ll.addView(itemView);
                 }
                 bean = list.get(i);
+                itemView.setTag(bean);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable(Constants.KEY_BASE_BEAN,(ArticleBean)view.getTag());
+                        gotoPager(ArticleDetailFragment.class,bundle);
+                    }
+                });
                 Utils.loadImage(R.drawable.default_1, bean.getMainPic(), (ImageView) itemView.findViewById(R.id.ivBg));
                 Utils.loadImage(R.drawable.touxiang, bean.getUserHead(), (ImageView) itemView.findViewById(R.id.ivAvater));
                 ((TextView) itemView.findViewById(R.id.tvContent)).setText(Html.fromHtml(Utils.replaceHtmlText(bean.getContent())));

@@ -14,6 +14,8 @@ public class ResponseBean implements Serializable {
     private UserInfoBean userEntity;
     private ArticleBean article;
     private ArrayList<SayBean> sayList;
+    private ArrayList<PetTypeBean> petTypeList;
+    private ArrayList<PetVarietyBean> PetVarietyList;
 
     public boolean isSuccess() {
         // TODO Auto-generated method stub
@@ -66,5 +68,21 @@ public class ResponseBean implements Serializable {
 
     public void setSayList(ArrayList<SayBean> sayList) {
         this.sayList = sayList;
+    }
+
+    public ArrayList<PetTypeBean> getPetTypeList() {
+        return petTypeList;
+    }
+
+    public void setPetTypeList(ArrayList<PetTypeBean> petTypeList) {
+        this.petTypeList = petTypeList;
+    }
+
+    public ArrayList<PetVarietyBean> getPetVarietyList() {
+        return PetVarietyList;
+    }
+
+    public void setPetVarietyList(ArrayList<PetVarietyBean> petVarietyList) {
+        PetVarietyList = petVarietyList;
     }
 }
