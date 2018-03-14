@@ -38,8 +38,8 @@ public class PetJiyangFragment extends BaseFragment implements OnRefreshListener
 
     @Override
     public void onClick(View view) {
-        int id=view.getId();
-        switch (id){
+        int id = view.getId();
+        switch (id) {
 
         }
     }
@@ -47,10 +47,10 @@ public class PetJiyangFragment extends BaseFragment implements OnRefreshListener
 
     @Override
     public void onRefresh(final RefreshLayout refreshlayout) {
-        ProgressSubscriber subscriber=new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+        ProgressSubscriber subscriber = new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
             @Override
             public void onNext(ResponseBean bean) {
-                if(getView()==null){
+                if (getView() == null) {
                     return;
                 }
                 refreshlayout.finishRefresh();
@@ -58,7 +58,7 @@ public class PetJiyangFragment extends BaseFragment implements OnRefreshListener
         }, getActivity(), false, new OnHttpErrorListener() {
             @Override
             public void onConnectError(Throwable e) {
-                if(getView()==null){
+                if (getView() == null) {
                     return;
                 }
                 refreshlayout.finishRefresh();
@@ -67,13 +67,13 @@ public class PetJiyangFragment extends BaseFragment implements OnRefreshListener
 
             @Override
             public void onServerError(int errorCode, String errorMsg) {
-                if(getView()==null){
+                if (getView() == null) {
                     return;
                 }
                 refreshlayout.finishRefresh();
-                ((BaseActivity) getActivity()).serverError(errorCode,errorMsg);
+                ((BaseActivity) getActivity()).serverError(errorCode, errorMsg);
             }
         });
-        HttpMethods.getInstance().fosterPetList(subscriber);
+        HttpMethods.getInstance().fosterPetList(1, 30, subscriber);
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -88,6 +89,10 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
 
     protected <VT extends View> VT fv(View parent, int id) {
         return (VT) parent.findViewById(id);
+    }
+
+    protected void setText(TextView tv, String text) {
+        tv.setText(text == null ? "" : text);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.gzcbkj.chongbao.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -56,10 +57,12 @@ public class PetCenterItemFragment extends BaseFragment implements OnRefreshList
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (mItemIndex == PetCenterFragment.PET_LINGYANG_INDEX) {
-                    gotoPager(PetLingyangDetailFragment.class, null);
-                }else if(mItemIndex==PetCenterFragment.PET_SHIDE_INDEX){
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable(Constants.KEY_BASE_BEAN,getAdapter1().getItem(i));
+                    gotoPager(PetLingyangDetailFragment.class, bundle);
+                } else if (mItemIndex == PetCenterFragment.PET_SHIDE_INDEX) {
                     gotoPager(PetShideGaoshiFragment.class, null);
-                }else if(mItemIndex==PetCenterFragment.PET_ZOUSHI_INDEX){
+                } else if (mItemIndex == PetCenterFragment.PET_ZOUSHI_INDEX) {
                     gotoPager(PetDiushiGaoshiFragment.class, null);
                 }
             }
@@ -90,18 +93,28 @@ public class PetCenterItemFragment extends BaseFragment implements OnRefreshList
 
     @Override
     public void onRefresh(final RefreshLayout refreshlayout) {
-        ProgressSubscriber subscriber=new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+        ProgressSubscriber subscriber = new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
             @Override
             public void onNext(ResponseBean bean) {
-                if(getView()==null){
+                if (getView() == null) {
                     return;
                 }
                 refreshlayout.finishRefresh();
+                if (bean == null) {
+                    return;
+                }
+                if (mItemIndex == PetCenterFragment.PET_LINGYANG_INDEX) {
+                    getAdapter1().setDataList(bean.getTobeAdoptList());
+                } else if (mItemIndex == PetCenterFragment.PET_SHIDE_INDEX) {
+
+                } else if (mItemIndex == PetCenterFragment.PET_ZOUSHI_INDEX) {
+
+                }
             }
         }, getActivity(), false, new OnHttpErrorListener() {
             @Override
             public void onConnectError(Throwable e) {
-                if(getView()==null){
+                if (getView() == null) {
                     return;
                 }
                 refreshlayout.finishRefresh();
@@ -110,20 +123,20 @@ public class PetCenterItemFragment extends BaseFragment implements OnRefreshList
 
             @Override
             public void onServerError(int errorCode, String errorMsg) {
-                if(getView()==null){
+                if (getView() == null) {
                     return;
                 }
                 refreshlayout.finishRefresh();
-                ((BaseActivity) getActivity()).serverError(errorCode,errorMsg);
+                ((BaseActivity) getActivity()).serverError(errorCode, errorMsg);
             }
         });
-        if(mItemIndex==PetCenterFragment.PET_LINGYANG_INDEX){
-            HttpMethods.getInstance().tobeAdoptList(1, 30,subscriber);
-        }else if(mItemIndex==PetCenterFragment.PET_SHIDE_INDEX){
-            //HttpMethods.getInstance().findorlostInfoList(subscriber);
-            HttpMethods.getInstance().queryTypeInfoList(subscriber);
-        }else if(mItemIndex==PetCenterFragment.PET_ZOUSHI_INDEX){
-
+        if (mItemIndex == PetCenterFragment.PET_LINGYANG_INDEX) {
+            HttpMethods.getInstance().tobeAdoptList(1, 30, subscriber);
+        } else if (mItemIndex == PetCenterFragment.PET_SHIDE_INDEX) {
+            HttpMethods.getInstance().findorlostInfoList(1,30,"2",subscriber);
+            //HttpMethods.getInstance().queryTypeInfoList(subscriber);
+        } else if (mItemIndex == PetCenterFragment.PET_ZOUSHI_INDEX) {
+            HttpMethods.getInstance().findorlostInfoList(1,30,"1",subscriber);
         }
     }
 }

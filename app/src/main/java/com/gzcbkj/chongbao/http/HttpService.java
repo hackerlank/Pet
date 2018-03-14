@@ -184,8 +184,8 @@ public interface HttpService {
      * 查询宠物走失或拾得信息
      * @return
      */
-    @GET("findorlostInfo/findorlostInfoList")
-    Observable<ResponseBean> findorlostInfoList();
+    @POST("findorlostInfo/findorlostInfoList")
+    Observable<ResponseBean> findorlostInfoList(@Body HashMap<String, Object> map);
 
     /**
      * 查询宠物类型和品种
@@ -217,7 +217,7 @@ public interface HttpService {
      * @return
      */
     @POST("fosterPet/fosterPetList")
-    Observable<ResponseBean> fosterPetList();
+    Observable<ResponseBean> fosterPetList(@Body HashMap<String, Object> map);
 
     /**
      * 保存寄养信息

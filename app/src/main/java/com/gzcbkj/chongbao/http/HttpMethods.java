@@ -216,13 +216,12 @@ public class HttpMethods {
     }
 
     /**
-     *
      * @param page
      * @param limit
-     * @param category 1:表示查询自己
+     * @param category   1:表示查询自己
      * @param subscriber
      */
-    public void querySayList(int page,int limit,int category, ProgressSubscriber subscriber) {
+    public void querySayList(int page, int limit, int category, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("page", page);
         map.put("limit", limit);
@@ -232,7 +231,6 @@ public class HttpMethods {
     }
 
     /**
-     *
      * @param sayId
      * @param subscriber
      */
@@ -288,8 +286,7 @@ public class HttpMethods {
     }
 
     /**
-     *
-     * @param type   //操作类型;2:点赞；3：收藏;1:分享
+     * @param type       //操作类型;2:点赞；3：收藏;1:分享
      * @param articleId
      * @param subscriber
      */
@@ -303,7 +300,6 @@ public class HttpMethods {
 
 
     /**
-     *
      * @param articleId
      * @param subscriber
      */
@@ -350,7 +346,7 @@ public class HttpMethods {
      * @param limit      行号
      * @param subscriber
      */
-    public void tobeAdoptList(int page, int limit,ProgressSubscriber subscriber) {
+    public void tobeAdoptList(int page, int limit, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("page", page);
         map.put("limit", limit);
@@ -362,7 +358,7 @@ public class HttpMethods {
      * @param id
      * @param subscriber
      */
-    public void tobeAdoptInfo(int id,ProgressSubscriber subscriber) {
+    public void tobeAdoptInfo(long id, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("id", id);
         Observable observable = mRetrofit.create(HttpService.class).tobeAdoptInfo(map);
@@ -373,18 +369,23 @@ public class HttpMethods {
      * @param id
      * @param subscriber
      */
-    public void adpotPetSave(int id,ProgressSubscriber subscriber) {
+    public void adpotPetSave(int id, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
-      //  map.put("id", id);
+        //  map.put("id", id);
         Observable observable = mRetrofit.create(HttpService.class).adpotPetSave(map);
         toSubscribe(observable, subscriber);
     }
 
     /**
+     * @param type       1走失 2拾得
      * @param subscriber
      */
-    public void findorlostInfoList(ProgressSubscriber subscriber) {
-        Observable observable = mRetrofit.create(HttpService.class).findorlostInfoList();
+    public void findorlostInfoList(int page, int limit, String type, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("page", page);
+        map.put("limit", limit);
+        map.put("type", type);
+        Observable observable = mRetrofit.create(HttpService.class).findorlostInfoList(map);
         toSubscribe(observable, subscriber);
     }
 
@@ -415,11 +416,18 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+
     /**
+     * @param page
+     * @param limit
      * @param subscriber
      */
-    public void fosterPetList(ProgressSubscriber subscriber) {
-        Observable observable = mRetrofit.create(HttpService.class).fosterPetList();
+    public void fosterPetList(int page, int limit, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("page", page);
+        map.put("limit", limit);
+        Observable observable = mRetrofit.create(HttpService.class).fosterPetList(map);
+
         toSubscribe(observable, subscriber);
     }
 

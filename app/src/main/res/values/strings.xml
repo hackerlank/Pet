@@ -54,6 +54,7 @@
     <string name="pet_name">名称：</string>
     <string name="pet_sex">性别：</string>
     <string name="pet_age">年龄：</string>
+    <string name="age">岁</string>
     <string name="pet_lingyang_status">领养状态：</string>
     <string name="pet_lingyang_require">领养要求</string>
     <string name="pet_jieshao">宠物介绍：</string>
