@@ -12,8 +12,9 @@ public class AdoptPetBean implements Serializable {
     private String createtime;
     private String petAge;
     private String petName;
-    private int petSex;
-    private String petStatus;
+    private String petRequirement;
+    private String petSex;  //1:公  2:母
+    private String petStatus; //宠物状态（1：待领养    2：已领养）
     private int petType;
     private String petTypeName;
     private int petVariety;
@@ -21,6 +22,14 @@ public class AdoptPetBean implements Serializable {
     private String remake;
     private String updatetime;
     private String petHeadUrl;
+
+    public String getPetRequirement() {
+        return petRequirement;
+    }
+
+    public void setPetRequirement(String petRequirement) {
+        this.petRequirement = petRequirement;
+    }
 
     public String getPetHeadUrl() {
         return petHeadUrl;
@@ -62,11 +71,11 @@ public class AdoptPetBean implements Serializable {
         this.petName = petName;
     }
 
-    public int getPetSex() {
+    public String getPetSex() {
         return petSex;
     }
 
-    public void setPetSex(int petSex) {
+    public void setPetSex(String petSex) {
         this.petSex = petSex;
     }
 

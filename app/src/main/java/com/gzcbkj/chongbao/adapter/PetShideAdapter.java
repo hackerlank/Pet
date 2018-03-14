@@ -7,13 +7,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.bean.PetFindorlostInfo;
 import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.utils.Utils;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class PetShideAdapter extends MyBaseAdapter<ResponseBean> {
+public class PetShideAdapter extends MyBaseAdapter<PetFindorlostInfo> {
     public PetShideAdapter(Context context) {
         super(context);
     }
@@ -36,6 +38,14 @@ public class PetShideAdapter extends MyBaseAdapter<ResponseBean> {
         }else{
             holder=(ViewHolder) view.getTag();
         }
+        PetFindorlostInfo bean=getItem(i);
+        setText(holder.tvName,bean.getFindorlostPeopleName());
+        setText(holder.tvTime,bean.getFindorlostTime());
+        setText(holder.tvPetType,bean.getPetVarietyName());
+        setText(holder.tvContent,bean.getFindorlostRemake());
+        setText(holder.tvLocation,bean.getFindorlostAddress());
+        holder.ivSex.setImageResource("1".equals(bean.getFindorlostPetSex()) ? R.drawable.male : R.drawable.female);
+        Utils.loadImage(R.drawable.default_1, bean.getFindorlostLmg(), holder.ivAvater);
         return view;
     }
 

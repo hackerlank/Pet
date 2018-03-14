@@ -200,8 +200,8 @@ public interface HttpService {
      * 根据ID查询宠物走失或拾得详细信息
      * @return
      */
-    @GET("findorlostInfo/findorlostInfoById")
-    Observable<ResponseBean> findorlostInfoById(@Query("id") long id);
+    @POST("findorlostInfo/findorlostInfoById")
+    Observable<ResponseBean> findorlostInfoById(@Body HashMap<String, Object> map);
 
 
     /**
@@ -225,5 +225,12 @@ public interface HttpService {
      */
     @POST("fosterPet/fosterPetSave")
     Observable<ResponseBean> fosterPetSave(@Body HashMap<String, Object> map);
+
+    /**
+     * 查询自己的宠物信息
+     * @return
+     */
+    @POST("adoptpetapp/findOwnPetList")
+    Observable<ResponseBean> findOwnPetList(@Body HashMap<String, Object> map);
 
 }

@@ -181,6 +181,7 @@
                     android:background="@android:color/transparent"
                     android:hint="@string/please_input_your_phone"
                     android:maxLines="1"
+                    android:inputType="phone"
                     android:textColor="@color/color_33_33_33"
                     android:textColorHint="@color/color_99_99_99"
                     android:textSize="13sp" />

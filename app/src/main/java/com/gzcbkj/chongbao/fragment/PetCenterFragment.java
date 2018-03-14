@@ -1,15 +1,21 @@
 package com.gzcbkj.chongbao.fragment;
 
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.utils.Utils;
 
 import java.util.ArrayList;
+
+import okhttp3.internal.Util;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
@@ -32,7 +38,7 @@ public class PetCenterFragment extends BaseFragment {
         setText(R.id.tvTitle, R.string.pet_center);
         setViewInvisible(R.id.ivLeft);
         initViewPager();
-        setViewsOnClickListener(R.id.llTab1, R.id.llTab2, R.id.llTab3, R.id.llTab4);
+        setViewsOnClickListener(R.id.llTab1, R.id.llTab2, R.id.llTab3, R.id.llTab4,R.id.tvRight);
     }
 
     private void initViewPager() {
@@ -76,10 +82,23 @@ public class PetCenterFragment extends BaseFragment {
 
     private void initTab(int pos) {
         ViewGroup viewGroup;
+        TextView tvRight=fv(R.id.tvRight);
         for (int i = 0; i < 4; ++i) {
             viewGroup = fv(getResources().getIdentifier("llTab" + (i + 1), "id", getActivity().getPackageName()));
             ((TextView) viewGroup.getChildAt(0)).setTextColor(getResources().getColor(i == pos ? R.color.color_33_33_33 : R.color.color_99_99_99));
             viewGroup.getChildAt(1).setVisibility(i == pos ? View.VISIBLE : View.GONE);
+        }
+        if(pos==1 || pos==2){
+            tvRight.setVisibility(View.VISIBLE);
+            tvRight.setText(getString(R.string.publish));
+            tvRight.setBackgroundResource(R.drawable.bg_lingyang_status);
+            int padding1=Utils.dip2px(getActivity(),15);
+            int padding2=Utils.dip2px(getActivity(),5);
+            tvRight.setPadding(padding1,padding2,padding1,padding2);
+            tvRight.setGravity(Gravity.CENTER);
+            tvRight.setTextColor(Color.WHITE);
+        }else{
+            tvRight.setVisibility(View.GONE);
         }
     }
 
@@ -93,20 +112,19 @@ public class PetCenterFragment extends BaseFragment {
         int id = view.getId();
         switch (id) {
             case R.id.llTab1:
-                ViewPager viewPager = fv(R.id.viewPager);
-                viewPager.setCurrentItem(0);
+                ((ViewPager)fv(R.id.viewPager)).setCurrentItem(0);
                 break;
             case R.id.llTab2:
-                viewPager = fv(R.id.viewPager);
-                viewPager.setCurrentItem(1);
+                ((ViewPager)fv(R.id.viewPager)).setCurrentItem(1);
                 break;
             case R.id.llTab3:
-                viewPager = fv(R.id.viewPager);
-                viewPager.setCurrentItem(2);
+                ((ViewPager)fv(R.id.viewPager)).setCurrentItem(2);
                 break;
             case R.id.llTab4:
-                viewPager = fv(R.id.viewPager);
-                viewPager.setCurrentItem(3);
+                ((ViewPager)fv(R.id.viewPager)).setCurrentItem(3);
+                break;
+            case R.id.tvRight:
+                gotoPager(((ViewPager)fv(R.id.viewPager)).getCurrentItem()==1?PetShideGaoshiFragment.class:PetDiushiGaoshiFragment.class,null);
                 break;
         }
     }

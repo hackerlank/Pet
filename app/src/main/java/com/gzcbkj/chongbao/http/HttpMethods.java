@@ -365,13 +365,36 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+
     /**
-     * @param id
+     *
+     * @param adoptName
+     * @param adoptAddress
+     * @param adoptBeginTime
+     * @param adoptEndTime
+     * @param adoptPhone
+     * @param adoptReason
+     * @param adoptShuttle
+     * @param userId
+     * @param tobteAdpotPet
+     * @param remake
      * @param subscriber
      */
-    public void adpotPetSave(int id, ProgressSubscriber subscriber) {
+    public void adpotPetSave(String adoptName,String adoptAddress,String adoptBeginTime,
+                             String adoptEndTime,String adoptPhone,String adoptReason,
+                             String adoptShuttle,String userId,long tobteAdpotPet,
+                             String remake,ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
-        //  map.put("id", id);
+        map.put("adoptName", adoptName);
+        map.put("adoptAddress", adoptAddress);
+        map.put("adoptBeginTime", adoptBeginTime);
+        map.put("adoptEndTime", adoptEndTime);
+        map.put("adoptPhone", adoptPhone);
+        map.put("adoptReason", adoptReason);
+        map.put("adoptShuttle", adoptShuttle);
+        map.put("userId", userId);
+        map.put("tobteAdpotPet", tobteAdpotPet);
+        map.put("remake", remake);
         Observable observable = mRetrofit.create(HttpService.class).adpotPetSave(map);
         toSubscribe(observable, subscriber);
     }
@@ -402,7 +425,9 @@ public class HttpMethods {
      * @param subscriber
      */
     public void findorlostInfoById(long id, ProgressSubscriber subscriber) {
-        Observable observable = mRetrofit.create(HttpService.class).findorlostInfoById(id);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id",id);
+        Observable observable = mRetrofit.create(HttpService.class).findorlostInfoById(map);
         toSubscribe(observable, subscriber);
     }
 
@@ -413,6 +438,17 @@ public class HttpMethods {
     public void findorlostInfoSave(long id, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         Observable observable = mRetrofit.create(HttpService.class).findorlostInfoSave(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     * @param userId
+     * @param subscriber
+     */
+    public void findOwnPetList(String userId, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userId",userId);
+        Observable observable = mRetrofit.create(HttpService.class).findOwnPetList(map);
         toSubscribe(observable, subscriber);
     }
 

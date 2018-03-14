@@ -97,6 +97,10 @@ public class RoundRectImageView extends ImageView {
         invalidate();
     }
 
+    public void setOnlyTopRound(boolean onlyTopRound) {
+        mOnlyTopRound = onlyTopRound;
+    }
+
 
     public void onDraw(Canvas canvas) {
         Drawable drawable = getDrawable();
@@ -146,7 +150,7 @@ public class RoundRectImageView extends ImageView {
                 mSrcRect = new Rect(0, bmp.getHeight() / 2, bmp.getWidth(), bmp.getHeight());
             }
             if (mDstRect == null) {
-                mDstRect = new Rect(0, bmp.getHeight() / 2, bmp.getWidth(), bmp.getHeight());
+                mDstRect = new Rect(0, getHeight() / 2, getWidth(), getHeight());
             }
             canvas.drawBitmap(bmp, mSrcRect, mDstRect, null);
         }

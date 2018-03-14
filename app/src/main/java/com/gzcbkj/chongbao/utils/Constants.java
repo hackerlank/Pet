@@ -23,6 +23,7 @@ public class Constants {
     public static final String WECHAT_NOTIFY_URL = "http://member.daqunli.cn:9090/billingws/ipn/wechat";
 
     public static final String KEY_BASE_BEAN = "key_base_bean";
+    public static final String KEY_BASE_BEAN_2 = "key_base_bean_2";
 
     public static final String ARTICLE_TYPE[] = new String[]{"guide", "welfare", "encyclopedias", "hospital"};
 

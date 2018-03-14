@@ -1,10 +1,8 @@
 package com.gzcbkj.chongbao.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
@@ -12,17 +10,15 @@ import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
-import com.gzcbkj.chongbao.bean.AdoptPetBean;
-import com.gzcbkj.chongbao.bean.BannerBean;
+import com.gzcbkj.chongbao.bean.PetFindorlostInfo;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.http.HttpMethods;
-import com.gzcbkj.chongbao.http.OnHttpErrorListener;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
 import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
-import com.gzcbkj.chongbao.manager.DataManager;
 import com.gzcbkj.chongbao.utils.Constants;
 import com.gzcbkj.chongbao.utils.Utils;
 import com.gzcbkj.chongbao.widgets.PagerDotView;
+import com.gzcbkj.chongbao.widgets.RoundRectImageView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -33,44 +29,48 @@ import java.util.ArrayList;
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class PetLingyangDetailFragment extends BaseFragment implements OnRefreshListener {
+public class PetDetailFragment extends BaseFragment implements OnRefreshListener {
 
-    private AdoptPetBean mBean;
+    private PetFindorlostInfo mBean;
+    private int mFindOrLostType;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_pet_lingyang_detail;
+        return R.layout.fragment_pet_shide_detail;
     }
 
     @Override
     protected void onViewCreated(View view) {
-        setText(R.id.tvTitle, R.string.lingyang_detail);
+        setText(R.id.tvTitle, R.string.pet_detail);
+        mBean = (PetFindorlostInfo) getArguments().getSerializable(Constants.KEY_BASE_BEAN);
+        mFindOrLostType=getArguments().getInt(Constants.KEY_BASE_BEAN_2,2);
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
-        smartRefreshLayout.setEnableLoadmore(false);
         smartRefreshLayout.autoRefresh();
-        setViewsOnClickListener(R.id.tvLingyang);
-        mBean = (AdoptPetBean) getArguments().getSerializable(Constants.KEY_BASE_BEAN);
-        if(mBean==null){
-            goBack();
-        }
     }
 
     @Override
     public void updateUIText() {
-        if(mBean==null){
+        if (mBean == null) {
             return;
         }
-        ConvenientBanner convenientBanner=fv(R.id.convenientBanner);
-        final PagerDotView pagerDotView=fv(R.id.pagerDotView);
-        ArrayList<String> list=new ArrayList<>();
-        String[] urls=mBean.getPetHeadUrl().split(",");
-        if (urls!=null && urls.length > 1) {
-            for(String url:urls){
+        if(mFindOrLostType==1){
+            setText(R.id.tvTitle1,R.string.zoushi_time);
+            setText(R.id.tvTitle2,R.string.zoushi_address);
+        }else{
+            setText(R.id.tvTitle1,R.string.shide_time);
+            setText(R.id.tvTitle2,R.string.shide_address);
+        }
+        ConvenientBanner convenientBanner = fv(R.id.convenientBanner);
+        final PagerDotView pagerDotView = fv(R.id.pagerDotView);
+        ArrayList<String> list = new ArrayList<>();
+        String[] urls = mBean.getFindorlostLmg().split(",");
+        if (urls != null && urls.length > 1) {
+            for (String url : urls) {
                 list.add(url);
             }
-        }else{
-            list.add(mBean.getPetHeadUrl());
+        } else {
+            list.add(mBean.getFindorlostLmg());
         }
         if (list.size() > 1) {
             convenientBanner.startTurning(3000);
@@ -108,60 +108,28 @@ public class PetLingyangDetailFragment extends BaseFragment implements OnRefresh
             public void onPageScrollStateChanged(int state) {
             }
         });
-        setText(R.id.tvPetName,mBean.getPetName());
-        setImage(R.id.ivPetSex,"1".equals(mBean.getPetSex())?R.drawable.male:R.drawable.female);
-        setText(R.id.tvPetType,mBean.getPetVarietyNmae());
-        setText(R.id.tvPetName2,mBean.getPetAge());
-        setText(R.id.tvPetSex,getString("1".equals(mBean.getPetSex())?R.string.male:R.string.female));
-        setText(R.id.tvPetAge,mBean.getPetAge()+getString(R.string.age));
-        if("1".equals(mBean.getPetStatus())){
-            setText(R.id.tvPetStatus, R.string.waiting_lingtang);
-            setViewVisible(R.id.tvLingyang);
-        }else{
-            setText(R.id.tvPetStatus, R.string.had_lingyang);
-            setViewGone(R.id.tvLingyang);
-        }
-        setText(R.id.tvPetLingyangRequire,mBean.getPetRequirement());
-        setText(R.id.tvPetJieshao,mBean.getRemake());
+        setText(R.id.tvTime, mBean.getFindorlostTime());
+        setImage(R.id.ivPetSex, "1".equals(mBean.getFindorlostPetSex()) ? R.drawable.male : R.drawable.female);
+        setText(R.id.tvAddress, mBean.getFindorlostAddress());
+        setText(R.id.tvPetType, mBean.getPetVarietyName());
+        setText(R.id.tvPetMiaoshu, mBean.getFindorlostRemake());
+        setText(R.id.tvContactPerson, mBean.getFindorlostPeopleName());
+        setText(R.id.tvContactPhone, mBean.getFindorlostPeoplePhone());
     }
 
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        switch (id) {
-            case R.id.tvLingyang:
-                if(!DataManager.getInstance().isLogin()){
-                    gotoPager(LoginFragment.class,null);
-                    return;
-                }
-                Bundle bundle=new Bundle();
-                bundle.putSerializable(Constants.KEY_BASE_BEAN,mBean);
-                gotoPager(PetLingyangziliaoFragment.class, bundle);
-                break;
-        }
-    }
 
-
-    @Override
-    public void onRefresh(final RefreshLayout refreshlayout) {
-        HttpMethods.getInstance().tobeAdoptInfo(mBean.getId(), new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
-            @Override
-            public void onNext(ResponseBean bean) {
-                if(getView()==null){
-                    return;
-                }
-                refreshlayout.finishRefresh();
-            }
-        }, getActivity(), false, (BaseActivity)getActivity()));
     }
 
     private class LocalImageHolderView implements Holder<String> {
-        private ImageView ivImage;
+        private RoundRectImageView ivImage;
 
         @Override
         public View createView(Context context) {
             View view = View.inflate(context, R.layout.item_pet_image, null);
             ivImage = view.findViewById(R.id.ivImage);
+            ivImage.setOnlyTopRound(false);
             return view;
         }
 
@@ -169,5 +137,20 @@ public class PetLingyangDetailFragment extends BaseFragment implements OnRefresh
         public void UpdateUI(Context context, int position, String petUrl) {
             Utils.loadImage(R.drawable.default_1, petUrl, ivImage);
         }
+    }
+
+    @Override
+    public void onRefresh(final RefreshLayout refreshlayout) {
+        HttpMethods.getInstance().findorlostInfoById(mBean.getId(),new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+            @Override
+            public void onNext(ResponseBean bean) {
+                if(getView()==null){
+                    return;
+                }
+                refreshlayout.finishRefresh();
+                mBean=bean.getFindorlostInfo();
+                updateUIText();
+            }
+        },getActivity(),false,(BaseActivity)getActivity()));
     }
 }
