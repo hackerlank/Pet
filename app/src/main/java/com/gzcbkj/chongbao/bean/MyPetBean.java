@@ -21,7 +21,24 @@ public class MyPetBean implements Serializable {
     private String ownUserId;
     private long id;
     private String updatetime;
+    private String petVarietyName;
+    private String typeName;
 
+    public String getPetVarietyName() {
+        return petVarietyName;
+    }
+
+    public void setPetVarietyName(String petVarietyName) {
+        this.petVarietyName = petVarietyName;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
 
     public String getCreatetime() {
         return createtime;

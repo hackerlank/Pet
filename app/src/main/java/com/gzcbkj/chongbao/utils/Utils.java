@@ -37,6 +37,7 @@ import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -195,7 +196,6 @@ public class Utils {
         }
         return isSuccessful;
     }
-
 
 
     /**
@@ -495,9 +495,9 @@ public class Utils {
 
     public static boolean isPhoneCorrect(String phone) {
         String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$";
-        if(TextUtils.isEmpty(phone) || phone.length() != 11){
+        if (TextUtils.isEmpty(phone) || phone.length() != 11) {
             return false;
-        }else{
+        } else {
             Pattern p = Pattern.compile(regex);
             Matcher m = p.matcher(phone);
             return m.matches();
@@ -507,7 +507,7 @@ public class Utils {
     // 获取Glide磁盘缓存大小
     public static String getCacheSize() {
         try {
-            return getFormatSize(getFolderSize(new File(BaseApplication.getAppContext().getCacheDir() + "/"+ InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR)));
+            return getFormatSize(getFolderSize(new File(BaseApplication.getAppContext().getCacheDir() + "/" + InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR)));
         } catch (Exception e) {
             e.printStackTrace();
             return "0M";
@@ -570,8 +570,8 @@ public class Utils {
     public static Date stringToDate(String strTime)
             throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date =  formatter.parse(strTime);
-        Log.e("aaaaaaa",date.toString()+", "+strTime);
+        Date date = formatter.parse(strTime);
+        Log.e("aaaaaaa", date.toString() + ", " + strTime);
         return date;
     }
 
@@ -579,7 +579,26 @@ public class Utils {
      *
      */
     public static String getNewText(int num) {
-        return num<10?("0"+num):String.valueOf(num);
+        return num < 10 ? ("0" + num) : String.valueOf(num);
+    }
+
+
+    public static ArrayList<String> getUrlList(String orginUrl) {
+        ArrayList<String> list = new ArrayList<>();
+        String[] urls = orginUrl.split(",");
+        if (urls != null && urls.length > 1) {
+            for (String url : urls) {
+                if (url.startsWith("http")) {
+                    list.add(url);
+                } else if (list.size() > 0) {
+                    String lastUrl = list.get(list.size() - 1) + "," + url;
+                    list.set(list.size() - 1, lastUrl);
+                }
+            }
+        } else {
+            list.add(orginUrl);
+        }
+        return list;
     }
 }
 

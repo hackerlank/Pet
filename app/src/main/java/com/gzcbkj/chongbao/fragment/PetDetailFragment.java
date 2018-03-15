@@ -2,6 +2,7 @@ package com.gzcbkj.chongbao.fragment;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -67,7 +68,12 @@ public class PetDetailFragment extends BaseFragment implements OnRefreshListener
         String[] urls = mBean.getFindorlostLmg().split(",");
         if (urls != null && urls.length > 1) {
             for (String url : urls) {
-                list.add(url);
+                if(url.startsWith("http")) {
+                    list.add(url);
+                }else if(list.size()>0){
+                    String lastUrl=list.get(list.size()-1)+","+url;
+                    list.set(list.size()-1,lastUrl);
+                }
             }
         } else {
             list.add(mBean.getFindorlostLmg());

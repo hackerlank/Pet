@@ -3,6 +3,7 @@ package com.gzcbkj.chongbao.http;
 import com.gzcbkj.chongbao.bean.ArticleBean;
 import com.gzcbkj.chongbao.bean.BannerListResponse;
 import com.gzcbkj.chongbao.bean.ArticleListResponse;
+import com.gzcbkj.chongbao.bean.PetJiyangResponseBean;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
 
@@ -217,7 +218,7 @@ public interface HttpService {
      * @return
      */
     @POST("fosterPet/fosterPetList")
-    Observable<ResponseBean> fosterPetList(@Body HashMap<String, Object> map);
+    Observable<PetJiyangResponseBean> fosterPetList(@Body HashMap<String, Object> map);
 
     /**
      * 保存寄养信息

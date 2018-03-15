@@ -92,66 +92,14 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <com.gzcbkj.chongbao.widgets.RatioImageView
-                                android:id="@+id/iv1"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/default_1" />
-
-                            <TextView
-                                android:id="@+id/tv1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:singleLine="true"
-                                android:text="单元住宅环境"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="10dp" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <com.gzcbkj.chongbao.widgets.RatioImageView
-                                android:id="@+id/iv2"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/default_1" />
-
-                            <TextView
-                                android:id="@+id/tv2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:singleLine="true"
-                                android:text="单元住宅环境"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-                    </LinearLayout>
+                    </android.support.v7.widget.RecyclerView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -262,6 +210,7 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
@@ -297,10 +246,10 @@
                     </LinearLayout>
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerView"
+                        android:id="@+id/recyclerView2"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_height="83dp">
+                        android:layout_height="83dp"
+                        android:layout_marginTop="10dp">
 
                     </android.support.v7.widget.RecyclerView>
 
@@ -347,104 +296,6 @@
                         android:layout_marginTop="10dp"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tvRoomJs_1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="10平米单间"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tvPrice_1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="￥60.0/月"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tvRoomJs_2"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="10平米单间"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tvPrice_2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="￥60.0/月"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tvRoomJs_3"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="10平米单间"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tvPrice_3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="￥60.0/月"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tvRoomJs_4"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="10平米单间"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tvPrice_4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="￥60.0/月"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -452,6 +303,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -489,105 +341,6 @@
                         android:layout_marginTop="10dp"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tvQitaFw_1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="洗澡"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tvQitaFwPrice_1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="￥60.0/月"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tvQitaFw_2"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="接送"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tvQitaFwPrice_2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="￥60.0/月"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tvQitaFw_3"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="洗澡"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tvQitaFwPrice_3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="￥60.0/月"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tvQitaFw_4"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="洗澡"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tvQitaFwPrice_4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="￥60.0/月"
-                                android:textColor="@color/color_66_66_66"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -631,7 +384,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="双床间，在多种客房中，这种客房数量最多，适合住两位客人和夫妻同住客房客房(7张)，适合旅游团体住用。设施的配备也最“标准”。"
                         android:textColor="@color/color_33_33_33"
                         android:textSize="13sp" />
                 </LinearLayout>

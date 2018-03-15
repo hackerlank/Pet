@@ -34,6 +34,7 @@ public class MyPetAdapter extends MyBaseAdapter<MyPetBean> {
         }
         MyPetBean bean=getItem(i);
         setText(holder.tvName,bean.getOwnPetName());
+        setText(holder.tvPetType,bean.getPetVarietyName());
         Utils.loadImage(R.drawable.default_1,bean.getOwnPetHeadurl(),holder.ivAvater);
         return view;
     }

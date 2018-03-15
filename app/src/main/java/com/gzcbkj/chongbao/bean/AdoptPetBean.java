@@ -17,11 +17,29 @@ public class AdoptPetBean implements Serializable {
     private String petStatus; //宠物状态（1：待领养    2：已领养）
     private int petType;
     private String petTypeName;
+    private String typeName;
     private int petVariety;
     private String petVarietyNmae;
+    private String petVarietyName;
     private String remake;
     private String updatetime;
     private String petHeadUrl;
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public String getPetVarietyName() {
+        return petVarietyName;
+    }
+
+    public void setPetVarietyName(String petVarietyName) {
+        this.petVarietyName = petVarietyName;
+    }
 
     public String getPetRequirement() {
         return petRequirement;

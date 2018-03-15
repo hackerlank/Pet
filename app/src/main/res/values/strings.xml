@@ -110,6 +110,7 @@
     <string name="diushi_ai_chong">爱宠丢失</string>
     <string name="waiting_lingtang">待领养</string>
     <string name="had_lingyang">已领养</string>
+    <string name="xx_price">￥%1$s/月</string>
 
 
     <!-- LoginFragment -->
