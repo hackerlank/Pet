@@ -233,4 +233,11 @@ public interface HttpService {
     @POST("adoptpetapp/findOwnPetList")
     Observable<ResponseBean> findOwnPetList(@Body HashMap<String, Object> map);
 
+    /**
+     * 保存个人宠物信息系
+     * @return
+     */
+    @POST("adoptpetapp/ownPetSave")
+    Observable<ResponseBean> ownPetSave(@Body HashMap<String, Object> map);
+
 }

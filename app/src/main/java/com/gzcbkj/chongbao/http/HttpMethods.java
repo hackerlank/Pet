@@ -367,7 +367,6 @@ public class HttpMethods {
 
 
     /**
-     *
      * @param adoptName
      * @param adoptAddress
      * @param adoptBeginTime
@@ -380,10 +379,10 @@ public class HttpMethods {
      * @param remake
      * @param subscriber
      */
-    public void adpotPetSave(String adoptName,String adoptAddress,String adoptBeginTime,
-                             String adoptEndTime,String adoptPhone,String adoptReason,
-                             String adoptShuttle,String userId,long tobteAdpotPet,
-                             String remake,ProgressSubscriber subscriber) {
+    public void adpotPetSave(String adoptName, String adoptAddress, String adoptBeginTime,
+                             String adoptEndTime, String adoptPhone, String adoptReason,
+                             String adoptShuttle, String userId, long tobteAdpotPet,
+                             String remake, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("adoptName", adoptName);
         map.put("adoptAddress", adoptAddress);
@@ -426,17 +425,46 @@ public class HttpMethods {
      */
     public void findorlostInfoById(long id, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("id",id);
+        map.put("id", id);
         Observable observable = mRetrofit.create(HttpService.class).findorlostInfoById(map);
         toSubscribe(observable, subscriber);
     }
 
+
     /**
-     * @param id
+     * @param findorlostType
+     * @param findorlostTime
+     * @param findorlostAddress
+     * @param findorlostPetType
+     * @param findorlostPetVariety
+     * @param findorlostPetSex
+     * @param findorlostPeopleName
+     * @param findorlostPeoplePhone
+     * @param findorlostRemake
+     * @param findorlostLmg
+     * @param findorlostLat
+     * @param findorlostLng
      * @param subscriber
      */
-    public void findorlostInfoSave(long id, ProgressSubscriber subscriber) {
+    public void findorlostInfoSave(String findorlostType, String findorlostTime,
+                                   String findorlostAddress, int findorlostPetType,
+                                   int findorlostPetVariety, String findorlostPetSex,
+                                   String findorlostPeopleName, String findorlostPeoplePhone,
+                                   String findorlostRemake, String findorlostLmg, String findorlostLat,
+                                   String findorlostLng, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
+        map.put("findorlostType", findorlostType);
+        map.put("findorlostTime", findorlostTime);
+        map.put("findorlostAddress", findorlostAddress);
+        map.put("findorlostPetType", findorlostPetType);
+        map.put("findorlostPetVariety", findorlostPetVariety);
+        map.put("findorlostPetSex", findorlostPetSex);
+        map.put("findorlostPeopleName", findorlostPeopleName);
+        map.put("findorlostRemake", findorlostRemake);
+        map.put("findorlostPeoplePhone", findorlostPeoplePhone);
+        map.put("findorlostLmg", findorlostLmg);
+        map.put("findorlostLat", findorlostLat);
+        map.put("findorlostLng", findorlostLng);
         Observable observable = mRetrofit.create(HttpService.class).findorlostInfoSave(map);
         toSubscribe(observable, subscriber);
     }
@@ -447,8 +475,41 @@ public class HttpMethods {
      */
     public void findOwnPetList(String userId, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("userId",userId);
+        map.put("userId", userId);
         Observable observable = mRetrofit.create(HttpService.class).findOwnPetList(map);
+        toSubscribe(observable, subscriber);
+    }
+
+
+    /**
+     * @param ownPetHeadurl
+     * @param ownPetName
+     * @param ownPetType
+     * @param ownPetVariety
+     * @param ownPetBirth
+     * @param ownPetSex
+     * @param ownPetWeight
+     * @param ownPetSterilization
+     * @param ownPetInterest
+     * @param ownUserId
+     * @param subscriber
+     */
+    public void ownPetSave(String ownPetHeadurl, String ownPetName, int ownPetType, int ownPetVariety, String ownPetBirth,
+                           String ownPetSex, String ownPetWeight, String ownPetSterilization,
+                           String ownPetInterest, String ownUserId,
+                           ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("ownUserId", ownUserId);
+        map.put("ownPetHeadurl", ownPetHeadurl);
+        map.put("ownPetName", ownPetName);
+        map.put("ownPetType", ownPetType);
+        map.put("ownPetVariety", ownPetVariety);
+        map.put("ownPetBirth", ownPetBirth);
+        map.put("ownPetSex", ownPetSex);
+        map.put("ownPetWeight", ownPetWeight);
+        map.put("ownPetSterilization", ownPetSterilization);
+        map.put("ownPetInterest", ownPetInterest);
+        Observable observable = mRetrofit.create(HttpService.class).ownPetSave(map);
         toSubscribe(observable, subscriber);
     }
 
@@ -468,11 +529,61 @@ public class HttpMethods {
     }
 
     /**
-     * @param id
+     *
+     * @param fosterName
+     * @param fosterPhone
+     * @param fosterSex
+     * @param fosterAge
+     * @param fosterAddress
+     * @param fosterCompay
+     * @param fosterReason
+     * @param fosterBeginTime
+     * @param fosterEndTime
+     * @param fosterCycle
+     * @param fosterShuttle
+     * @param fosterPetType
+     * @param fosterPetVariety
+     * @param fosterPetAge
+     * @param fosterPetSex
+     * @param fosterPetPic
+     * @param feedRequire
+     * @param remake
+     * @param immuneTime
+     * @param immuneCondition
+     * @param immuneNewlyday
      * @param subscriber
      */
-    public void fosterPetSave(long id, ProgressSubscriber subscriber) {
+    public void fosterPetSave(String fosterName, String fosterPhone,
+                              String fosterSex, String fosterAge, String fosterAddress,
+                              String fosterCompay, String fosterReason,
+                              String fosterBeginTime, String fosterEndTime,
+                              String fosterCycle, String fosterShuttle, String fosterPetType,
+                              String fosterPetVariety, String fosterPetAge, String fosterPetSex,
+                              String fosterPetPic, String feedRequire, String remake,
+                              String immuneTime, String immuneCondition, String immuneNewlyday,
+                              ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
+        map.put("fosterName", fosterName);
+        map.put("fosterPhone", fosterPhone);
+        map.put("fosterSex", fosterSex);
+        map.put("fosterAge", fosterAge);
+        map.put("fosterAddress", fosterAddress);
+        map.put("fosterCompay", fosterCompay);
+        map.put("fosterReason", fosterReason);
+        map.put("fosterBeginTime", fosterBeginTime);
+        map.put("fosterEndTime", fosterEndTime);
+        map.put("fosterCycle", fosterCycle);
+        map.put("fosterShuttle", fosterShuttle);
+        map.put("fosterPetType", fosterPetType);
+        map.put("fosterPetVariety", fosterPetVariety);
+        map.put("fosterPetAge", fosterPetAge);
+        map.put("fosterPetSex", fosterPetSex);
+        map.put("fosterPetPic", fosterPetPic);
+        map.put("feedRequire", feedRequire);
+        map.put("remake", remake);
+        map.put("immuneTime", immuneTime);
+        map.put("immuneCondition", immuneCondition);
+        map.put("immuneNewlyday", immuneNewlyday);
         Observable observable = mRetrofit.create(HttpService.class).fosterPetSave(map);
         toSubscribe(observable, subscriber);
     }

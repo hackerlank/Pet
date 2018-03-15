@@ -5,15 +5,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.bean.MyPetBean;
+import com.gzcbkj.chongbao.utils.Utils;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class MyPetAdapter extends MyBaseAdapter<ResponseBean> {
+public class MyPetAdapter extends MyBaseAdapter<MyPetBean> {
     public MyPetAdapter(Context context) {
         super(context);
     }
@@ -32,6 +32,9 @@ public class MyPetAdapter extends MyBaseAdapter<ResponseBean> {
         }else{
             holder=(ViewHolder) view.getTag();
         }
+        MyPetBean bean=getItem(i);
+        setText(holder.tvName,bean.getOwnPetName());
+        Utils.loadImage(R.drawable.default_1,bean.getOwnPetHeadurl(),holder.ivAvater);
         return view;
     }
 
