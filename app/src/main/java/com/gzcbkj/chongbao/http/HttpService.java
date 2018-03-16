@@ -241,4 +241,11 @@ public interface HttpService {
     @POST("adoptpetapp/ownPetSave")
     Observable<ResponseBean> ownPetSave(@Body HashMap<String, Object> map);
 
+    /**
+     * 查询寄领信息
+     * @return
+     */
+    @POST("fosterPet/fosterAndAdoptPetInfoList")
+    Observable<ResponseBean> fosterAndAdoptPetInfoList(@Body HashMap<String, Object> map);
+
 }

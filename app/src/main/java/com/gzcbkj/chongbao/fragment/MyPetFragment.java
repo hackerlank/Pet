@@ -83,41 +83,42 @@ public class MyPetFragment extends BaseFragment implements OnRefreshListener {
 //                        }, getActivity(), (BaseActivity) getActivity()));
 
 
-//                String fosterName = "HZF";
-//                String fosterPhone = "18898352847";
-//                String fosterSex = "1";
-//                String fosterAge = "28";
-//                String fosterAddress = "深圳福田";
-//                String fosterCompay = "有限公司";
-//                String fosterReason = "回老家";
-//                String fosterBeginTime = "2018-03-15";
-//                String fosterEndTime = "2018-04-13";
-//                String fosterCycle = "2";
-//                String fosterShuttle = "1";
-//                String fosterPetType = "1";
-//                String fosterPetVariety = "1";
-//                String fosterPetAge = "2";
-//                String fosterPetSex = "2";
-//                String fosterPetPic = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1670658909,3056786610&fm=27&gp=0.jpg";
-//                String feedRequire = "每天帮洗澡";
-//                String remake = "没有备注";
-//                String immuneTime = "90";
-//                String immuneCondition = "3";
-//                String immuneNewlyday = "2018-03-15";
-//
-//                HttpMethods.getInstance().fosterPetSave(fosterName, fosterPhone, fosterSex, fosterAge, fosterAddress,
-//                        fosterCompay, fosterReason, fosterBeginTime, fosterEndTime, fosterCycle,
-//                        fosterShuttle, fosterPetType, fosterPetVariety, fosterPetAge, fosterPetSex,
-//                        fosterPetPic, feedRequire, remake, immuneTime, immuneCondition, immuneNewlyday,
-//                        new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
-//                            @Override
-//                            public void onNext(ResponseBean bean) {
-//                                if (bean != null && !TextUtils.isEmpty(bean.getMsg())) {
-//                                    showToast(bean.getMsg());
-//                                }
-//                                //      goBack();
-//                            }
-//                        }, getActivity(), (BaseActivity) getActivity()));
+                String userId=DataManager.getInstance().getMyUserInfo().getUserId();
+                String fosterName = "HZF";
+                String fosterPhone = "18898352847";
+                String fosterSex = "2";
+                String fosterAge = "28";
+                String fosterAddress = "深圳福田";
+                String fosterCompay = "有限公司";
+                String fosterReason = "回老家";
+                String fosterBeginTime = "2018-03-20";
+                String fosterEndTime = "2018-05-13";
+                String fosterCycle = "2";
+                String fosterShuttle = "1";
+                String fosterPetType = "2";
+                String fosterPetVariety = "2";
+                String fosterPetAge = "2";
+                String fosterPetSex = "1";
+                String fosterPetPic = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1670658909,3056786610&fm=27&gp=0.jpg";
+                String feedRequire = "每天帮洗澡";
+                String remake = "没有备注";
+                String immuneTime = "90";
+                String immuneCondition = "3";
+                String immuneNewlyday = "2018-03-16";
+
+                HttpMethods.getInstance().fosterPetSave(userId,fosterName, fosterPhone, fosterSex, fosterAge, fosterAddress,
+                        fosterCompay, fosterReason, fosterBeginTime, fosterEndTime, fosterCycle,
+                        fosterShuttle, fosterPetType, fosterPetVariety, fosterPetAge, fosterPetSex,
+                        fosterPetPic, feedRequire, remake, immuneTime, immuneCondition, immuneNewlyday,
+                        new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+                            @Override
+                            public void onNext(ResponseBean bean) {
+                                if (bean != null && !TextUtils.isEmpty(bean.getMsg())) {
+                                    showToast(bean.getMsg());
+                                }
+                                //      goBack();
+                            }
+                        }, getActivity(), (BaseActivity) getActivity()));
                 break;
         }
     }

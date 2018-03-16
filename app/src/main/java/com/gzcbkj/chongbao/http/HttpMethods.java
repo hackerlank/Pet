@@ -529,7 +529,7 @@ public class HttpMethods {
     }
 
     /**
-     *
+     * @param userId
      * @param fosterName
      * @param fosterPhone
      * @param fosterSex
@@ -553,7 +553,7 @@ public class HttpMethods {
      * @param immuneNewlyday
      * @param subscriber
      */
-    public void fosterPetSave(String fosterName, String fosterPhone,
+    public void fosterPetSave(String userId, String fosterName, String fosterPhone,
                               String fosterSex, String fosterAge, String fosterAddress,
                               String fosterCompay, String fosterReason,
                               String fosterBeginTime, String fosterEndTime,
@@ -563,6 +563,7 @@ public class HttpMethods {
                               String immuneTime, String immuneCondition, String immuneNewlyday,
                               ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
         map.put("fosterName", fosterName);
         map.put("fosterPhone", fosterPhone);
         map.put("fosterSex", fosterSex);
@@ -585,6 +586,22 @@ public class HttpMethods {
         map.put("immuneCondition", immuneCondition);
         map.put("immuneNewlyday", immuneNewlyday);
         Observable observable = mRetrofit.create(HttpService.class).fosterPetSave(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     * @param userId
+     * @param page
+     * @param limit
+     * @param subscriber
+     */
+    public void fosterAndAdoptPetInfoList(String userId, int page, int limit, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("page", page);
+        map.put("limit", limit);
+        Observable observable = mRetrofit.create(HttpService.class).fosterAndAdoptPetInfoList(map);
+
         toSubscribe(observable, subscriber);
     }
 
