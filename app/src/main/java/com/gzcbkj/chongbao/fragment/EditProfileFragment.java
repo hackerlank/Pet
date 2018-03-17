@@ -1,10 +1,12 @@
 package com.gzcbkj.chongbao.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
 import com.gzcbkj.chongbao.manager.DataManager;
+import com.gzcbkj.chongbao.utils.Constants;
 
 /**
  * Created by huangzhifeng on 2018/3/2.
@@ -39,7 +41,10 @@ public class EditProfileFragment extends BaseFragment {
             case R.id.rlAvater:
                 break;
             case R.id.rlNickname:
-                gotoPager(EditNicknameFragment.class,null);
+                Bundle bundle=new Bundle();
+                bundle.putInt(Constants.KEY_BASE_BEAN,Constants.EDIT_USER_NICK);
+                bundle.putString(Constants.KEY_BASE_BEAN_2,getTextById(R.id.tvNick));
+                gotoPager(EditNicknameFragment.class,bundle);
                 break;
         }
     }

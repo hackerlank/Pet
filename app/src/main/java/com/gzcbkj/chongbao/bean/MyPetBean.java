@@ -1,12 +1,15 @@
 package com.gzcbkj.chongbao.bean;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
+import java.util.Calendar;
 
 /**
  * Created by huangzhifeng on 2018/3/14.
  */
 
-public class MyPetBean implements Serializable {
+public class MyPetBean extends BaseBean {
 
     private String createtime;
     private String ownPetBirth;
@@ -23,6 +26,21 @@ public class MyPetBean implements Serializable {
     private String updatetime;
     private String petVarietyName;
     private String typeName;
+    private String petAge;
+
+    public String getPetAge() {
+        if(TextUtils.isEmpty(petAge) && !TextUtils.isEmpty(ownPetBirth)){
+            Calendar calendar=Calendar.getInstance();
+            int currentYear=calendar.get(Calendar.YEAR);
+            int year=Integer.parseInt(ownPetBirth.split("-")[0]);
+            petAge=String.valueOf(currentYear-year);
+        }
+        return petAge;
+    }
+
+    public void setPetAge(String petAge) {
+        this.petAge = petAge;
+    }
 
     public String getPetVarietyName() {
         return petVarietyName;

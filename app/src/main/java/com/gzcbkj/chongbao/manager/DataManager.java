@@ -24,6 +24,7 @@ public class DataManager implements IDataManager {
     private IWXAPI mWeChatApi;
 
     private Object mObject;
+    private int mObjectType;
 
     private UserInfoBean mMyUserInfo;
 
@@ -140,6 +141,16 @@ public class DataManager implements IDataManager {
     @Override
     public ArrayList<IDataChangeListener> getDataChangeListener() {
         return mListeners;
+    }
+
+    @Override
+    public void setObjectType(int objectType){
+        mObjectType=objectType;
+    }
+
+    @Override
+    public int getObjectType(){
+        return mObjectType;
     }
 
     @Override

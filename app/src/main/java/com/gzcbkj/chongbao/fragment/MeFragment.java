@@ -65,7 +65,6 @@ public class MeFragment extends BaseFragment implements OnRefreshListener {
                 gotoPager(DataManager.getInstance().isLogin() ? SettingFragment.class : LoginFragment.class, null);
                 break;
             case R.id.ivMessage:
-
                     gotoPager(DataManager.getInstance().isLogin() ?MessageCenterFragment.class:LoginFragment.class, null);
                 break;
             case R.id.rlProfile:

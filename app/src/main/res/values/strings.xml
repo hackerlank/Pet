@@ -75,6 +75,7 @@
     <string name="lingyang_time">领养时间</string>
     <string name="please_input_start_time">请选择开始时间</string>
     <string name="please_input_end_time">请选择结束时间</string>
+    <string name="end_time_must_much_thaan_start_time">结束时间需大于开始时间</string>
     <string name="lingyang_yuanyin">领养原因</string>
     <string name="please_input_lingyang_yuanying">请选择领养原因</string>
     <string name="lingyang_yuanyin_1">家中老人需要陪伴</string>
@@ -97,6 +98,8 @@
     <string name="pet_type_2">宠物品种</string>
     <string name="please_select_pet_type">请选择宠物类型</string>
     <string name="please_select_pet_type_2">请选择宠物品种</string>
+    <string name="please_select_pet_birth">请选择宠物生日</string>
+    <string name="please_select_pet_sex">请选择宠物性别</string>
     <string name="male">男</string>
     <string name="female">女</string>
     <string name="not_know_sex">不清楚</string>
@@ -111,6 +114,33 @@
     <string name="waiting_lingtang">待领养</string>
     <string name="had_lingyang">已领养</string>
     <string name="xx_price">￥%1$s/月</string>
+    <string name="not_jiyang">未寄养</string>
+    <string name="jiyang_zhong">寄养中</string>
+    <string name="jiyang_jishu">寄养结束</string>
+    <string name="save">保存</string>
+    <string name="please_add_pet_photos">请添加宠物照片</string>
+
+    <!-- AddPetFragment -->
+    <string name="add_pet">添加宠物</string>
+    <string name="not_tianxie">未填写</string>
+    <string name="birth_day">出生年月</string>
+    <string name="pet_sex_2">性别</string>
+    <string name="weight">体重</string>
+    <string name="is_sterilization">是否绝育</string>
+    <string name="expect_message">特别信息</string>
+    <string name="ta_shi_tiao_pi_gui">TA是调皮鬼么？</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="not">不是</string>
+    <string name="not_sure">不确定</string>
+    <string name="danzi_tebie_xiao">TA胆子特别小？</string>
+    <string name="hao_xiangchu">TA和其他动物相处友好么？</string>
+    <string name="pet_jianjie">宠物简介</string>
+    <string name="pet_jianjie_sample">对宠物进行简单说明，比如：宠物是否胆小、调皮等</string>
+    <string name="pet_weight_2">宠物体重</string>
+    <string name="your_pet_weight">您宠物的体重是...</string>
+    <string name="please_seclect_avater">请选择头像</string>
+    <string name="please_seclect_pet_is_sterilization">请选择宠物是否绝育</string>
 
 
     <!-- LoginFragment -->
@@ -218,7 +248,9 @@
 
     <!-- EditNicknameFragment -->
     <string name="edit_nickname">修改昵称</string>
+    <string name="pet_nickname">宠物昵称</string>
     <string name="please_input_nickname_2">请填写昵称</string>
+    <string name="please_input_pet_nickname">填写16字以内的昵称</string>
 
     <!-- SettingFragment -->
     <string name="setting">设置</string>

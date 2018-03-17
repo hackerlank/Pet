@@ -1,6 +1,5 @@
 package com.gzcbkj.chongbao.fragment;
 
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
 
@@ -8,6 +7,7 @@ import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.adapter.MyPetAdapter;
 import com.gzcbkj.chongbao.bean.AdoptPetBean;
+import com.gzcbkj.chongbao.bean.BaseBean;
 import com.gzcbkj.chongbao.bean.MyPetBean;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
@@ -52,73 +52,50 @@ public class MyPetFragment extends BaseFragment implements OnRefreshListener {
 
     }
 
-    private int index = 1;
-
     @Override
     public void onClick(View view) {
         int id = view.getId();
         switch (id) {
             case R.id.ivRight:
-//                String ownPetHeadurl = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1670658909,3056786610&fm=27&gp=0.jpg";
-//                String ownPetName = index % 2 == 0 ? "多多" : "西西";
-//                int ownPetType = 1;
-//                int ownPetVariety = 1;
-//                String ownPetBirth = "2016-08-12";
-//                String ownPetSex = index % 2 == 0 ? "1" : "2";
-//                String ownPetWeight = "10";
-//                String ownPetSterilization = index % 2 == 0 ? "1" : "2";
-//                String ownPetInterest = index % 2 == 0 ? "凶猛异常" : "温顺可爱";
-//                ++index;
-//                String ownUserId = DataManager.getInstance().getMyUserInfo().getUserId();
-//                HttpMethods.getInstance().ownPetSave(ownPetHeadurl, ownPetName, ownPetType, ownPetVariety, ownPetBirth,
-//                        ownPetSex, ownPetWeight, ownPetSterilization, ownPetInterest, ownUserId,
+                gotoPager(AddPetFragment.class,null);
+
+
+//                String userId=DataManager.getInstance().getMyUserInfo().getUserId();
+//                String fosterName = "HZF";
+//                String fosterPhone = "18898352847";
+//                String fosterSex = "2";
+//                String fosterAge = "28";
+//                String fosterAddress = "深圳福田";
+//                String fosterCompay = "有限公司";
+//                String fosterReason = "回老家";
+//                String fosterBeginTime = "2018-03-20";
+//                String fosterEndTime = "2018-05-13";
+//                String fosterCycle = "2";
+//                String fosterShuttle = "1";
+//                String fosterPetType = "2";
+//                String fosterPetVariety = "2";
+//                String fosterPetAge = "2";
+//                String fosterPetSex = "1";
+//                String fosterPetPic = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1670658909,3056786610&fm=27&gp=0.jpg";
+//                String feedRequire = "每天帮洗澡";
+//                String remake = "没有备注";
+//                String immuneTime = "90";
+//                String immuneCondition = "3";
+//                String immuneNewlyday = "2018-03-16";
+//
+//                HttpMethods.getInstance().fosterPetSave(userId,fosterName, fosterPhone, fosterSex, fosterAge, fosterAddress,
+//                        fosterCompay, fosterReason, fosterBeginTime, fosterEndTime, fosterCycle,
+//                        fosterShuttle, fosterPetType, fosterPetVariety, fosterPetAge, fosterPetSex,
+//                        fosterPetPic, feedRequire, remake, immuneTime, immuneCondition, immuneNewlyday,
 //                        new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
 //                            @Override
 //                            public void onNext(ResponseBean bean) {
 //                                if (bean != null && !TextUtils.isEmpty(bean.getMsg())) {
 //                                    showToast(bean.getMsg());
 //                                }
-//                          //      goBack();
+//                                //      goBack();
 //                            }
 //                        }, getActivity(), (BaseActivity) getActivity()));
-
-
-                String userId=DataManager.getInstance().getMyUserInfo().getUserId();
-                String fosterName = "HZF";
-                String fosterPhone = "18898352847";
-                String fosterSex = "2";
-                String fosterAge = "28";
-                String fosterAddress = "深圳福田";
-                String fosterCompay = "有限公司";
-                String fosterReason = "回老家";
-                String fosterBeginTime = "2018-03-20";
-                String fosterEndTime = "2018-05-13";
-                String fosterCycle = "2";
-                String fosterShuttle = "1";
-                String fosterPetType = "2";
-                String fosterPetVariety = "2";
-                String fosterPetAge = "2";
-                String fosterPetSex = "1";
-                String fosterPetPic = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1670658909,3056786610&fm=27&gp=0.jpg";
-                String feedRequire = "每天帮洗澡";
-                String remake = "没有备注";
-                String immuneTime = "90";
-                String immuneCondition = "3";
-                String immuneNewlyday = "2018-03-16";
-
-                HttpMethods.getInstance().fosterPetSave(userId,fosterName, fosterPhone, fosterSex, fosterAge, fosterAddress,
-                        fosterCompay, fosterReason, fosterBeginTime, fosterEndTime, fosterCycle,
-                        fosterShuttle, fosterPetType, fosterPetVariety, fosterPetAge, fosterPetSex,
-                        fosterPetPic, feedRequire, remake, immuneTime, immuneCondition, immuneNewlyday,
-                        new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
-                            @Override
-                            public void onNext(ResponseBean bean) {
-                                if (bean != null && !TextUtils.isEmpty(bean.getMsg())) {
-                                    showToast(bean.getMsg());
-                                }
-                                //      goBack();
-                            }
-                        }, getActivity(), (BaseActivity) getActivity()));
                 break;
         }
     }
@@ -139,21 +116,14 @@ public class MyPetFragment extends BaseFragment implements OnRefreshListener {
                     return;
                 }
                 refreshlayout.finishRefresh();
-                ArrayList<AdoptPetBean> list=bean.getTobeAdoptList();
-                ArrayList<MyPetBean> myPetList=bean.getOwnPetList();
-                if(myPetList==null){
-                    myPetList=new ArrayList<>();
+                ArrayList<MyPetBean> list1=bean.getOwnPetList();
+                ArrayList<AdoptPetBean> list2=bean.getTobeAdoptList();
+                ArrayList<BaseBean> myPetList=new ArrayList<>();
+                if(list1!=null){
+                    myPetList.addAll(list1);
                 }
-                if(list!=null && !list.isEmpty()){
-                    for(AdoptPetBean adoptPetBean:list){
-                        MyPetBean myPetBean=new MyPetBean();
-                        myPetBean.setCreatetime(adoptPetBean.getCreatetime());
-                        myPetBean.setOwnPetName(adoptPetBean.getPetName());
-                        myPetBean.setTypeName(adoptPetBean.getPetTypeName());
-                        myPetBean.setPetVarietyName(adoptPetBean.getPetVarietyName());
-                      //  myPetBean.setO
-                        myPetList.add(myPetBean);
-                    }
+                if(list2!=null){
+                    myPetList.addAll(list2);
                 }
                 getAdapter().setDataList(myPetList);
             }

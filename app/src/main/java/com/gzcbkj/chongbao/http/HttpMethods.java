@@ -309,34 +309,25 @@ public class HttpMethods {
     }
 
     /**
+     *
+     * @param files
      * @param subscriber
      */
-    public void uploadFile(ProgressSubscriber subscriber) {
-//        HashMap<String, Object> map = new HashMap<>();
-//        map.put("page",page);
-//        map.put("limit",limit);
-//        map.put("type",type);
+    public void uploadFile(ArrayList<String> files,ProgressSubscriber subscriber) {
+        if(files==null || files.isEmpty()){
+            return;
+        }
         ArrayList<MultipartBody.Part> parts = new ArrayList<>();
         RequestBody requestBody;
         MultipartBody.Part part;
-        File file = new File(Environment.getExternalStorageDirectory(), "1.jpg");
-        requestBody = RequestBody.create(MediaType.parse("image"), file);
-        part = MultipartBody.Part.
-                createFormData("files", file.getName(), requestBody);
-        parts.add(part);
-
-        file = new File(Environment.getExternalStorageDirectory(), "2.jpg");
-        requestBody = RequestBody.create(MediaType.parse("image"), file);
-        part = MultipartBody.Part.
-                createFormData("files", file.getName(), requestBody);
-        parts.add(part);
-
-        file = new File(Environment.getExternalStorageDirectory(), "3.jpg");
-        requestBody = RequestBody.create(MediaType.parse("image"), file);
-        part = MultipartBody.Part.
-                createFormData("files", file.getName(), requestBody);
-        parts.add(part);
-
+        File file;
+        for(String str:files) {
+            file = new File(str);
+            requestBody = RequestBody.create(MediaType.parse("image"), file);
+            part = MultipartBody.Part.
+                    createFormData("files", file.getName(), requestBody);
+            parts.add(part);
+        }
         Observable observable = mRetrofit.create(HttpService.class).uploadFile(parts);
         toSubscribe(observable, subscriber);
     }

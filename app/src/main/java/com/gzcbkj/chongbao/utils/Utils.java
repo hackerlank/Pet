@@ -36,6 +36,7 @@ import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -237,6 +238,14 @@ public class Utils {
 
     public static String getDateString(int time, String keyString) {
         return String.format(keyString, time);
+    }
+
+
+    public static Date strToDate(String strDate) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        ParsePosition pos = new ParsePosition(0);
+        Date strtodate = formatter.parse(strDate, pos);
+        return strtodate;
     }
 
     /**
@@ -569,9 +578,8 @@ public class Utils {
 
     public static Date stringToDate(String strTime)
             throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = formatter.parse(strTime);
-        Log.e("aaaaaaa", date.toString() + ", " + strTime);
         return date;
     }
 
@@ -586,7 +594,7 @@ public class Utils {
     public static ArrayList<String> getUrlList(String orginUrl) {
         ArrayList<String> list = new ArrayList<>();
         String[] urls = orginUrl.split(",");
-        if (urls != null && urls.length > 1) {
+        if (urls != null && urls.length > 0) {
             for (String url : urls) {
                 if (url.startsWith("http")) {
                     list.add(url);

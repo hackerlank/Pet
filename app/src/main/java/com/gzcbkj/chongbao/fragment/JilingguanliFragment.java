@@ -6,6 +6,7 @@ import android.widget.ListView;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.adapter.JilingguanliAdapter;
+import com.gzcbkj.chongbao.bean.BaseBean;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
@@ -35,11 +36,6 @@ public class JilingguanliFragment extends BaseFragment implements OnRefreshListe
         setText(R.id.tvTitle, R.string.jiling_guanli);
         ListView listView = fv(R.id.listView);
         listView.setAdapter(getAdapter());
-//        ArrayList<ResponseBean> list=new ArrayList<>();
-//        for(int i=0;i<10;++i){
-//            list.add(new ResponseBean());
-//        }
-//        getAdapter().setDataList(list);
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
         smartRefreshLayout.autoRefresh();
@@ -75,6 +71,14 @@ public class JilingguanliFragment extends BaseFragment implements OnRefreshListe
                         if (getView() == null) {
                             return;
                         }
+                        ArrayList<BaseBean> list=new ArrayList<>();
+                        if(bean.getTobeAdoptList()!=null){
+                            list.addAll(bean.getTobeAdoptList());
+                        }
+                        if(bean.getFosterPetList()!=null){
+                            list.addAll(bean.getFosterPetList());
+                        }
+                        getAdapter().setDataList(list);
                         refreshlayout.finishRefresh();
                     }
                 }, getActivity(), false, (BaseActivity) getActivity()));

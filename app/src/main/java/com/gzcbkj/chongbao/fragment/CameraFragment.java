@@ -14,6 +14,7 @@ import com.gzcbkj.chongbao.hardwrare.CameraManager;
 import com.gzcbkj.chongbao.hardwrare.OnCameraListener;
 import com.gzcbkj.chongbao.hardwrare.SensorControler;
 import com.gzcbkj.chongbao.manager.DataManager;
+import com.gzcbkj.chongbao.utils.Constants;
 import com.gzcbkj.chongbao.widgets.SquareCameraContainer;
 
 /**
@@ -21,8 +22,7 @@ import com.gzcbkj.chongbao.widgets.SquareCameraContainer;
  */
 public class CameraFragment extends BaseFragment implements View.OnTouchListener {
 
-    public static final int TYPE_CAMERA_FOR_CHAT = 0;
-    public static final int TYPE_CAMERA_FOR_PROFILE = 1;
+  //  public static final int TYPE_CAMERA_FOR_CHAT = 0;
 
 
     private final static String TAG = "CameraFragment";
@@ -34,7 +34,7 @@ public class CameraFragment extends BaseFragment implements View.OnTouchListener
 
     public static final String USE_CAMERA_TYPE = "use_camera_type";
 
-    protected int mCameraUseType = TYPE_CAMERA_FOR_CHAT;
+    protected int mCameraUseType = Constants.TYPE_CAMERA_FOR_AVATER;
 
 
     @Override

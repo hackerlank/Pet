@@ -27,14 +27,13 @@
             android:layout_height="wrap_content"
             android:background="@color/color_255_255_255"
             android:orientation="vertical"
-            android:paddingBottom="10dp"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="10dp">
+            android:paddingRight="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -48,8 +47,9 @@
                 <TextView
                     android:id="@+id/tvShideTime"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/color_33_33_33"
+                    android:gravity="center_vertical"
                     android:textColorHint="@color/color_99_99_99"
                     android:hint="@string/please_select_time"
                     android:textSize="13sp" />
@@ -57,8 +57,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -72,8 +72,9 @@
                 <EditText
                     android:id="@+id/etShideAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/color_33_33_33"
+                    android:gravity="center_vertical"
                     android:textColorHint="@color/color_99_99_99"
                     android:hint="@string/please_input_address"
                     android:background="@android:color/transparent"
@@ -82,8 +83,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -94,20 +95,21 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/etShidePetType"
+                    android:id="@+id/tvShidePetType"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/color_33_33_33"
                     android:textColorHint="@color/color_99_99_99"
                     android:hint="@string/please_select_pet_type"
+                    android:gravity="center_vertical"
                     android:background="@android:color/transparent"
                     android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -118,12 +120,13 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/etShidePetType2"
+                    android:id="@+id/tvShidePetType2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/color_33_33_33"
                     android:textColorHint="@color/color_99_99_99"
                     android:hint="@string/please_select_pet_type_2"
+                    android:gravity="center_vertical"
                     android:background="@android:color/transparent"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -169,14 +172,15 @@
                     android:text="@string/not_know_sex"
                     android:textColor="@color/color_33_33_33"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:layout_marginLeft="20dp"
                     android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -189,9 +193,10 @@
                 <EditText
                     android:id="@+id/etShidePersonname"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/color_33_33_33"
                     android:textColorHint="@color/color_99_99_99"
+                    android:gravity="center_vertical"
                     android:hint="@string/please_input_name"
                     android:background="@android:color/transparent"
                     android:textSize="13sp" />
@@ -199,8 +204,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -213,10 +218,13 @@
                 <EditText
                     android:id="@+id/etContactWay"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/color_33_33_33"
                     android:textColorHint="@color/color_99_99_99"
                     android:hint="@string/please_input_contact_way"
+                    android:inputType="phone"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
                     android:background="@android:color/transparent"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -281,8 +289,6 @@
                     android:src="@drawable/add_pet_pic_camera"/>
 
             </LinearLayout>
-
-
 
         </LinearLayout>
     </RelativeLayout>

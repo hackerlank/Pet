@@ -34,4 +34,14 @@ public class Constants {
 
     public static final int MAX_UPLOAD_PHOTO_NUM = 9;
 
+
+    public static final int TYPE_CAMERA_FOR_AVATER = 1;
+    public static final int OBJECT_TYPE_AVATER=1;
+    public static final int OBJECT_TYPE_NICKNAME=2;
+    public static final int OBJECT_TYPE_PET_TYPE=3;
+    public static final int OBJECT_TYPE_PET_WEIGHT=4;
+
+    public static final int EDIT_USER_NICK=1;
+    public static final int EDIT_PET_NICK=2;
+
 }

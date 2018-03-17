@@ -1,8 +1,14 @@
 package com.gzcbkj.chongbao.fragment;
 
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gzcbkj.chongbao.R;
@@ -19,6 +25,9 @@ import com.gzcbkj.chongbao.utils.Utils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import java.text.ParseException;
+import java.util.Calendar;
 
 import okhttp3.internal.Util;
 
@@ -38,7 +47,7 @@ public class PetLingyangziliaoFragment extends BaseFragment{
     @Override
     protected void onViewCreated(View view) {
         setText(R.id.tvTitle, R.string.input_lingyang_ziliao);
-        setViewsOnClickListener(R.id.tvSubmit);
+        setViewsOnClickListener(R.id.tvSubmit,R.id.tvRecSendWay,R.id.tvStartTime,R.id.tvEndTime,R.id.tvLingyangYuanyin);
         mBean = (AdoptPetBean) getArguments().getSerializable(Constants.KEY_BASE_BEAN);
         Utils.loadImage(R.drawable.default_1,mBean.getPetHeadUrl(),(ImageView) fv(R.id.ivPetAvater));
         setText(R.id.tvPetName,mBean.getPetName());
@@ -52,10 +61,86 @@ public class PetLingyangziliaoFragment extends BaseFragment{
 
     }
 
+    private void initSelect(final int selectType){
+        final LinearLayout llSelect=fv(R.id.llSelect);
+        llSelect.setVisibility(View.VISIBLE);
+        int childCount=llSelect.getChildCount();
+        TextView tv;
+        String text;
+        String currentText=getTextById(R.id.tvLingyangYuanyin);
+        for(int i=0;i<childCount;++i){
+            tv= (TextView) llSelect.getChildAt(i);
+            text=getString(getResources().getIdentifier(selectType==1?("lingyang_yuanyin_"+(i+1)):("rec_send_way_"+(i+1)),"string",getActivity().getPackageName()));
+            if((TextUtils.isEmpty(currentText) && i==0) || currentText.equals(text)){
+                tv.setBackgroundColor(getResources().getColor(R.color.color_ff_73_73));
+                tv.setTextColor(Color.WHITE);
+            }else{
+                tv.setBackgroundColor(Color.TRANSPARENT);
+                tv.setTextColor(getResources().getColor(R.color.color_33_33_33));
+            }
+            tv.setText(text);
+            tv.setTag(text);
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(selectType==1) {
+                        setText(R.id.tvLingyangYuanyin, (String) view.getTag());
+                    }else{
+                        setText(R.id.tvRecSendWay, (String) view.getTag());
+                    }
+                    llSelect.setVisibility(View.GONE);
+                }
+            });
+        }
+        RelativeLayout.LayoutParams lp=(RelativeLayout.LayoutParams) llSelect.getLayoutParams();
+        lp.topMargin=selectType==1?0:-Utils.dip2px(getActivity(),80);
+        getView().setOnClickListener(this);
+    }
+
+    private void showSelectTime(final TextView tvTime){
+        String time=tvTime.getText().toString();
+        Calendar calendar=Calendar.getInstance();
+        if(!TextUtils.isEmpty(time)){
+            try {
+                calendar.setTime(Utils.stringToDate(time));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        calendar=Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,0);
+        calendar.set(Calendar.MINUTE,0);
+        calendar.set(Calendar.SECOND,0);
+        ((BaseActivity) getActivity()).showSelectTimeView(year, month, day, calendar.getTimeInMillis(),0, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker datePicker, int y, int m, int d) {
+                tvTime.setText(y+"-"+Utils.getNewText(m+1)+"-"+Utils.getNewText(d));
+            }
+        });
+    }
+
     @Override
     public void onClick(View view) {
+        if(fv(R.id.llSelect).getVisibility()==View.VISIBLE){
+            setViewGone(R.id.llSelect);
+            return;
+        }
         int id = view.getId();
         switch (id) {
+            case R.id.tvRecSendWay:
+                initSelect(2);
+                break;
+            case R.id.tvStartTime:
+            case R.id.tvEndTime:
+                showSelectTime((TextView) view);
+                break;
+            case R.id.tvLingyangYuanyin:
+                initSelect(1);
+                break;
             case R.id.tvSubmit:
                 String userName=getTextById(R.id.etLingyangName);
                 if(TextUtils.isEmpty(userName)){
@@ -72,22 +157,26 @@ public class PetLingyangziliaoFragment extends BaseFragment{
                     showToast(R.string.please_input_your_address);
                     return;
                 }
-                String recSendWay=getString(R.string.rec_send_way_1);//getTextById(R.id.tvRecSendWay);
+                String recSendWay=getTextById(R.id.tvRecSendWay);
                 if(TextUtils.isEmpty(recSendWay)){
                     showToast(R.string.please_select_rec_send_way);
                     return;
                 }
-                String startTime="2018-03-14";//getTextById(R.id.tvStartTime);
+                String startTime=getTextById(R.id.tvStartTime);
                 if(TextUtils.isEmpty(startTime)){
                     showToast(R.string.please_input_start_time);
                     return;
                 }
-                String endTime="2018-05-01";getTextById(R.id.tvEndTime);
+                String endTime=getTextById(R.id.tvEndTime);
                 if(TextUtils.isEmpty(endTime)){
                     showToast(R.string.please_input_end_time);
                     return;
                 }
-                String lingyangYuanyin=getString(R.string.lingyang_yuanyin_1);//getTextById(R.id.tvLingyangYuanyin);
+                if(endTime.compareTo(startTime)<=0){
+                    showToast(R.string.end_time_must_much_thaan_start_time);
+                    return;
+                }
+                String lingyangYuanyin=getTextById(R.id.tvLingyangYuanyin);
                 if(TextUtils.isEmpty(lingyangYuanyin)){
                     showToast(R.string.please_input_lingyang_yuanying);
                     return;

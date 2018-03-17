@@ -15,6 +15,7 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
@@ -148,9 +149,13 @@ public class RoundRectImageView extends ImageView {
         if (mOnlyTopRound) {
             if (mSrcRect == null) {
                 mSrcRect = new Rect(0, bmp.getHeight() / 2, bmp.getWidth(), bmp.getHeight());
+            }else{
+                mSrcRect.set(0, bmp.getHeight() / 2, bmp.getWidth(), bmp.getHeight());
             }
             if (mDstRect == null) {
                 mDstRect = new Rect(0, getHeight() / 2, getWidth(), getHeight());
+            }else{
+                mDstRect.set(0, getHeight() / 2, getWidth(), getHeight());
             }
             canvas.drawBitmap(bmp, mSrcRect, mDstRect, null);
         }

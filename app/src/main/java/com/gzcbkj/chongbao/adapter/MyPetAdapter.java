@@ -6,14 +6,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.bean.AdoptPetBean;
+import com.gzcbkj.chongbao.bean.BaseBean;
 import com.gzcbkj.chongbao.bean.MyPetBean;
 import com.gzcbkj.chongbao.utils.Utils;
+
+import java.util.ArrayList;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class MyPetAdapter extends MyBaseAdapter<MyPetBean> {
+public class MyPetAdapter extends MyBaseAdapter<BaseBean> {
     public MyPetAdapter(Context context) {
         super(context);
     }
@@ -27,15 +31,31 @@ public class MyPetAdapter extends MyBaseAdapter<MyPetBean> {
             holder.tvName=fv(view,R.id.tvName);
             holder.ivAvater=fv(view,R.id.ivAvater);
             holder.tvPetType=fv(view,R.id.tvPetType);
-            holder.tvPetTime=fv(view,R.id.tvPetTime);
+            holder.tvPetAge=fv(view,R.id.tvPetAge);
             view.setTag(holder);
         }else{
             holder=(ViewHolder) view.getTag();
         }
-        MyPetBean bean=getItem(i);
-        setText(holder.tvName,bean.getOwnPetName());
-        setText(holder.tvPetType,bean.getPetVarietyName());
-        Utils.loadImage(R.drawable.default_1,bean.getOwnPetHeadurl(),holder.ivAvater);
+        BaseBean bean=getItem(i);
+        ArrayList<String> urlList;
+        if(bean instanceof MyPetBean){
+            MyPetBean petBean=(MyPetBean) bean;
+            setText(holder.tvName,petBean.getOwnPetName());
+            setText(holder.tvPetType,petBean.getPetVarietyName());
+            setText(holder.tvPetAge,petBean.getPetAge()+mContext.getString(R.string.age));
+            urlList=Utils.getUrlList(petBean.getOwnPetHeadurl());
+        }else{
+            AdoptPetBean petBean=(AdoptPetBean) bean;
+            setText(holder.tvName,petBean.getPetName());
+            setText(holder.tvPetType,petBean.getPetVarietyName());
+            setText(holder.tvPetAge,petBean.getPetAge()+mContext.getString(R.string.age));
+            urlList=Utils.getUrlList(petBean.getPetHeadUrl());
+        }
+        if(urlList.size()>0) {
+            Utils.loadImage(R.drawable.touxiang, urlList.get(0), holder.ivAvater);
+        }else{
+            holder.ivAvater.setImageResource(R.drawable.touxiang);
+        }
         return view;
     }
 
@@ -43,6 +63,6 @@ public class MyPetAdapter extends MyBaseAdapter<MyPetBean> {
         ImageView ivAvater;
         TextView tvName;
         TextView tvPetType;
-        TextView tvPetTime;
+        TextView tvPetAge;
     }
 }

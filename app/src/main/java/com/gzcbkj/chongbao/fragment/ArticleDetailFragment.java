@@ -145,6 +145,9 @@ public class ArticleDetailFragment extends BaseFragment implements OnRefreshList
                 e.printStackTrace();
                 return null;
             }
+            if(drawable==null){
+                drawable=getResources().getDrawable(R.drawable.default_1);
+            }
             int width=getDisplaymetrics().widthPixels-Utils.dip2px(getActivity(),30);
             int height=drawable.getIntrinsicHeight()*width/drawable.getIntrinsicWidth();
             drawable.setBounds(0, 0, width, height);

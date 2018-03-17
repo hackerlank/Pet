@@ -114,12 +114,12 @@ public class PetLingyangDetailFragment extends BaseFragment implements OnRefresh
         setText(R.id.tvPetName2,mBean.getPetAge());
         setText(R.id.tvPetSex,getString("1".equals(mBean.getPetSex())?R.string.male:R.string.female));
         setText(R.id.tvPetAge,mBean.getPetAge()+getString(R.string.age));
-        if("1".equals(mBean.getPetStatus())){
+        if(1==mBean.getPetStatus()){
             setText(R.id.tvPetStatus, R.string.waiting_lingtang);
-            setViewVisible(R.id.tvLingyang);
+   //         setViewVisible(R.id.tvLingyang);
         }else{
             setText(R.id.tvPetStatus, R.string.had_lingyang);
-            setViewGone(R.id.tvLingyang);
+ //           setViewGone(R.id.tvLingyang);
         }
         setText(R.id.tvPetLingyangRequire,mBean.getPetRequirement());
         setText(R.id.tvPetJieshao,mBean.getRemake());

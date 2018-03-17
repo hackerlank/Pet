@@ -86,7 +86,7 @@ public class PetCenterFragment extends BaseFragment {
         for (int i = 0; i < 4; ++i) {
             viewGroup = fv(getResources().getIdentifier("llTab" + (i + 1), "id", getActivity().getPackageName()));
             ((TextView) viewGroup.getChildAt(0)).setTextColor(getResources().getColor(i == pos ? R.color.color_33_33_33 : R.color.color_99_99_99));
-            viewGroup.getChildAt(1).setVisibility(i == pos ? View.VISIBLE : View.GONE);
+            viewGroup.getChildAt(1).setVisibility(i == pos ? View.VISIBLE : View.INVISIBLE);
         }
         if(pos==1 || pos==2){
             tvRight.setVisibility(View.VISIBLE);

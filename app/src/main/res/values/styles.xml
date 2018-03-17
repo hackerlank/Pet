@@ -9,8 +9,11 @@
         <item name="android:windowBackground">@drawable/login_bg</item>
     </style>
 
-    <style name="TranslucentTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-
+    <style name="TranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <style name="dialog_fragment_style" parent="@android:style/Theme.Dialog">

@@ -1,20 +1,17 @@
 package com.gzcbkj.chongbao.bean;
 
-import java.io.Serializable;
-
 /**
  * Created by huangzhifeng on 2018/3/13.
  */
 
-public class AdoptPetBean implements Serializable {
+public class AdoptPetBean extends BaseBean {
 
     private long id;
-    private String createtime;
     private String petAge;
     private String petName;
     private String petRequirement;
     private String petSex;  //1:公  2:母
-    private String petStatus; //宠物状态（1：待领养    2：已领养）
+    private int petStatus=1; //宠物状态（1：待领养    2：已领养）
     private int petType;
     private String petTypeName;
     private String typeName;
@@ -24,6 +21,16 @@ public class AdoptPetBean implements Serializable {
     private String remake;
     private String updatetime;
     private String petHeadUrl;
+
+    private String createtime;
+
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createTime) {
+        this.createtime = createTime;
+    }
 
     public String getTypeName() {
         return typeName;
@@ -65,14 +72,6 @@ public class AdoptPetBean implements Serializable {
         this.id = id;
     }
 
-    public String getCreatetime() {
-        return createtime;
-    }
-
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime;
-    }
-
     public String getPetAge() {
         return petAge;
     }
@@ -97,11 +96,11 @@ public class AdoptPetBean implements Serializable {
         this.petSex = petSex;
     }
 
-    public String getPetStatus() {
+    public int getPetStatus() {
         return petStatus;
     }
 
-    public void setPetStatus(String petStatus) {
+    public void setPetStatus(int petStatus) {
         this.petStatus = petStatus;
     }
 

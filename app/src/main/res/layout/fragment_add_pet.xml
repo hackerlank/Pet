@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/layout_top_bar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginTop="10dp"
+        android:scrollbars="none"
+        android:paddingBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dialog_background"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rlAvater"
+                    android:layout_width="match_parent"
+                    android:layout_height="76dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:background="@color/color_255_255_255">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/avater"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <com.gzcbkj.chongbao.widgets.RoundRectImageView
+                        android:id="@+id/ivAvater"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        app:round_radius="23"
+                        android:src="@drawable/touxiang" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/line"/>
+
+                <LinearLayout
+                    android:id="@+id/llNickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:orientation="horizontal"
+                    android:background="@color/color_255_255_255">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/nickname"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvNick"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:layout_weight="1"
+                        android:hint="@string/not_tianxie"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColorHint="@color/color_99_99_99"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/right_arrow" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/line"/>
+
+
+                <LinearLayout
+                    android:id="@+id/llPetType"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:orientation="horizontal"
+                    android:background="@color/color_255_255_255">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/shide_pet_type"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvPetType"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:layout_weight="1"
+                        android:hint="@string/not_tianxie"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColorHint="@color/color_99_99_99"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/right_arrow" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/line"/>
+
+
+                <LinearLayout
+                    android:id="@+id/llBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:orientation="horizontal"
+                    android:background="@color/color_255_255_255">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/birth_day"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvBirth"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:layout_weight="1"
+                        android:hint="@string/not_tianxie"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColorHint="@color/color_99_99_99"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/right_arrow" />
+
+                </LinearLayout>
+
+                <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/line"/>
+
+
+                <LinearLayout
+                    android:id="@+id/llPetSex"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:orientation="horizontal"
+                    android:background="@color/color_255_255_255">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/pet_sex_2"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvPetSex"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:layout_weight="1"
+                        android:hint="@string/not_tianxie"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColorHint="@color/color_99_99_99"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/right_arrow" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/line"/>
+
+
+                <LinearLayout
+                    android:id="@+id/llPetWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:orientation="horizontal"
+                    android:background="@color/color_255_255_255">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/weight"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvPetWeight"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:layout_weight="1"
+                        android:hint="@string/not_tianxie"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColorHint="@color/color_99_99_99"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/right_arrow" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/line"/>
+
+
+                <LinearLayout
+                    android:id="@+id/llPetIsSterilization"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:orientation="horizontal"
+                    android:background="@color/color_255_255_255">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/is_sterilization"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvPetSterilization"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center_vertical"
+                        android:layout_weight="1"
+                        android:hint="@string/not_tianxie"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColorHint="@color/color_99_99_99"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/right_arrow" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expect_message"
+                android:textColor="@color/color_66_66_66"
+                android:layout_marginTop="20dp"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dialog_background"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="76dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:orientation="vertical"
+                    android:background="@color/color_255_255_255">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/ta_shi_tiao_pi_gui"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <RadioButton
+                            android:id="@+id/rb1_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/yes"
+                            android:textColor="@color/color_33_33_33"
+                            android:textSize="13sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb1_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/not"
+                            android:textColor="@color/color_33_33_33"
+                            android:textSize="13sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb1_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/not_sure"
+                            android:textColor="@color/color_33_33_33"
+                            android:textSize="13sp" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/line"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="76dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:orientation="vertical"
+                    android:background="@color/color_255_255_255">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/danzi_tebie_xiao"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <RadioButton
+                            android:id="@+id/rb2_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/yes"
+                            android:textColor="@color/color_33_33_33"
+                            android:textSize="13sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb2_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/not"
+                            android:textColor="@color/color_33_33_33"
+                            android:textSize="13sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb2_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/not_sure"
+                            android:textColor="@color/color_33_33_33"
+                            android:textSize="13sp" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/line"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="76dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:orientation="vertical"
+                    android:background="@color/color_255_255_255">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/hao_xiangchu"
+                        android:textColor="@color/color_33_33_33"
+                        android:textSize="13sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <RadioButton
+                            android:id="@+id/rb3_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/yes"
+                            android:textColor="@color/color_33_33_33"
+                            android:textSize="13sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb3_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/not"
+                            android:textColor="@color/color_33_33_33"
+                            android:textSize="13sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb3_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/not_sure"
+                            android:textColor="@color/color_33_33_33"
+                            android:textSize="13sp" />
+                    </RadioGroup>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pet_jianjie"
+                android:textColor="@color/color_66_66_66"
+                android:layout_marginTop="20dp"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/etJianjie"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:hint="@string/pet_jianjie_sample"
+                android:textColor="@color/color_33_33_33"
+                android:textColorHint="@color/color_99_99_99"
+                android:gravity="left|top"
+                android:padding="10dp"
+                android:background="@drawable/bg_leave_msg"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>

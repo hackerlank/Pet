@@ -12,6 +12,7 @@ public class PetVarietyBean implements Serializable {
     private long id;
     private long petType;
     private String petVariety;
+    private String petVarietyName;
     private String updatetime;
 
     public String getCreatetime() {
@@ -52,5 +53,13 @@ public class PetVarietyBean implements Serializable {
 
     public void setUpdatetime(String updatetime) {
         this.updatetime = updatetime;
+    }
+
+    public String getPetVarietyName() {
+        return petVarietyName;
+    }
+
+    public void setPetVarietyName(String petVarietyName) {
+        this.petVarietyName = petVarietyName;
     }
 }

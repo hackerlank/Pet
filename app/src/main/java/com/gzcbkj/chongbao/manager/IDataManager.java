@@ -22,6 +22,10 @@ public interface IDataManager {
 
     public ArrayList<IDataChangeListener> getDataChangeListener();
 
+    public void setObjectType(int objectType);
+
+    public int getObjectType();
+
     public void setObject(Object object);
 
     public Object getObject();

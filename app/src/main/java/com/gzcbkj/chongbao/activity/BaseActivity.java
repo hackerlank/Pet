@@ -3,12 +3,19 @@ package com.gzcbkj.chongbao.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,22 +23,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.gzcbkj.chongbao.BaseApplication;
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.fragment.AlbumFragment;
 import com.gzcbkj.chongbao.fragment.BaseFragment;
+import com.gzcbkj.chongbao.fragment.CameraFragment;
 import com.gzcbkj.chongbao.fragment.MyDialogFragment;
+import com.gzcbkj.chongbao.fragment.PhotoPreviewFragment;
 import com.gzcbkj.chongbao.http.OnHttpErrorListener;
+import com.gzcbkj.chongbao.manager.DataManager;
+import com.gzcbkj.chongbao.utils.BitmapUtil;
+import com.gzcbkj.chongbao.utils.Constants;
 import com.gzcbkj.chongbao.utils.NetUtil;
 import com.gzcbkj.chongbao.utils.Preferences;
 import com.gzcbkj.chongbao.utils.Utils;
+import com.gzcbkj.chongbao.widgets.MorePopupWindow;
 
 import org.json.JSONException;
 
+import java.io.File;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -51,14 +68,15 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
 
     private DisplayMetrics mDisplaymetrics;
 
-    private boolean mIsFullScreen;
-
     private static boolean isNotComeFromBG;  //改为静态的，防止多个Activity会调用背景到前景的方法
 
 
     private static ArrayList<String> mActivityNameList;  //当mActivityNameList size为0时表示到了后台
 
     private ACProgressBaseDialog mDlgLoading;
+
+    private static final int CAMERA_REQUEST_CODE = 10001;
+    private static final int ALBUM_REQUEST_CODE = 10002;
 
 
     @Override
@@ -68,20 +86,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
          * 这里判断是否从splashActivity过来，是的话当作从后台到前台处理
 		 */
         isNotComeFromBG = !isComeFromSplash();
-    }
-
-    public void setTitle(String title) {
-        setTopBar(title, 0);
-    }
-
-
-    public void setTopBar(String title, int rightRes) {
-        ((TextView) findViewById(R.id.tvTitle)).setText(title);
-//        if (rightRes > 0) {
-//            ImageView ivRight = findViewById(R.id.ivRight);
-//            ivRight.setVisibility(View.VISIBLE);
-//            ivRight.setImageResource(rightRes);
-//        }
     }
 
     public void showLoadingDialog() {
@@ -160,12 +164,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
         }
     }
 
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-
-    }
 
     /**
      * 判断是否从splashActivity过来
@@ -267,31 +265,31 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
 
     public void errorCodeDo(final int errorCode, final String message) {
         if (!TextUtils.isEmpty(message)) {
-                final MyDialogFragment errorDialog = new MyDialogFragment();
-                errorDialog.setLayout(R.layout.layout_one_btn_dialog);
-                errorDialog.setOnMyDialogListener(new MyDialogFragment.OnMyDialogListener() {
-                    @Override
-                    public void initView(View view) {
-                        view.findViewById(R.id.tv1).setVisibility(View.GONE);
-                        ((TextView) view.findViewById(R.id.tv2)).setText(message);
-                        ((TextView) view.findViewById(R.id.btn2)).setText(getString(R.string.ok));
-                        errorDialog.setDialogViewsOnClickListener(view, R.id.btn2);
-                    }
+            final MyDialogFragment errorDialog = new MyDialogFragment();
+            errorDialog.setLayout(R.layout.layout_one_btn_dialog);
+            errorDialog.setOnMyDialogListener(new MyDialogFragment.OnMyDialogListener() {
+                @Override
+                public void initView(View view) {
+                    view.findViewById(R.id.tv1).setVisibility(View.GONE);
+                    ((TextView) view.findViewById(R.id.tv2)).setText(message);
+                    ((TextView) view.findViewById(R.id.btn2)).setText(getString(R.string.ok));
+                    errorDialog.setDialogViewsOnClickListener(view, R.id.btn2);
+                }
 
-                    @Override
-                    public void onViewClick(int viewId) {
+                @Override
+                public void onViewClick(int viewId) {
 
-                    }
-                });
-                errorDialog.show(getSupportFragmentManager(), "MyDialogFragment");
+                }
+            });
+            errorDialog.show(getSupportFragmentManager(), "MyDialogFragment");
 
-                errorDialog.setOnDismiss(new MyDialogFragment.IDismissListener() {
-                    @Override
-                    public void onDismiss() {
+            errorDialog.setOnDismiss(new MyDialogFragment.IDismissListener() {
+                @Override
+                public void onDismiss() {
 
-                    }
-                });
-            }
+                }
+            });
+        }
     }
 
 
@@ -371,6 +369,127 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         getVisibleFragment().onReturnResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CAMERA_REQUEST_CODE) {
+                super.onActivityResult(requestCode, resultCode, data);
+                try {
+                    String filePath = Utils.getSaveFilePath(BaseActivity.this, "output.jpg");
+                    Bitmap bmp = BitmapUtil.getBitmapFromFile(filePath, getDisplaymetrics().widthPixels, getDisplaymetrics().heightPixels);
+                    if (bmp == null) {
+                        return;
+                    }
+                    DataManager.getInstance().setObject(bmp);
+                    Bundle bundle=new Bundle();
+                    bundle.putInt(CameraFragment.USE_CAMERA_TYPE, Constants.TYPE_CAMERA_FOR_AVATER);
+                    gotoPager(PhotoPreviewFragment.class,bundle);
+                } catch (Exception e) {
+
+                }
+            } else if (requestCode == ALBUM_REQUEST_CODE) {
+                try {
+                    String filePath;
+                    int sdkVersion = Build.VERSION.SDK_INT;
+                    if (sdkVersion >= 19) {
+                        filePath = getRealPathFromUriAboveApi19(data.getData());
+                    } else {
+                        filePath = getRealPathFromUriBelowAPI19(data.getData());
+                    }
+                    Bitmap bmp = BitmapUtil.getBitmapFromFile(filePath, getDisplaymetrics().widthPixels, getDisplaymetrics().heightPixels);
+                    if (bmp == null) {
+                        return;
+                    }
+                    DataManager.getInstance().setObject(bmp);
+                    Bundle bundle=new Bundle();
+                    bundle.putInt(CameraFragment.USE_CAMERA_TYPE,Constants.TYPE_CAMERA_FOR_AVATER);
+                    gotoPager(PhotoPreviewFragment.class,bundle);
+                } catch (Exception e) {
+
+                }
+            }
+        }
+    }
+
+    /**
+     * 适配api19以下(不包括api19),根据uri获取图片的绝对路径
+     *
+     * @param uri 图片的Uri
+     * @return 如果Uri对应的图片存在, 那么返回该图片的绝对路径, 否则返回null
+     */
+    private String getRealPathFromUriBelowAPI19(Uri uri) {
+        return getDataColumn(uri, null, null);
+    }
+
+    /**
+     * 获取数据库表中的 _data 列，即返回Uri对应的文件路径
+     *
+     * @return
+     */
+    private String getDataColumn(Uri uri, String selection, String[] selectionArgs) {
+        String path = null;
+
+        String[] projection = new String[]{MediaStore.Images.Media.DATA};
+        Cursor cursor = null;
+        try {
+            cursor = getContentResolver().query(uri, projection, selection, selectionArgs, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndexOrThrow(projection[0]);
+                path = cursor.getString(columnIndex);
+            }
+        } catch (Exception e) {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return path;
+    }
+
+    /**
+     * @param uri the Uri to check
+     * @return Whether the Uri authority is MediaProvider
+     */
+    private boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri the Uri to check
+     * @return Whether the Uri authority is DownloadsProvider
+     */
+    private boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * 适配api19及以上,根据uri获取图片的绝对路径
+     *
+     * @param uri 图片的Uri
+     * @return 如果Uri对应的图片存在, 那么返回该图片的绝对路径, 否则返回null
+     */
+    @SuppressLint("NewApi")
+    private String getRealPathFromUriAboveApi19(Uri uri) {
+        String filePath = null;
+        if (DocumentsContract.isDocumentUri(this, uri)) {
+            // 如果是document类型的 uri, 则通过document id来进行处理
+            String documentId = DocumentsContract.getDocumentId(uri);
+            if (isMediaDocument(uri)) { // MediaProvider
+                // 使用':'分割
+                String id = documentId.split(":")[1];
+
+                String selection = MediaStore.Images.Media._ID + "=?";
+                String[] selectionArgs = {id};
+                filePath = getDataColumn(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection, selectionArgs);
+            } else if (isDownloadsDocument(uri)) { // DownloadsProvider
+                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(documentId));
+                filePath = getDataColumn(contentUri, null, null);
+            }
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
+            // 如果是 content 类型的 Uri
+            filePath = getDataColumn(uri, null, null);
+        } else if ("file".equals(uri.getScheme())) {
+            // 如果是 file 类型的 Uri,直接获取图片对应的路径
+            filePath = uri.getPath();
+        }
+        return filePath;
     }
 
     protected void onToBackground() {
@@ -442,28 +561,93 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
         goBack();
     }
 
-    public void setScreenFull(boolean isFull) {
-        if (mIsFullScreen == isFull) {
-            return;
-        }
-
-        if (isFull) {
-            WindowManager.LayoutParams params = getWindow().getAttributes();
-            params.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-            getWindow().setAttributes(params);
-            mIsFullScreen = true;
+    public void goCameraPage() {
+        if (this instanceof CameraActivity) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            File file = new File(Utils.getSaveFilePath(BaseActivity.this, "output.jpg"));
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+            startActivityForResult(intent, CAMERA_REQUEST_CODE);
         } else {
-            WindowManager.LayoutParams params = getWindow().getAttributes();
-            params.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            getWindow().setAttributes(params);
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            mIsFullScreen = false;
+            gotoPager(CameraActivity.class, null);
         }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 0: {
+                if (permissions != null && permissions.length > 0 && permissions[0].equals(Manifest.permission.CAMERA)) {
+                    if (grantResults != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        goCameraPage();
+                        return;
+                    }
+                }
+                break;
+            }
+        }
     }
 
     protected void stopHttpLoad() {
         getVisibleFragment().stopLoad();
+    }
+
+
+    public void showSelectTimeView(int year, int month, int day,long minDate,long maxDate, DatePicker.OnDateChangedListener listener) {
+        View llSelectTime = findViewById(R.id.llSelectTime);
+        llSelectTime.setVisibility(View.VISIBLE);
+        llSelectTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setVisibility(View.GONE);
+            }
+        });
+        DatePicker datePicker = findViewById(R.id.datePicker);
+        if(minDate>0) {
+            datePicker.setMinDate(minDate);
+        }
+        if(maxDate>0){
+            datePicker.setMaxDate(maxDate);
+        }
+        datePicker.init(year, month, day, listener);
+    }
+
+    public void showSelectPhotoWindow() {
+        MorePopupWindow morePopupWindow = new MorePopupWindow(this, new MorePopupWindow.MorePopupWindowClickListener() {
+            @Override
+            public void onFirstBtnClicked() {
+                if (!Utils.isGrantPermission(BaseActivity.this,
+                        Manifest.permission.CAMERA)) {
+                    requestPermission(0, Manifest.permission.CAMERA);
+                } else {
+                    goCameraPage();
+                }
+            }
+
+            @Override
+            public void onSecondBtnClicked() {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");//相片类型
+                startActivityForResult(intent, ALBUM_REQUEST_CODE);
+            }
+
+            @Override
+            public void onThirdBtnClicked() {
+
+            }
+
+            @Override
+            public void onFourthBtnClicked() {
+
+            }
+
+            @Override
+            public void onCancelBtnClicked() {
+
+            }
+        }, MorePopupWindow.MORE_POPUP_WINDOW_TYPE.TYPE_SELECT_ALBUM_OR_CAMERA);
+        morePopupWindow.initView();
+        morePopupWindow.showAtLocation(findViewById(R.id.rootView), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 
 }

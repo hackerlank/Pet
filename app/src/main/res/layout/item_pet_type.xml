@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="51dp"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+
+
+
+    <TextView
+        android:id="@+id/tvPetType"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="爱尔兰猎狼犬"
+        android:singleLine="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp"
+        android:background="@color/color_255_255_255"
+        android:textColor="@color/color_33_33_33"
+        android:textSize="13sp" />
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/tvPetType"
+        android:background="@color/line"/>
+
+
+</RelativeLayout>
