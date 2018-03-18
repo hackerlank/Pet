@@ -3,7 +3,6 @@ package com.gzcbkj.chongbao.fragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
-import com.gzcbkj.chongbao.bean.MyPetBean;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
@@ -31,7 +29,7 @@ import java.util.Calendar;
 
 public class AddPetFragment extends BaseFragment {
 
-    private String mPetAvaterPath;
+    private File mPetAvaterFile;
     private String mPetNick;
     private int mPetType=-1;
     private int mPetVariety=-1;
@@ -61,8 +59,8 @@ public class AddPetFragment extends BaseFragment {
         if(DataManager.getInstance().getObject()!=null){
             int objectType=DataManager.getInstance().getObjectType();
             if(objectType== Constants.OBJECT_TYPE_AVATER){
-                mPetAvaterPath=(String)DataManager.getInstance().getObject();
-                Utils.loadImage(R.drawable.touxiang, Uri.fromFile(new File(mPetAvaterPath)),(ImageView)fv(R.id.ivAvater));
+                mPetAvaterFile=new File((String)DataManager.getInstance().getObject());
+                Utils.loadImage(R.drawable.touxiang, Uri.fromFile(mPetAvaterFile),(ImageView)fv(R.id.ivAvater));
                 DataManager.getInstance().setObject(null);
             }else if(objectType==Constants.OBJECT_TYPE_NICKNAME){
                 mPetNick=(String)DataManager.getInstance().getObject();
@@ -93,7 +91,7 @@ public class AddPetFragment extends BaseFragment {
         int id=view.getId();
         switch (id){
             case R.id.tvRight:
-                if(TextUtils.isEmpty(mPetAvaterPath)){
+                if(mPetAvaterFile!=null && mPetAvaterFile.exists()){
                     showToast(R.string.please_seclect_avater);
                     return;
                 }
@@ -130,8 +128,8 @@ public class AddPetFragment extends BaseFragment {
                     showToast(R.string.pet_jianjie_sample);
                     return;
                 }
-                ArrayList<String> files=new ArrayList<>();
-                files.add(mPetAvaterPath);
+                ArrayList<File> files=new ArrayList<>();
+                files.add(mPetAvaterFile);
                 HttpMethods.getInstance().uploadFile(files,new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                     @Override
                     public void onNext(ResponseBean responseBean) {
@@ -170,7 +168,7 @@ public class AddPetFragment extends BaseFragment {
                 break;
             case R.id.llPetSex:
                 final MyDialogFragment dialogFragment = new MyDialogFragment();
-                dialogFragment.setLayout(R.layout.layout_select_gender_dialog);
+                dialogFragment.setLayout(R.layout.layout_select_dialog);
                 dialogFragment.setOnMyDialogListener(new MyDialogFragment.OnMyDialogListener() {
                     @Override
                     public void initView(View view) {
@@ -200,7 +198,7 @@ public class AddPetFragment extends BaseFragment {
                 break;
             case R.id.llPetIsSterilization:
                 final MyDialogFragment dialogFragment1 = new MyDialogFragment();
-                dialogFragment1.setLayout(R.layout.layout_select_gender_dialog);
+                dialogFragment1.setLayout(R.layout.layout_select_dialog);
                 dialogFragment1.setOnMyDialogListener(new MyDialogFragment.OnMyDialogListener() {
                     @Override
                     public void initView(View view) {

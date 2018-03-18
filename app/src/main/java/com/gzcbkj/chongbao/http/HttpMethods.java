@@ -300,6 +300,36 @@ public class HttpMethods {
 
 
     /**
+     *
+     * @param page
+     * @param limit
+     * @param articleId
+     * @param subscriber
+     */
+    public void articlecommentList(int page,int limit, long articleId, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("page", page);
+        map.put("limit", limit);
+        map.put("articleId", articleId);
+        Observable observable = mRetrofit.create(HttpService.class).articlecommentList(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     * @param content
+     * @param articleId
+     * @param subscriber
+     */
+    public void articleCommentSave(String content, long articleId, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("content", String.valueOf(content));
+        map.put("articleId", articleId);
+        Observable observable = mRetrofit.create(HttpService.class).articleCommentSave(map);
+        toSubscribe(observable, subscriber);
+    }
+
+
+    /**
      * @param articleId
      * @param subscriber
      */
@@ -313,16 +343,14 @@ public class HttpMethods {
      * @param files
      * @param subscriber
      */
-    public void uploadFile(ArrayList<String> files,ProgressSubscriber subscriber) {
+    public void uploadFile(ArrayList<File> files,ProgressSubscriber subscriber) {
         if(files==null || files.isEmpty()){
             return;
         }
         ArrayList<MultipartBody.Part> parts = new ArrayList<>();
         RequestBody requestBody;
         MultipartBody.Part part;
-        File file;
-        for(String str:files) {
-            file = new File(str);
+        for(File file:files) {
             requestBody = RequestBody.create(MediaType.parse("image"), file);
             part = MultipartBody.Part.
                     createFormData("files", file.getName(), requestBody);

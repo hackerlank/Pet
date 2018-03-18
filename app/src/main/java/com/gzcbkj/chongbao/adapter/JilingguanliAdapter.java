@@ -14,6 +14,8 @@ import com.gzcbkj.chongbao.bean.PetFosterBean;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.utils.Utils;
 
+import java.util.ArrayList;
+
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
@@ -46,7 +48,7 @@ public class JilingguanliAdapter extends MyBaseAdapter<BaseBean> {
             AdoptPetBean adoptPetBean=(AdoptPetBean) bean;
             setText(holder.tvName,adoptPetBean.getPetName());
             setText(holder.tvPetType,adoptPetBean.getPetVarietyName());
-            Utils.loadImage(R.drawable.default_1,adoptPetBean.getPetHeadUrl(),holder.ivAvater);
+            Utils.loadImages(R.drawable.touxiang, adoptPetBean.getPetHeadUrl(), holder.ivAvater);
             holder.ivSex.setImageResource("1".equals(adoptPetBean.getPetSex())? R.drawable.male : R.drawable.female);
             setText(holder.tvDate,adoptPetBean.getCreatetime());
             setText(holder.tvContent,adoptPetBean.getRemake());
@@ -56,17 +58,17 @@ public class JilingguanliAdapter extends MyBaseAdapter<BaseBean> {
             PetFosterBean petFosterBean=(PetFosterBean) bean;
             setText(holder.tvName,petFosterBean.getFosterName());
             setText(holder.tvPetType,petFosterBean.getPetVarietyName());
-            Utils.loadImage(R.drawable.default_1,petFosterBean.getFosterPetPic(),holder.ivAvater);
+            Utils.loadImages(R.drawable.touxiang, petFosterBean.getFosterPetPic(), holder.ivAvater);
             holder.ivSex.setImageResource("1".equals(petFosterBean.getFosterPetSex())? R.drawable.male : R.drawable.female);
             setText(holder.tvDate,petFosterBean.getCreateTime());
             setText(holder.tvContent,petFosterBean.getRemake());
             setText(holder.tvLocation,petFosterBean.getFosterAddress());
-            if(petFosterBean.getFosterStatus()==1){
-                setText(holder.tvExamineState,mContext.getString(R.string.not_jiyang));
+            if(petFosterBean.getFosterStatus()==3){
+                setText(holder.tvExamineState,mContext.getString(R.string.jiyang_jishu));
             }else if(petFosterBean.getFosterStatus()==2){
                 setText(holder.tvExamineState,mContext.getString(R.string.jiyang_zhong));
             }else{
-                setText(holder.tvExamineState,mContext.getString(R.string.jiyang_jishu));
+                setText(holder.tvExamineState,mContext.getString(R.string.not_jiyang));
             }
         }
         return view;

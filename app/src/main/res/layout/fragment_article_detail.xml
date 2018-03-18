@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include
@@ -16,7 +17,8 @@
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smartLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
@@ -26,5 +28,48 @@
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+
+    <LinearLayout
+        android:id="@+id/llComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_255_255_255"
+        android:padding="10dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etComment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:background="@drawable/bg_add_comment"
+            android:textColor="@color/color_33_33_33"
+            android:textColorHint="@color/color_99_99_99"
+            android:hint="@string/comment_cannot_null"
+            android:layout_weight="1"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tvComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_send_comment_btn"
+            android:textColor="@color/color_255_255_255"
+            android:text="@string/ok"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

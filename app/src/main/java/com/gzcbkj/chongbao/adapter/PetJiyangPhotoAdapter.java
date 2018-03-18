@@ -13,6 +13,7 @@ import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.bean.PetJiyangResponseBean;
 import com.gzcbkj.chongbao.utils.Utils;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**

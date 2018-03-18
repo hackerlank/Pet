@@ -42,7 +42,7 @@ public class PetLingyangAdapter extends MyBaseAdapter<AdoptPetBean> {
         setText(holder.tvContent, bean.getRemake());
         setText(holder.tvPetAge, bean.getPetAge() + mContext.getString(R.string.age));
         holder.ivPetSex.setImageResource("1".equals(bean.getPetSex())? R.drawable.male : R.drawable.female);
-        Utils.loadImage(R.drawable.default_1, bean.getPetHeadUrl(), holder.ivPet);
+        Utils.loadImages(R.drawable.default_1, bean.getPetHeadUrl(), holder.ivPet);
         return view;
     }
 

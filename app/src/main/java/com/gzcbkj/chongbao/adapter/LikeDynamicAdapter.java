@@ -61,7 +61,7 @@ public class LikeDynamicAdapter extends RecyclerView.Adapter<LikeDynamicAdapter.
         }
 
         public void setData(SayDetailResponse.PraiseUser user) {
-            Utils.loadImage(R.drawable.touxiang,user.getUserHead(),ivAvater);
+            Utils.loadImages(R.drawable.touxiang,user.getUserHead(),ivAvater);
         }
 
     }

@@ -73,6 +73,8 @@
     <string name="rec_send_way_2">自己接送</string>
     <string name="rec_send_way_3">其它</string>
     <string name="lingyang_time">领养时间</string>
+    <string name="start_time">开始时间</string>
+    <string name="end_time">结束时间</string>
     <string name="please_input_start_time">请选择开始时间</string>
     <string name="please_input_end_time">请选择结束时间</string>
     <string name="end_time_must_much_thaan_start_time">结束时间需大于开始时间</string>
@@ -98,6 +100,9 @@
     <string name="pet_type_2">宠物品种</string>
     <string name="please_select_pet_type">请选择宠物类型</string>
     <string name="please_select_pet_type_2">请选择宠物品种</string>
+
+    <string name="please_select_type">请选择类型</string>
+    <string name="please_select_type_2">请选择品种</string>
     <string name="please_select_pet_birth">请选择宠物生日</string>
     <string name="please_select_pet_sex">请选择宠物性别</string>
     <string name="male">男</string>
@@ -118,7 +123,32 @@
     <string name="jiyang_zhong">寄养中</string>
     <string name="jiyang_jishu">寄养结束</string>
     <string name="save">保存</string>
+    <string name="jiangyang_pet_age">宠物年龄</string>
+
+    <string name="jiyang_people_name">寄养人姓名</string>
+    <string name="jiyang_address">寄养住址</string>
+    <string name="jiyang_reason">寄养原因</string>
+    <string name="please_select_jiyang_reason">请选择寄养原因</string>
     <string name="please_add_pet_photos">请添加宠物照片</string>
+    <string name="weiyang_yaoqiu">喂养要求</string>
+    <string name="mianyi_qingkuang">免疫情况</string>
+    <string name="mianyi_shijian">免疫时间</string>
+    <string name="last_mianyi_shijian">最近免疫时间</string>
+    <string name="please_input_weiyang_yaoqiu">请输入您宠物的喂养要求</string>
+    <string name="please_input_mianyi_shijian">请选择免疫时间</string>
+    <string name="please_input_last_mianyi_shijian">请选择最近免疫时间</string>
+    <string name="please_select_mianyi_qingkuang">请选择免疫情况</string>
+    <string name="please_input_beizhu">请输入备注</string>
+    <string name="please_input_pet_age">请输入宠物年龄</string>
+    <string name="please_input_bumber">请输入数字</string>
+    <string name="please_select_sex">请选择性别</string>
+    <string name="jiyang_pet_age">宠物年龄</string>
+    <string name="not_mianyi">未免疫</string>
+    <string name="had_mianyi">已免疫</string>
+    <string name="weizhi">未知</string>
+    <string name="jiyang_yuanyin_1">出差</string>
+    <string name="jiyang_yuanyin_2">回老家</string>
+    <string name="jiyang_yuanyin_3">上班忙</string>
 
     <!-- AddPetFragment -->
     <string name="add_pet">添加宠物</string>
@@ -236,6 +266,8 @@
     <string name="write_something">写点什么... ...</string>
     <string name="please_input_title">请填写文章标题</string>
     <string name="please_input_content">请填写文章内容</string>
+    <string name="please_select_mian_pic">请上传封面图片</string>
+    <string name="please_select_article_type">请选择文章类型</string>
 
     <!-- PublishPictureFrigment -->
     <string name="publish_picture">发布照片</string>
@@ -329,4 +361,11 @@
 
     <!-- ArticleDetailFragment -->
     <string name="choice_comment">精选留言</string>
+    <string name="add_comment">添加评论</string>
+    <string name="comment_cannot_null">评论不能为空</string>
+
+    <string name="second_ago">秒前</string>
+    <string name="minute_ago">分钟前</string>
+    <string name="hour_ago">小时前</string>
+    <string name="day_ago">天前</string>
 </resources>

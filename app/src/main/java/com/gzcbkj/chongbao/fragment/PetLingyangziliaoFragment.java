@@ -49,7 +49,7 @@ public class PetLingyangziliaoFragment extends BaseFragment{
         setText(R.id.tvTitle, R.string.input_lingyang_ziliao);
         setViewsOnClickListener(R.id.tvSubmit,R.id.tvRecSendWay,R.id.tvStartTime,R.id.tvEndTime,R.id.tvLingyangYuanyin);
         mBean = (AdoptPetBean) getArguments().getSerializable(Constants.KEY_BASE_BEAN);
-        Utils.loadImage(R.drawable.default_1,mBean.getPetHeadUrl(),(ImageView) fv(R.id.ivPetAvater));
+        Utils.loadImages(R.drawable.default_1,mBean.getPetHeadUrl(),(ImageView) fv(R.id.ivPetAvater));
         setText(R.id.tvPetName,mBean.getPetName());
         setImage(R.id.ivPetSex,"1".equals(mBean.getPetSex())?R.drawable.male:R.drawable.female);
         setText(R.id.tvPetAge,mBean.getPetAge()+getString(R.string.age));
@@ -67,7 +67,12 @@ public class PetLingyangziliaoFragment extends BaseFragment{
         int childCount=llSelect.getChildCount();
         TextView tv;
         String text;
-        String currentText=getTextById(R.id.tvLingyangYuanyin);
+        String currentText;
+        if(selectType==1) {
+            currentText=getTextById(R.id.tvLingyangYuanyin);
+        }else{
+            currentText=getTextById(R.id.tvRecSendWay);
+        }
         for(int i=0;i<childCount;++i){
             tv= (TextView) llSelect.getChildAt(i);
             text=getString(getResources().getIdentifier(selectType==1?("lingyang_yuanyin_"+(i+1)):("rec_send_way_"+(i+1)),"string",getActivity().getPackageName()));

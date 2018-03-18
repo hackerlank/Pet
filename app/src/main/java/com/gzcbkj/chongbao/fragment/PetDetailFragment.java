@@ -141,7 +141,7 @@ public class PetDetailFragment extends BaseFragment implements OnRefreshListener
 
         @Override
         public void UpdateUI(Context context, int position, String petUrl) {
-            Utils.loadImage(R.drawable.default_1, petUrl, ivImage);
+            Utils.loadImages(R.drawable.default_1, petUrl, ivImage);
         }
     }
 

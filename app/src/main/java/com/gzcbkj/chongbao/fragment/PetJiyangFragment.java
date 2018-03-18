@@ -72,6 +72,7 @@ public class PetJiyangFragment extends BaseFragment implements OnRefreshListener
         int id = view.getId();
         switch (id) {
             case R.id.tvAplly:
+                gotoPager(PetApplyJiyangFragment.class,null);
                 break;
         }
     }
@@ -134,12 +135,12 @@ public class PetJiyangFragment extends BaseFragment implements OnRefreshListener
         return mAdapter1;
     }
 
+
     private PetJiyangPhotoAdapter getAdapter2() {
         if (mAdapter2 == null)
             mAdapter2 = new PetJiyangPhotoAdapter(getActivity());
         return mAdapter2;
     }
-
 
     @Override
     public void onRefresh(final RefreshLayout refreshlayout) {
@@ -239,7 +240,7 @@ public class PetJiyangFragment extends BaseFragment implements OnRefreshListener
 
         @Override
         public void UpdateUI(Context context, int position, BannerBean bean) {
-            Utils.loadImage(R.drawable.default_1, bean.getImgUrl(), ivImage);
+            Utils.loadImages(R.drawable.default_1, bean.getImgUrl(), ivImage);
         }
     }
 }

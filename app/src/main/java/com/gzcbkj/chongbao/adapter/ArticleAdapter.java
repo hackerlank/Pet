@@ -19,6 +19,8 @@ import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
 import com.gzcbkj.chongbao.manager.DataManager;
 import com.gzcbkj.chongbao.utils.Utils;
 
+import java.util.ArrayList;
+
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
@@ -52,12 +54,12 @@ public class ArticleAdapter extends MyBaseAdapter<ArticleBean> {
             holder = (ViewHolder) view.getTag();
         }
         ArticleBean bean = getItem(i);
-        Utils.loadImage(R.drawable.default_1, bean.getMainPic(), holder.ivPic);
-        Utils.loadImage(R.drawable.touxiang, bean.getUserHead(), holder.ivAvater);
+        Utils.loadImages(R.drawable.default_1, bean.getMainPic(), holder.ivPic);
+        Utils.loadImages(R.drawable.touxiang, bean.getUserHead(), holder.ivAvater);
         holder.tvTitle.setText(bean.getTitle());
-        holder.tvContent.setText(Html.fromHtml(Utils.replaceHtmlText(bean.getContent())));
+        holder.tvContent.setText(Html.fromHtml(Utils.replaceHtmlImage(Utils.replaceHtmlText(bean.getContent()))));
         holder.tvName.setText(bean.getUserName());
-        holder.tvTime.setText(bean.getCreateTime());
+        holder.tvTime.setText(Utils.transformTime(mContext,bean.getCreateTime()));
         holder.ivShare.setImageResource(bean.getShareFlag() == 1 ? R.drawable.share : R.drawable.share_grey);
         holder.ivCollect.setImageResource(bean.getCollectionFlag() == 1 ? R.drawable.collect : R.drawable.collect_grey);
         holder.ivLike.setImageResource(bean.getPraiseFlag() == 1 ? R.drawable.like : R.drawable.like_grey);

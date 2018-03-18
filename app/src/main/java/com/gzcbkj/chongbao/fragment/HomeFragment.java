@@ -178,11 +178,11 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
                         gotoPager(ArticleDetailFragment.class,bundle);
                     }
                 });
-                Utils.loadImage(R.drawable.default_1, bean.getMainPic(), (ImageView) itemView.findViewById(R.id.ivBg));
-                Utils.loadImage(R.drawable.touxiang, bean.getUserHead(), (ImageView) itemView.findViewById(R.id.ivAvater));
-                ((TextView) itemView.findViewById(R.id.tvContent)).setText(Html.fromHtml(Utils.replaceHtmlText(bean.getContent())));
+                Utils.loadImages(R.drawable.default_1, bean.getMainPic(), (ImageView) itemView.findViewById(R.id.ivBg));
+                Utils.loadImages(R.drawable.touxiang, bean.getUserHead(), (ImageView) itemView.findViewById(R.id.ivAvater));
+                ((TextView) itemView.findViewById(R.id.tvContent)).setText(bean.getTitle());
                 setText((TextView) itemView.findViewById(R.id.tvName), bean.getUserName());
-                setText((TextView) itemView.findViewById(R.id.tvTime), bean.getCreateTime());
+                setText((TextView) itemView.findViewById(R.id.tvTime), Utils.transformTime(getActivity(),bean.getCreateTime()));
             }
         }
     }
@@ -198,12 +198,6 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
         switch (id) {
             case R.id.ivAdvisory:
                 gotoPager(RaisePetAdvisoryFragment.class, null);
-//                HttpMethods.getInstance().uploadFile(new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
-//                    @Override
-//                    public void onNext(ResponseBean o) {
-//
-//                    }
-//                },getActivity(),(BaseActivity)getActivity()));
                 break;
             case R.id.ivSearch:
                 gotoPager(SearchFragment.class, null);
@@ -238,7 +232,7 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
     }
 
     private void firstArticleList() {
-        HttpMethods.getInstance().firstArticleList(1, 10, new ProgressSubscriber(new SubscriberOnNextListener<ArticleListResponse>() {
+        HttpMethods.getInstance().firstArticleList(1, 30, new ProgressSubscriber(new SubscriberOnNextListener<ArticleListResponse>() {
             @Override
             public void onNext(ArticleListResponse response) {
                 DataManager.getInstance().saveData(ArticleListResponse.class.getName(),response);
@@ -261,7 +255,7 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
 
         @Override
         public void UpdateUI(Context context, int position, BannerBean bean) {
-            Utils.loadImage(R.drawable.default_1, bean.getImgUrl(), ivImage);
+            Utils.loadImages(R.drawable.default_1, bean.getImgUrl(), ivImage);
         }
     }
 }

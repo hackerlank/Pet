@@ -71,8 +71,8 @@ public class MyDynamicFragment extends BaseFragment implements OnRefreshListener
     }
 
     private void initTopView(UserInfoBean userInfo){
-        Utils.loadImage(R.drawable.default_1,userInfo.getSpaceImg(),(ImageView) mTopView.findViewById(R.id.ivBg));
-        Utils.loadImage(R.drawable.touxiang,userInfo.getSpaceImg(),(ImageView) mTopView.findViewById(R.id.ivAvater));
+        Utils.loadImages(R.drawable.default_1,userInfo.getSpaceImg(),(ImageView) mTopView.findViewById(R.id.ivBg));
+        Utils.loadImages(R.drawable.touxiang,userInfo.getSpaceImg(),(ImageView) mTopView.findViewById(R.id.ivAvater));
         ((TextView) mTopView.findViewById(R.id.tvName)).setText(userInfo.getUsername());
     }
 

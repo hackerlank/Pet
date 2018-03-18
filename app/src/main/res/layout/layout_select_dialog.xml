@@ -35,6 +35,36 @@
                 android:gravity="center"
                 android:textColor="@color/color_33_33_33" />
 
+        <View
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:background="@color/line"
+            android:visibility="gone"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textColor="@color/color_33_33_33" />
+
+        <View
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:background="@color/line"
+            android:visibility="gone"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textColor="@color/color_33_33_33" />
+
     </LinearLayout>
 
 </RelativeLayout>

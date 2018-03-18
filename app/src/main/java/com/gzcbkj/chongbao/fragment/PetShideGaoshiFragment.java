@@ -4,9 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
@@ -33,7 +37,7 @@ public class PetShideGaoshiFragment extends BaseFragment {
     private int mFindorlostType=-1;
     private int mFindorlostVariety=-1;
     private String mFindorlostPetSex="1";
-    private ArrayList<String> mPetPictures;
+    private ArrayList<File> mPetPictures;
 
     @Override
     protected int getLayoutId() {
@@ -45,9 +49,10 @@ public class PetShideGaoshiFragment extends BaseFragment {
         setText(R.id.tvTitle, R.string.shide_pet_gaoshi);
         setViewsOnClickListener(R.id.tvSubmit,R.id.tvShideTime,R.id.tvShidePetType,R.id.tvShidePetType2,R.id.tvMale,
                 R.id.tvFemale,R.id.tvNotKnow);
+        resetPhotosView();
     }
 
-    public ArrayList<String> getPetPictures(){
+    public ArrayList<File> getPetPictures(){
         if(mPetPictures==null){
             mPetPictures=new ArrayList<>();
         }
@@ -85,7 +90,12 @@ public class PetShideGaoshiFragment extends BaseFragment {
         super.onResume();
         if (DataManager.getInstance().getObject() != null) {
             int objectType = DataManager.getInstance().getObjectType();
-            if(objectType== Constants.OBJECT_TYPE_PET_TYPE){
+            if(DataManager.getInstance().getObject() instanceof Bitmap){
+                String fileStr=Utils.saveJpeg((Bitmap)DataManager.getInstance().getObject(),getActivity());
+                getPetPictures().add(new File(fileStr));
+                DataManager.getInstance().setObject(null);
+                resetPhotosView();
+            }else if(objectType== Constants.OBJECT_TYPE_PET_TYPE){
                 String text=(String)DataManager.getInstance().getObject();
                 String[] strs=text.split("_");
                 mFindorlostType=Integer.parseInt(strs[2]);
@@ -93,9 +103,74 @@ public class PetShideGaoshiFragment extends BaseFragment {
                 setText(R.id.tvShidePetType,strs[0]);
                 setText(R.id.tvShidePetType2,strs[1]);
                 DataManager.getInstance().setObject(null);
-            }else if(DataManager.getInstance().getObject() instanceof Bitmap){
-                getPetPictures().add(Utils.saveJpeg((Bitmap)DataManager.getInstance().getObject(),getActivity()));
-                DataManager.getInstance().setObject(null);
+            }
+        }
+    }
+
+    protected void resetPhotosView() {
+        LinearLayout llCarPhotos = fv(R.id.llPhotos);
+        llCarPhotos.removeAllViews();
+        int size;
+        if (getPetPictures().size() == Constants.MAX_UPLOAD_PHOTO_NUM) {
+            size = Constants.MAX_UPLOAD_PHOTO_NUM;
+        } else {
+            size = getPetPictures().size() + 1;
+        }
+        int row = (size % 3 == 0) ? size / 3 : size / 3 + 1;
+        LinearLayout itemView;
+        for (int i = 0; i < row; ++i) {
+            itemView = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.item_add_pet_photo, null);
+            llCarPhotos.addView(itemView);
+            int index = i * 3;
+            setPhoto((ViewGroup) itemView.getChildAt(0), index < getPetPictures().size() ? getPetPictures().get(index) : null, index, index == size - 1);
+            setPhoto((ViewGroup) itemView.getChildAt(1), index + 1 < getPetPictures().size() ? getPetPictures().get(index + 1) : null, index + 1, index + 1 == size - 1);
+            setPhoto((ViewGroup) itemView.getChildAt(2), index + 2 < getPetPictures().size() ? getPetPictures().get(index + 2) : null, index + 2, index + 2 == size - 1);
+        }
+        if(getPetPictures().size()>1){
+            final ScrollView scrollView=fv(R.id.scrollView);
+            scrollView.post(new Runnable() {
+                @Override
+                public void run() {
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                }
+            });
+        }
+    }
+
+    private void setPhoto(ViewGroup itemView, File photo, int index, boolean isLast) {
+        ImageView ivPhoto = (ImageView) itemView.getChildAt(0);
+        ImageView ivClose = (ImageView) itemView.getChildAt(1);
+        View addPhoto = itemView.getChildAt(2);
+        if (photo != null) {
+            addPhoto.setVisibility(View.GONE);
+            Utils.loadImage(R.drawable.default_1, Uri.fromFile(photo), ivPhoto);
+            ivClose.setVisibility(View.VISIBLE);
+            ivPhoto.setTag(R.id.tag, index);
+            ivClose.setTag(R.id.tag, index);
+            ivClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = (int) v.getTag(R.id.tag);
+                    File file = getPetPictures().remove(pos);
+                    if (file!=null && file.exists()) {
+                        file.delete();
+                    }
+                    resetPhotosView();
+                }
+            });
+        } else {
+            if (isLast) {
+                ivPhoto.setVisibility(View.GONE);
+                addPhoto.setVisibility(View.VISIBLE);
+                ivClose.setVisibility(View.GONE);
+                addPhoto.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ((BaseActivity) getActivity()).showSelectPhotoWindow();
+                    }
+                });
+            } else {
+                itemView.setVisibility(View.INVISIBLE);
             }
         }
     }

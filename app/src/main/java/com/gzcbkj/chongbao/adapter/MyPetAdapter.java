@@ -43,18 +43,13 @@ public class MyPetAdapter extends MyBaseAdapter<BaseBean> {
             setText(holder.tvName,petBean.getOwnPetName());
             setText(holder.tvPetType,petBean.getPetVarietyName());
             setText(holder.tvPetAge,petBean.getPetAge()+mContext.getString(R.string.age));
-            urlList=Utils.getUrlList(petBean.getOwnPetHeadurl());
+            Utils.loadImages(R.drawable.touxiang, petBean.getOwnPetHeadurl(), holder.ivAvater);
         }else{
             AdoptPetBean petBean=(AdoptPetBean) bean;
             setText(holder.tvName,petBean.getPetName());
             setText(holder.tvPetType,petBean.getPetVarietyName());
             setText(holder.tvPetAge,petBean.getPetAge()+mContext.getString(R.string.age));
-            urlList=Utils.getUrlList(petBean.getPetHeadUrl());
-        }
-        if(urlList.size()>0) {
-            Utils.loadImage(R.drawable.touxiang, urlList.get(0), holder.ivAvater);
-        }else{
-            holder.ivAvater.setImageResource(R.drawable.touxiang);
+            Utils.loadImages(R.drawable.touxiang, petBean.getPetHeadUrl(), holder.ivAvater);
         }
         return view;
     }

@@ -44,7 +44,7 @@ public class PetNoticeAdapter extends MyBaseAdapter<PetFindorlostInfo> {
         setText(holder.tvContent,bean.getFindorlostRemake());
         setText(holder.tvLocation,bean.getFindorlostAddress());
         holder.ivSex.setImageResource("1".equals(bean.getFindorlostPetSex()) ? R.drawable.male : R.drawable.female);
-        Utils.loadImage(R.drawable.default_1, bean.getFindorlostLmg(), holder.ivAvater);
+        Utils.loadImages(R.drawable.default_1, bean.getFindorlostLmg(), holder.ivAvater);
         return view;
     }
 

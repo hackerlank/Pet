@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import com.gzcbkj.chongbao.BaseApplication;
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.fragment.AddPetFragment;
 import com.gzcbkj.chongbao.fragment.AlbumFragment;
 import com.gzcbkj.chongbao.fragment.BaseFragment;
 import com.gzcbkj.chongbao.fragment.CameraFragment;
@@ -356,7 +357,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
         FragmentManager fragmentManager = getSupportFragmentManager();
         @SuppressLint("RestrictedApi") List<Fragment> fragments = fragmentManager.getFragments();
         if (fragments == null) {
-            return null;
+            return BaseApplication.getCurFragment();
         }
         for (Fragment fragment : fragments) {
             if (fragment != null && fragment instanceof BaseFragment && fragment.isVisible())
@@ -379,9 +380,12 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
                         return;
                     }
                     DataManager.getInstance().setObject(bmp);
-                    Bundle bundle=new Bundle();
-                    bundle.putInt(CameraFragment.USE_CAMERA_TYPE, Constants.TYPE_CAMERA_FOR_AVATER);
-                    gotoPager(PhotoPreviewFragment.class,bundle);
+                    BaseFragment fragment=getVisibleFragment();
+                    if(fragment!=null && fragment instanceof AddPetFragment) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(CameraFragment.USE_CAMERA_TYPE, Constants.TYPE_CAMERA_FOR_AVATER);
+                        gotoPager(PhotoPreviewFragment.class, bundle);
+                    }
                 } catch (Exception e) {
 
                 }
@@ -399,9 +403,12 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
                         return;
                     }
                     DataManager.getInstance().setObject(bmp);
-                    Bundle bundle=new Bundle();
-                    bundle.putInt(CameraFragment.USE_CAMERA_TYPE,Constants.TYPE_CAMERA_FOR_AVATER);
-                    gotoPager(PhotoPreviewFragment.class,bundle);
+                    BaseFragment fragment=getVisibleFragment();
+                    if(fragment!=null && fragment instanceof AddPetFragment) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(CameraFragment.USE_CAMERA_TYPE, Constants.TYPE_CAMERA_FOR_AVATER);
+                        gotoPager(PhotoPreviewFragment.class, bundle);
+                    }
                 } catch (Exception e) {
 
                 }

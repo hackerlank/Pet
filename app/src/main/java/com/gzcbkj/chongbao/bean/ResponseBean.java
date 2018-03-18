@@ -21,6 +21,7 @@ public class ResponseBean implements Serializable {
     private PetFindorlostInfo findorlostInfo;
     private ArrayList<MyPetBean> ownPetList;
     private ArrayList<PetFosterBean> fosterPetList;
+    private ArrayList<ArticleCommentBean> articleCommentList;
 
     public boolean isSuccess() {
         // TODO Auto-generated method stub
@@ -129,5 +130,13 @@ public class ResponseBean implements Serializable {
 
     public void setFosterPetList(ArrayList<PetFosterBean> fosterPetList) {
         this.fosterPetList = fosterPetList;
+    }
+
+    public ArrayList<ArticleCommentBean> getArticleCommentList() {
+        return articleCommentList;
+    }
+
+    public void setArticleCommentList(ArrayList<ArticleCommentBean> articleCommentList) {
+        this.articleCommentList = articleCommentList;
     }
 }

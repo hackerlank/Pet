@@ -129,7 +129,19 @@ public interface HttpService {
     Observable<ResponseBean> updateArticle(@Body HashMap<String, Object> map);
 
 
+    /**
+     * 查询文章评论
+     * @return
+     */
+    @POST("apparticlecomment/articlecommentList")
+    Observable<ResponseBean> articlecommentList(@Body HashMap<String, Object> map);
 
+    /**
+     * 查询文章评论
+     * @return
+     */
+    @POST("apparticlecomment/save")
+    Observable<ResponseBean> articleCommentSave(@Body HashMap<String, Object> map);
 
     /**
      * banner图和精选文章

@@ -29,7 +29,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/llSelectSex"
+        android:id="@+id/llAddComment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/half_black"

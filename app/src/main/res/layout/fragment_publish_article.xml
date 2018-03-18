@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include
@@ -13,114 +15,146 @@
         android:layout_height="1dp"
         android:background="@color/line"/>
 
-    <RelativeLayout
-        android:id="@+id/rlSelectType"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:background="@color/color_255_255_255">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="@string/article_type"
-            android:textColor="@color/color_99_99_99"
-            android:textSize="15sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/select" />
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="121dp"
-        android:background="@color/color_255_255_255"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/llArticlePic"
-            android:layout_width="112dp"
-            android:layout_height="101dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:background="@drawable/bg_select_video">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/publish_article_pic"
-                android:drawableTop="@drawable/article_pic"
-                android:drawablePadding="5dp"
-                android:gravity="center"
-                android:textColor="@color/color_99_99_99"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:background="@color/color_255_255_255"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:orientation="vertical">
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etTitle"
+        <RelativeLayout
+            android:id="@+id/rlSelectType"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:singleLine="true"
-            android:gravity="center_vertical"
-            android:textColorHint="@color/color_cc_cc_cc"
-            android:hint="@string/article_title"
-            android:textColor="@color/color_11_11_11"
-            android:layout_marginTop="10dp"
-            android:background="@color/color_255_255_255"
-            android:textSize="15sp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/line"/>
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:background="@color/color_255_255_255">
 
-        <EditText
-            android:id="@+id/etAddDes"
+            <TextView
+                android:id="@+id/tvArticleType"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="@string/article_title"
+                android:textColorHint="@color/color_99_99_99"
+                android:textColor="@color/color_33_33_33"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/select" />
+
+        </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:background="@color/color_255_255_255"
+            android:gravity="center_vertical">
+
+
+
+            <LinearLayout
+                android:id="@+id/llArticlePic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@drawable/bg_select_video">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/publish_article_pic"
+                    android:drawableTop="@drawable/article_pic"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:textColor="@color/color_99_99_99"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <com.gzcbkj.chongbao.widgets.RoundRectImageView
+                android:id="@+id/ivArticlePic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:round_radius="5"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                android:src="@drawable/default_1"/>
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/close"/>
+
+        </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:gravity="left|top"
-            android:textColorHint="@color/color_cc_cc_cc"
-            android:hint="@string/write_something"
-            android:textColor="@color/color_11_11_11"
             android:background="@color/color_255_255_255"
-            android:textSize="15sp" />
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etAddDes1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:gravity="left|top"
-            android:textColorHint="@color/color_cc_cc_cc"
-            android:hint="@string/write_something"
-            android:textColor="@color/color_11_11_11"
-            android:background="@color/color_255_255_255"
-            android:textSize="15sp" />
+            <EditText
+                android:id="@+id/etTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:textColorHint="@color/color_cc_cc_cc"
+                android:hint="@string/article_title"
+                android:textColor="@color/color_11_11_11"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_255_255_255"
+                android:textSize="15sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"/>
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+
 
 
 

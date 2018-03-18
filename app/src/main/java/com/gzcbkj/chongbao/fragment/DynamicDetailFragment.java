@@ -69,7 +69,7 @@ public class DynamicDetailFragment extends BaseFragment implements OnRefreshList
         layoutManager.setOrientation(OrientationHelper.HORIZONTAL);
         recyclerView.setAdapter(getLikeDynamicAdapter());
         getLikeDynamicAdapter().setDataList(mSayPraiseList);
-        Utils.loadImage(R.drawable.touxiang,mSayBean.getUserHead(),(ImageView)mTopView.findViewById(R.id.ivAvater));
+        Utils.loadImages(R.drawable.touxiang,mSayBean.getUserHead(),(ImageView)mTopView.findViewById(R.id.ivAvater));
         ((TextView)mTopView.findViewById(R.id.tvName)).setText(mSayBean.getUserName());
         ((TextView)mTopView.findViewById(R.id.tvContent)).setText(mSayBean.getContent());
         ((TextView)mTopView.findViewById(R.id.tvTime)).setText(mSayBean.getCreateTime());

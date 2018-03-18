@@ -167,7 +167,7 @@ public class PetLingyangDetailFragment extends BaseFragment implements OnRefresh
 
         @Override
         public void UpdateUI(Context context, int position, String petUrl) {
-            Utils.loadImage(R.drawable.default_1, petUrl, ivImage);
+            Utils.loadImages(R.drawable.default_1, petUrl, ivImage);
         }
     }
 }

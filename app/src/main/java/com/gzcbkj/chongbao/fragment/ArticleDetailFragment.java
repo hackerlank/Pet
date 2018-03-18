@@ -18,7 +18,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.gzcbkj.chongbao.BaseApplication;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
-import com.gzcbkj.chongbao.adapter.DynamicCommentAdapter;
+import com.gzcbkj.chongbao.adapter.ArticleCommentAdapter;
 import com.gzcbkj.chongbao.bean.ArticleBean;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.http.HttpMethods;
@@ -39,7 +39,7 @@ import java.util.ArrayList;
  */
 
 public class ArticleDetailFragment extends BaseFragment implements OnRefreshListener {
-    private DynamicCommentAdapter mAdapter;
+    private ArticleCommentAdapter mAdapter;
     private ArticleBean mArticleBean;
     private View mTopView;
     @Override
@@ -59,15 +59,11 @@ public class ArticleDetailFragment extends BaseFragment implements OnRefreshList
         mArticleBean=(ArticleBean) getArguments().getSerializable(Constants.KEY_BASE_BEAN);
         setText(R.id.tvTitle,R.string.choice_article);
         setViewVisible(R.id.ivRight);
+        setViewGone(R.id.status_bar);
         setImage(R.id.ivRight,R.drawable.more);
-        setViewsOnClickListener(R.id.ivRight);
+        setViewsOnClickListener(R.id.ivRight,R.id.tvComment);
         ListView listView = fv(R.id.listView);
         listView.setAdapter(getAdapter());
-        ArrayList<ResponseBean> list=new ArrayList<>();
-        for(int i=0;i<5;++i){
-            list.add(new ResponseBean());
-        }
-        getAdapter().setDataList(list);
         mTopView=LayoutInflater.from(getActivity()).inflate(R.layout.article_detail_top_layout,null);
         listView.addHeaderView(mTopView);
         initTopView();
@@ -91,22 +87,34 @@ public class ArticleDetailFragment extends BaseFragment implements OnRefreshList
                 }
             }
         });
-        if(!TextUtils.isEmpty(mArticleBean.getUserHead())){
-            Utils.loadImage(R.drawable.touxiang,mArticleBean.getUserHead(),(ImageView)mTopView.findViewById(R.id.ivAvater));
-        }else{
-            ((ImageView)mTopView.findViewById(R.id.ivAvater)).setImageResource(R.drawable.touxiang);
-        }
+        Utils.loadImages(R.drawable.touxiang,mArticleBean.getUserHead(),(ImageView)mTopView.findViewById(R.id.ivAvater));
         ((TextView)mTopView.findViewById(R.id.tvName)).setText(mArticleBean.getUserName()==null?"":mArticleBean.getUserName());
-        ((TextView)mTopView.findViewById(R.id.tvTime)).setText(mArticleBean.getCreateTime());
+        ((TextView)mTopView.findViewById(R.id.tvTime)).setText(Utils.transformTime(getActivity(),mArticleBean.getCreateTime()));
         ((ImageView)mTopView.findViewById(R.id.ivLike)).setImageResource(mArticleBean.getPraiseFlag()==0?R.drawable.like_grey:R.drawable.like);
         ((TextView)mTopView.findViewById(R.id.tvTitle)).setText(mArticleBean.getTitle());
-        //<p>关于他在场上最合适的位置突然成为了外界讨论的焦点。就在此时，阿扎尔在主场迎战水晶宫的比赛中如脱胎换骨一般焕发了往日的风采，他在前场如鱼得水，盘活了蓝军的进攻体系，而唯一的变化便是他重新回到了左边锋的位置上。</p><p><img src="http://n.sinaimg.cn/sports/transform/w638h423/20180311/bl8J-fxpwyhw9073041.png"/></p><p>客观的说，切尔西在此前几场比赛中，接连与巴塞罗那、曼城这样善于传控的球队进行比拼，孔蒂在舍弃对球权的控制后安排小快灵的三叉戟在前场寻求反击，也是无可厚非的决定。</p>
         ((TextView)mTopView.findViewById(R.id.tvContent)).setText(Html.fromHtml(mArticleBean.getContent(),mImgGetter,null));
+
+        mTopView.findViewById(R.id.ivLike).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HttpMethods.getInstance().updateArticle(2, mArticleBean.getId(), new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+                    @Override
+                    public void onNext(ResponseBean o) {
+                        if(mArticleBean.getPraiseFlag()==0) {
+                            mArticleBean.setPraiseFlag(1);
+                        }else{
+                            mArticleBean.setPraiseFlag(0);
+                        }
+                        ((ImageView)mTopView.findViewById(R.id.ivLike)).setImageResource(mArticleBean.getPraiseFlag()==0?R.drawable.like_grey:R.drawable.like);
+                    }
+                }, getActivity(), false, (BaseActivity) getActivity()));
+            }
+        });
     }
 
-    private DynamicCommentAdapter getAdapter(){
+    private ArticleCommentAdapter getAdapter(){
         if(mAdapter==null)
-            mAdapter=new DynamicCommentAdapter(getActivity());
+            mAdapter=new ArticleCommentAdapter(getActivity());
         return mAdapter;
     }
 
@@ -117,21 +125,57 @@ public class ArticleDetailFragment extends BaseFragment implements OnRefreshList
 
     @Override
     public void onClick(View view) {
+        int id=view.getId();
+        switch (id){
+            case R.id.tvComment:
+                String content=getTextById(R.id.etComment).trim();
+                if(TextUtils.isEmpty(content)){
+                    showToast(R.string.comment_cannot_null);
+                    return;
+                }
+                String text=getTextById(R.id.etComment);
+                hideKeyBoard();
+                setText(R.id.etComment,"");
+                HttpMethods.getInstance().articleCommentSave(text,mArticleBean.getId(),
+                        new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+                            @Override
+                            public void onNext(ResponseBean bean) {
+                                if(bean!=null && !TextUtils.isEmpty(bean.getMsg())){
+                                    showToast(bean.getMsg());
+                                }
+                                getComment(1,30);
+                            }
+                        },getActivity(),false,(BaseActivity)getActivity()));
+                break;
+        }
+    }
 
+    private void getComment(int page,int limit){
+        HttpMethods.getInstance().articlecommentList(page,limit,mArticleBean.getId(),
+                new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+                    @Override
+                    public void onNext(ResponseBean bean) {
+                        if(bean!=null){
+                            getAdapter().setDataList(bean.getArticleCommentList());
+                        }
+                    }
+                },getActivity(),false,(BaseActivity)getActivity()));
     }
 
     @Override
     public void onRefresh(final RefreshLayout refreshlayout) {
-        HttpMethods.getInstance().articleInfo(mArticleBean.getId(),new ProgressSubscriber(new SubscriberOnNextListener<ArticleBean>() {
+        HttpMethods.getInstance().articleInfo(mArticleBean.getId(),new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
             @Override
-            public void onNext(ArticleBean bean) {
+            public void onNext(ResponseBean bean) {
                 if(getView()==null){
                     return;
                 }
+                mArticleBean=bean.getArticle();
                 refreshlayout.finishRefresh();
                 initTopView();
             }
         },getActivity(),false,(BaseActivity)getActivity()));
+        getComment(1,30);
     }
 
     Html.ImageGetter mImgGetter = new Html.ImageGetter() {
@@ -139,7 +183,8 @@ public class ArticleDetailFragment extends BaseFragment implements OnRefreshList
             Drawable drawable = null;
             URL url;
             try {
-                url = new URL(source);
+                ArrayList<String> list=Utils.getUrlList(source);
+                url = new URL(list.get(0));
                 drawable = Drawable.createFromStream(url.openStream(), "");
             } catch (Exception e) {
                 e.printStackTrace();

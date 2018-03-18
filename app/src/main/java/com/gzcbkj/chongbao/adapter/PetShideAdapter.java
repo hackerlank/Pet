@@ -11,6 +11,8 @@ import com.gzcbkj.chongbao.bean.PetFindorlostInfo;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.utils.Utils;
 
+import java.util.ArrayList;
+
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
@@ -45,7 +47,7 @@ public class PetShideAdapter extends MyBaseAdapter<PetFindorlostInfo> {
         setText(holder.tvContent,bean.getFindorlostRemake());
         setText(holder.tvLocation,bean.getFindorlostAddress());
         holder.ivSex.setImageResource("1".equals(bean.getFindorlostPetSex()) ? R.drawable.male : R.drawable.female);
-        Utils.loadImage(R.drawable.default_1, bean.getFindorlostLmg(), holder.ivAvater);
+        Utils.loadImages(R.drawable.touxiang, bean.getFindorlostLmg(), holder.ivAvater);
         return view;
     }
 
