@@ -178,13 +178,18 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+
     /**
      * @param nick
+     * @param userHeadPic
      * @param subscriber
      */
-    public void updateUserName(String nick, ProgressSubscriber subscriber) {
+    public void updateUserInfo(String nick, String userHeadPic, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("username", nick);
+        if (!TextUtils.isEmpty(nick))
+            map.put("username", nick);
+        if (!TextUtils.isEmpty(userHeadPic))
+            map.put("headPic", userHeadPic);
         Observable observable = mRetrofit.create(HttpService.class).updateUser(map);
         toSubscribe(observable, subscriber);
     }
@@ -300,13 +305,12 @@ public class HttpMethods {
 
 
     /**
-     *
      * @param page
      * @param limit
      * @param articleId
      * @param subscriber
      */
-    public void articlecommentList(int page,int limit, long articleId, ProgressSubscriber subscriber) {
+    public void articlecommentList(int page, int limit, long articleId, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("page", page);
         map.put("limit", limit);
@@ -339,18 +343,17 @@ public class HttpMethods {
     }
 
     /**
-     *
      * @param files
      * @param subscriber
      */
-    public void uploadFile(ArrayList<File> files,ProgressSubscriber subscriber) {
-        if(files==null || files.isEmpty()){
+    public void uploadFile(ArrayList<File> files, ProgressSubscriber subscriber) {
+        if (files == null || files.isEmpty()) {
             return;
         }
         ArrayList<MultipartBody.Part> parts = new ArrayList<>();
         RequestBody requestBody;
         MultipartBody.Part part;
-        for(File file:files) {
+        for (File file : files) {
             requestBody = RequestBody.create(MediaType.parse("image"), file);
             part = MultipartBody.Part.
                     createFormData("files", file.getName(), requestBody);

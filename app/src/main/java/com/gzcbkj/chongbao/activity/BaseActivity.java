@@ -36,6 +36,7 @@ import com.gzcbkj.chongbao.fragment.AddPetFragment;
 import com.gzcbkj.chongbao.fragment.AlbumFragment;
 import com.gzcbkj.chongbao.fragment.BaseFragment;
 import com.gzcbkj.chongbao.fragment.CameraFragment;
+import com.gzcbkj.chongbao.fragment.EditProfileFragment;
 import com.gzcbkj.chongbao.fragment.MyDialogFragment;
 import com.gzcbkj.chongbao.fragment.PhotoPreviewFragment;
 import com.gzcbkj.chongbao.http.OnHttpErrorListener;
@@ -381,7 +382,8 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
                     }
                     DataManager.getInstance().setObject(bmp);
                     BaseFragment fragment=getVisibleFragment();
-                    if(fragment!=null && fragment instanceof AddPetFragment) {
+                    if(fragment!=null && (fragment instanceof AddPetFragment
+                            || fragment instanceof EditProfileFragment)) {
                         Bundle bundle = new Bundle();
                         bundle.putInt(CameraFragment.USE_CAMERA_TYPE, Constants.TYPE_CAMERA_FOR_AVATER);
                         gotoPager(PhotoPreviewFragment.class, bundle);
@@ -404,7 +406,8 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
                     }
                     DataManager.getInstance().setObject(bmp);
                     BaseFragment fragment=getVisibleFragment();
-                    if(fragment!=null && fragment instanceof AddPetFragment) {
+                    if(fragment!=null && (fragment instanceof AddPetFragment
+                            || fragment instanceof EditProfileFragment)) {
                         Bundle bundle = new Bundle();
                         bundle.putInt(CameraFragment.USE_CAMERA_TYPE, Constants.TYPE_CAMERA_FOR_AVATER);
                         gotoPager(PhotoPreviewFragment.class, bundle);

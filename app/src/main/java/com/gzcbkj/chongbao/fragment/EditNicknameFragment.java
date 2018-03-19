@@ -68,7 +68,7 @@ public class EditNicknameFragment extends BaseFragment {
                     return;
                 }
                 hideKeyBoard();
-                HttpMethods.getInstance().updateUserName(nick,new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+                HttpMethods.getInstance().updateUserInfo(nick,null,new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                     @Override
                     public void onNext(ResponseBean bean) {
                         if(!TextUtils.isEmpty(bean.getMsg())){

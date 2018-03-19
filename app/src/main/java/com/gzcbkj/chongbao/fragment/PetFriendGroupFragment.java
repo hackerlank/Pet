@@ -15,7 +15,7 @@ public class PetFriendGroupFragment extends BaseFragment {
 
     @Override
     protected void onViewCreated(View view) {
-
+        setText(R.id.tvTitle,R.string.pet_friend);
     }
 
     @Override
