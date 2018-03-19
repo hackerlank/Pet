@@ -42,7 +42,7 @@ public class MeFragment extends BaseFragment implements OnRefreshListener {
             setText(R.id.tvName, bean.getUsername());
             setText(R.id.tvPhone, bean.getMobile());
             Utils.loadImages(R.drawable.touxiang,bean.getHeadPic(),(ImageView)fv(R.id.ivAvater));
-            Utils.loadImages(R.drawable.wall,bean.getHeadPic(),(ImageView)fv(R.id.ivWall));
+            Utils.loadImages(R.drawable.wall,bean.getSpaceImg(),(ImageView)fv(R.id.ivWall));
         } else {
             setText(R.id.tvName, R.string.not_login);
             setText(R.id.tvPhone, R.string.not_login);
