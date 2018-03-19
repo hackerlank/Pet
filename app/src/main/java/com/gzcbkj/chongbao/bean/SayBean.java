@@ -172,7 +172,7 @@ public class SayBean implements Serializable {
         this.userName = userName;
     }
 
-    public class SayImg implements Serializable{
+    public static class SayImg implements Serializable{
         private long id;
         private String imgUrl;
         private long sayId;

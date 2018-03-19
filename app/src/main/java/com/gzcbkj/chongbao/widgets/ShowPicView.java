@@ -40,6 +40,8 @@ public class ShowPicView extends View {
 
     private float mCurrentLenght;
 
+    private float mCutRatio;
+
 
     /**
      * 模式 NONE：无 DRAG：拖拽. ZOOM:缩放
@@ -63,14 +65,15 @@ public class ShowPicView extends View {
         mIsCutBmp = false;
     }
 
-    public void setImageBitmap(Bitmap bitmap, boolean isCutBmp) {
+    public void setImageBitmap(Bitmap bitmap, float cutRatio, boolean isCutBmp) {
         mIsCutBmp = isCutBmp;
+        mCutRatio = cutRatio;
         if (isCutBmp) {
             DisplayMetrics dis = ((BaseActivity) getContext()).getDisplaymetrics();
             mCutLeft = 0;
-            mCutTop = dis.heightPixels / 10;
+            mCutTop = (int) ((dis.heightPixels - dis.widthPixels * cutRatio) * 0.5);
             mCutRight = dis.widthPixels;
-            mCutBottom = dis.heightPixels / 10 + dis.widthPixels;
+            mCutBottom = (int) ((dis.heightPixels + dis.widthPixels * cutRatio) * 0.5);
         }
         setImageBitmap(bitmap);
         MIN_SCALE_SIZE = mScaleSize;
@@ -88,27 +91,13 @@ public class ShowPicView extends View {
             mPoints = new float[10];
             if (getWidth() == 0 || getHeight() == 0) {
                 DisplayMetrics dis = ((BaseActivity) getContext()).getDisplaymetrics();
-                if (mIsCutBmp) {
-                    mScaleSize = Math.max(dis.widthPixels / px, dis.widthPixels / py);
-                    mPoints[8] = dis.widthPixels * 0.5f;
-                    mPoints[9] = dis.heightPixels * 0.1f + dis.widthPixels * 0.5f;
-
-                } else {
-                    mScaleSize = Math.min(dis.widthPixels / px, dis.heightPixels / py);
-                    mPoints[8] = dis.widthPixels * 0.5f;
-                    mPoints[9] = dis.heightPixels * 0.5f;
-                }
+                mScaleSize = Math.max(dis.widthPixels / px, dis.widthPixels / py);
+                mPoints[8] = dis.widthPixels * 0.5f;
+                mPoints[9] = dis.heightPixels*0.5f;
             } else {
-                if (mIsCutBmp) {
-                    mScaleSize = Math.max(getWidth() / px, getWidth() / py);
-                    mPoints[8] = getWidth() * 0.5f;
-                    mPoints[9] = getHeight() * 0.1f + getWidth() * 0.5f;
-                } else {
-                    mScaleSize = Math.min(getWidth() / px, getHeight() / py);
-                    mPoints[8] = getWidth() * 0.5f;
-                    mPoints[9] = getHeight() * 0.5f;
-                }
-
+                mScaleSize = Math.min(getWidth() / px, getHeight() / py);
+                mPoints[8] = getWidth() * 0.5f;
+                mPoints[9] = getHeight() * 0.5f;
             }
             mOriginPoints = new float[]{0, 0, px, 0, px, py, 0, py, px / 2, py / 2};
             mOriginContentRect = new RectF(0, 0, px, py);

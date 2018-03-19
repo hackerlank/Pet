@@ -1,18 +1,14 @@
 package com.gzcbkj.chongbao.http;
 
-import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.gzcbkj.chongbao.manager.DataManager;
 import com.google.gson.GsonBuilder;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -182,14 +178,17 @@ public class HttpMethods {
     /**
      * @param nick
      * @param userHeadPic
+     * @param spaceImg
      * @param subscriber
      */
-    public void updateUserInfo(String nick, String userHeadPic, ProgressSubscriber subscriber) {
+    public void updateUserInfo(String nick, String userHeadPic,String spaceImg, ProgressSubscriber subscriber) {
         HashMap<String, Object> map = new HashMap<>();
         if (!TextUtils.isEmpty(nick))
             map.put("username", nick);
         if (!TextUtils.isEmpty(userHeadPic))
             map.put("headPic", userHeadPic);
+        if (!TextUtils.isEmpty(spaceImg))
+            map.put("spaceImg", spaceImg);
         Observable observable = mRetrofit.create(HttpService.class).updateUser(map);
         toSubscribe(observable, subscriber);
     }
@@ -241,6 +240,48 @@ public class HttpMethods {
      */
     public void querySayDetail(long sayId, ProgressSubscriber subscriber) {
         Observable observable = mRetrofit.create(HttpService.class).querySayDetail(sayId);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param content
+     * @param list
+     * @param type 1:自己空间发表说说；2：广场发表说说
+     * @param sayLat
+     * @param sayLng
+     * @param subscriber
+     */
+    public void saveSayDetail(String content, ArrayList<HashMap<String,String>> list,
+                              String type,double sayLat,double sayLng,
+                              ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("content", content);
+        map.put("sayImgList", list);
+        map.put("type", type);
+        if(sayLat!=0.0)
+            map.put("sayLat", sayLat);
+        if(sayLng!=0.0)
+            map.put("sayLng", sayLng);
+        Observable observable = mRetrofit.create(HttpService.class).saveSayDetail(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param content
+     * @param sayId
+     * @param userId2
+     * @param subscriber
+     */
+    public void saveSayComment(String content,long sayId,String userId2,
+                              ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("content", content);
+        map.put("sayId", sayId);
+        if(!TextUtils.isEmpty(userId2))
+            map.put("userId2",userId2);
+        Observable observable = mRetrofit.create(HttpService.class).saveSayComment(map);
         toSubscribe(observable, subscriber);
     }
 

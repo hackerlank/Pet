@@ -26,8 +26,6 @@ import java.util.ArrayList;
 
 public class EditProfileFragment extends BaseFragment {
 
-    private File mPetAvaterFile;
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_edit_profile;
@@ -56,25 +54,28 @@ public class EditProfileFragment extends BaseFragment {
         if (DataManager.getInstance().getObject() != null) {
             int objectType = DataManager.getInstance().getObjectType();
             if (objectType == Constants.OBJECT_TYPE_AVATER) {
-                mPetAvaterFile = new File((String) DataManager.getInstance().getObject());
-                Utils.loadImage(R.drawable.touxiang, Uri.fromFile(mPetAvaterFile), (ImageView) fv(R.id.ivAvater));
+                final File avaterFile = new File((String) DataManager.getInstance().getObject());
                 DataManager.getInstance().setObject(null);
                 ArrayList<File> files = new ArrayList<>();
-                files.add(mPetAvaterFile);
+                files.add(avaterFile);
                 HttpMethods.getInstance().uploadFile(files, new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                     @Override
                     public void onNext(final ResponseBean responseBean) {
                         if (responseBean != null && !TextUtils.isEmpty(responseBean.getMsg())) {
-                            HttpMethods.getInstance().updateUserInfo(null, responseBean.getMsg(),
+                            HttpMethods.getInstance().updateUserInfo(null, responseBean.getMsg(), null,
                                     new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                                         @Override
                                         public void onNext(ResponseBean bean) {
-                                            if (bean != null && !TextUtils.isEmpty(bean.getMsg())) {
-                                                showToast(bean.getMsg());
-                                            }
                                             UserInfoBean userInfoBean = DataManager.getInstance().getMyUserInfo();
                                             userInfoBean.setHeadPic(responseBean.getMsg());
                                             DataManager.getInstance().saveMyUserInfo(userInfoBean);
+                                            if (getView() == null) {
+                                                return;
+                                            }
+                                            if (bean != null && !TextUtils.isEmpty(bean.getMsg())) {
+                                                showToast(bean.getMsg());
+                                            }
+                                            Utils.loadImage(R.drawable.touxiang, Uri.fromFile(avaterFile), (ImageView) fv(R.id.ivAvater));
                                         }
                                     }, getActivity(), (BaseActivity) getActivity()));
                         }

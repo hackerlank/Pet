@@ -140,6 +140,9 @@ public class DataManager implements IDataManager {
 
     @Override
     public ArrayList<IDataChangeListener> getDataChangeListener() {
+        if(mListeners==null){
+            mListeners=new ArrayList<>();
+        }
         return mListeners;
     }
 

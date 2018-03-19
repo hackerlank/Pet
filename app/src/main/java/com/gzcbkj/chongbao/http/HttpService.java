@@ -5,6 +5,7 @@ import com.gzcbkj.chongbao.bean.BannerListResponse;
 import com.gzcbkj.chongbao.bean.ArticleListResponse;
 import com.gzcbkj.chongbao.bean.PetJiyangResponseBean;
 import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.bean.SayDetailResponse;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
 
 import java.util.ArrayList;
@@ -90,6 +91,13 @@ public interface HttpService {
     @GET("userInfo/queryUserInfo")
     Observable<ResponseBean> queryUserInfo();
 
+    /**
+     * 发表说说
+     * @return
+     */
+    @POST("appusersay/saveSayDetail")
+    Observable<ResponseBean> saveSayDetail(@Body HashMap<String, Object> map);
+
 
     /**
      * 查询自己空间发表的说说
@@ -104,7 +112,14 @@ public interface HttpService {
      * @return
      */
     @GET("appusersay/querySayDetail")
-    Observable<ResponseBean> querySayDetail(@Query("sayId") long sayId);
+    Observable<SayDetailResponse> querySayDetail(@Query("sayId") long sayId);
+
+    /**
+     * 评论说说
+     * @return
+     */
+    @POST("appusersaycomment/saveSayComment")
+    Observable<ResponseBean> saveSayComment(@Body HashMap<String, Object> map);
 
 
     /**
@@ -137,7 +152,7 @@ public interface HttpService {
     Observable<ResponseBean> articlecommentList(@Body HashMap<String, Object> map);
 
     /**
-     * 查询文章评论
+     * 评论文章
      * @return
      */
     @POST("apparticlecomment/save")

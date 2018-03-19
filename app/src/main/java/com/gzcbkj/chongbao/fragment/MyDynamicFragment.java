@@ -19,6 +19,7 @@ import com.gzcbkj.chongbao.http.HttpMethods;
 import com.gzcbkj.chongbao.http.ProgressSubscriber;
 import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
 import com.gzcbkj.chongbao.manager.DataManager;
+import com.gzcbkj.chongbao.manager.IDataChangeListener;
 import com.gzcbkj.chongbao.utils.Constants;
 import com.gzcbkj.chongbao.utils.Utils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
  * Created by huangzhifeng on 2018/3/4.
  */
 
-public class MyDynamicFragment extends BaseFragment implements OnRefreshListener {
+public class MyDynamicFragment extends BaseFragment implements OnRefreshListener,IDataChangeListener {
 
     private DynamicAdapter mAdapter;
     private View mTopView;
@@ -68,11 +69,12 @@ public class MyDynamicFragment extends BaseFragment implements OnRefreshListener
                 }
             }
         });
+        DataManager.getInstance().addDataChangeListener(this);
     }
 
     private void initTopView(UserInfoBean userInfo){
         Utils.loadImages(R.drawable.default_1,userInfo.getSpaceImg(),(ImageView) mTopView.findViewById(R.id.ivBg));
-        Utils.loadImages(R.drawable.touxiang,userInfo.getSpaceImg(),(ImageView) mTopView.findViewById(R.id.ivAvater));
+        Utils.loadImages(R.drawable.touxiang,userInfo.getHeadPic(),(ImageView) mTopView.findViewById(R.id.ivAvater));
         ((TextView) mTopView.findViewById(R.id.tvName)).setText(userInfo.getUsername());
     }
 
@@ -121,5 +123,17 @@ public class MyDynamicFragment extends BaseFragment implements OnRefreshListener
                 }
             }
         },getActivity(),false,(BaseActivity)getActivity()));
+    }
+
+    public void onDestroyView(){
+        super.onDestroyView();
+        DataManager.getInstance().removeDataChangeListener(this);
+    }
+
+    @Override
+    public void needRefrsh() {
+        if(getView()!=null){
+            ((SmartRefreshLayout) fv(R.id.smartLayout)).autoRefresh();
+        }
     }
 }

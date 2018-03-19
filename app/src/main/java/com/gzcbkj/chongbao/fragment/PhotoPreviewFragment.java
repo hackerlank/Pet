@@ -11,6 +11,7 @@ import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.manager.DataManager;
 import com.gzcbkj.chongbao.utils.Constants;
 import com.gzcbkj.chongbao.utils.Utils;
+import com.gzcbkj.chongbao.widgets.CutPhotoView;
 import com.gzcbkj.chongbao.widgets.ShowPicView;
 
 
@@ -21,6 +22,7 @@ public class PhotoPreviewFragment extends BaseFragment {
 
     private int mCameraUseType;
     private Bitmap mScreenBmp, mBmp;
+    private float mCutRatio;
 
 
     @Override
@@ -50,11 +52,19 @@ public class PhotoPreviewFragment extends BaseFragment {
             return;
         }
         DataManager.getInstance().setObject(null);
-        final ShowPicView showPicView = (ShowPicView) view.findViewById(R.id.ivShowPic);
-        if (mCameraUseType == Constants.TYPE_CAMERA_FOR_AVATER) {
-            view.findViewById(R.id.cutPhotoView).setVisibility(View.VISIBLE);
-            showPicView.setImageBitmap(mBmp, true);
-        } else {
+        ShowPicView showPicView = view.findViewById(R.id.ivShowPic);
+        CutPhotoView cutPhotoView=view.findViewById(R.id.cutPhotoView);
+        mCutRatio=1.0f;
+        if (mCameraUseType == Constants.TYPE_CAMERA_FOR_AVATER
+                || mCameraUseType==Constants.TYPE_CAMERA_FOR_WALL) {
+            cutPhotoView.setVisibility(View.VISIBLE);
+            if(mCameraUseType==Constants.TYPE_CAMERA_FOR_WALL){
+                mCutRatio=0.5f;
+            }
+            cutPhotoView.setCutRatio(mCutRatio);
+            showPicView.setImageBitmap(mBmp,mCutRatio, true);
+        }else {
+            cutPhotoView.setVisibility(View.GONE);
             showPicView.setImageBitmap(mBmp);
         }
     }
@@ -77,18 +87,20 @@ public class PhotoPreviewFragment extends BaseFragment {
                         Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 return;
             }
-            if (mCameraUseType == Constants.TYPE_CAMERA_FOR_AVATER) {
+            if (mCameraUseType == Constants.TYPE_CAMERA_FOR_AVATER
+                    || mCameraUseType==Constants.TYPE_CAMERA_FOR_WALL) {
                 View rl = getView().findViewById(R.id.rl);
                 mScreenBmp = Bitmap.createBitmap(rl.getWidth(), rl.getHeight(), Bitmap.Config.ARGB_8888);
                 rl.draw(new Canvas(mScreenBmp));
-                final ShowPicView showPicView = (ShowPicView) getView().findViewById(R.id.ivShowPic);
-                showPicView.setImageBitmap(mScreenBmp, false);
+                final ShowPicView showPicView = getView().findViewById(R.id.ivShowPic);
+                showPicView.setImageBitmap(mScreenBmp,mCutRatio, false);
                 mBmp.recycle();
                 mBmp = null;
 
                 int x = 0;
-                int y = mScreenBmp.getHeight() / 10;
-                Bitmap newBmp = Bitmap.createBitmap(mScreenBmp, x, y, mScreenBmp.getWidth(), mScreenBmp.getWidth());
+                int cutHeight=(int)(mScreenBmp.getWidth()*mCutRatio+0.5f);
+                int y = (mScreenBmp.getHeight()-cutHeight)/2;
+                Bitmap newBmp = Bitmap.createBitmap(mScreenBmp, x, y, mScreenBmp.getWidth(), cutHeight);
                 DataManager.getInstance().setObjectType(Constants.OBJECT_TYPE_AVATER);
                 DataManager.getInstance().setObject(Utils.saveJpeg(newBmp, getActivity()));
                 newBmp.recycle();

@@ -323,10 +323,10 @@ public class Utils {
      * @param iv
      */
     public static void loadImages(int defaultId, String path, ImageView iv) {
-        ArrayList<String> list=Utils.getUrlList(path);
-        if(list.size()>0) {
+        ArrayList<String> list = Utils.getUrlList(path);
+        if (list.size() > 0) {
             Utils.loadImage(defaultId, list.get(0), iv);
-        }else{
+        } else {
             iv.setImageResource(defaultId);
         }
     }
@@ -598,34 +598,33 @@ public class Utils {
         return date;
     }
 
-    public static String transformTime(Context context,String strTime) {
-        if(TextUtils.isEmpty(strTime)){
+    public static String transformTime(Context context, String strTime) {
+        if (TextUtils.isEmpty(strTime)) {
             return "";
         }
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = formatter.parse(strTime);
             long time = date.getTime();
-            long currentTime=System.currentTimeMillis();
-            if(currentTime<time){
+            long currentTime = System.currentTimeMillis();
+            if (currentTime < time) {
                 return strTime;
             }
-            if(currentTime-time<60*1000){
-                return ((currentTime-time)/1000)+context.getString(R.string.second_ago);
+            if (currentTime - time < 60 * 1000) {
+                return ((currentTime - time) / 1000) + context.getString(R.string.second_ago);
             }
-            if(currentTime-time<60*60*1000){
-                return ((currentTime-time)/(60*1000))+context.getString(R.string.minute_ago);
+            if (currentTime - time < 60 * 60 * 1000) {
+                return ((currentTime - time) / (60 * 1000)) + context.getString(R.string.minute_ago);
             }
-            if(currentTime-time<24*60*60*1000){
-                return ((currentTime-time)/(60*60*1000))+context.getString(R.string.hour_ago);
+            if (currentTime - time < 24 * 60 * 60 * 1000) {
+                return ((currentTime - time) / (60 * 60 * 1000)) + context.getString(R.string.hour_ago);
             }
-            return ((currentTime-time)/(24*60*60*1000))+context.getString(R.string.day_ago);
-        }catch (Exception e){
+            return ((currentTime - time) / (24 * 60 * 60 * 1000)) + context.getString(R.string.day_ago);
+        } catch (Exception e) {
 
         }
         return strTime;
     }
-
 
 
     /**
@@ -638,7 +637,7 @@ public class Utils {
 
     public static ArrayList<String> getUrlList(String orginUrl) {
         ArrayList<String> list = new ArrayList<>();
-        if(TextUtils.isEmpty(orginUrl)){
+        if (TextUtils.isEmpty(orginUrl)) {
             return list;
         }
         String[] urls = orginUrl.split(",");

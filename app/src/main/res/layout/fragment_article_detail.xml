@@ -38,7 +38,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_255_255_255"
-        android:padding="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:orientation="horizontal">
@@ -53,7 +56,7 @@
             android:textColorHint="@color/color_99_99_99"
             android:hint="@string/comment_cannot_null"
             android:layout_weight="1"
-            android:padding="10dp"/>
+            android:padding="10dp" />
 
         <TextView
             android:id="@+id/tvComment"

@@ -273,6 +273,7 @@
     <string name="publish_picture">发布照片</string>
     <string name="add_picture_des">添加照片描述... ...</string>
     <string name="album_select">相册选择</string>
+    <string name="please_select_photos">请选择照片</string>
 
     <!-- EditProfileFragment -->
     <string name="personal_prdfile">个人资料</string>
@@ -300,6 +301,7 @@
 
     <!-- MyDynamicFragment -->
     <string name="today">今天</string>
+    <string name="total_phone">共%1$s张</string>
 
     <!-- DynamicDetailFragment -->
     <string name="detail">详情</string>

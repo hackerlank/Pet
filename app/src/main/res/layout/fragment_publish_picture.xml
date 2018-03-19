@@ -32,22 +32,6 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
-        <!--  <LinearLayout
-              android:id="@+id/llRecordVideo"
-              android:layout_width="112dp"
-              android:layout_height="101dp"
-              android:orientation="horizontal"
-              android:gravity="center"
-              android:background="@drawable/bg_select_video">
-              <TextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/album_select"
-                  android:drawableTop="@drawable/article_pic"
-                  android:drawablePadding="5dp"
-                  android:gravity="center"
-                  android:textColor="@color/color_99_99_99"
-                  android:textSize="12sp" />-->
 
     </LinearLayout>
 

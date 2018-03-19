@@ -3,12 +3,15 @@ package com.gzcbkj.chongbao.fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.adapter.DynamicCommentAdapter;
@@ -50,16 +53,13 @@ public class DynamicDetailFragment extends BaseFragment implements OnRefreshList
         mSayBean=(SayBean) getArguments().getSerializable(Constants.KEY_BASE_BEAN);
         ListView listView = fv(R.id.listView);
         listView.setAdapter(getAdapter());
-        ArrayList<ResponseBean> list=new ArrayList<>();
-        for(int i=0;i<5;++i){
-            list.add(new ResponseBean());
-        }
-        getAdapter().setDataList(list);
         mTopView= LayoutInflater.from(getActivity()).inflate(R.layout.dynamic_detail_top_layout,null);
         listView.addHeaderView(mTopView);
         initTopView();
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
+        smartRefreshLayout.autoRefresh();
+        setViewsOnClickListener(R.id.tvComment);
     }
 
     private void initTopView(){
@@ -72,7 +72,7 @@ public class DynamicDetailFragment extends BaseFragment implements OnRefreshList
         Utils.loadImages(R.drawable.touxiang,mSayBean.getUserHead(),(ImageView)mTopView.findViewById(R.id.ivAvater));
         ((TextView)mTopView.findViewById(R.id.tvName)).setText(mSayBean.getUserName());
         ((TextView)mTopView.findViewById(R.id.tvContent)).setText(mSayBean.getContent());
-        ((TextView)mTopView.findViewById(R.id.tvTime)).setText(mSayBean.getCreateTime());
+        ((TextView)mTopView.findViewById(R.id.tvTime)).setText(Utils.transformTime(getActivity(),mSayBean.getCreateTime()));
         ((DynamicDetailPhotosView)mTopView.findViewById(R.id.dynamicDetailPhotosView)).setImageList(mSayBean.getSayImgList());
     }
 
@@ -95,7 +95,28 @@ public class DynamicDetailFragment extends BaseFragment implements OnRefreshList
 
     @Override
     public void onClick(View view) {
-
+        int id=view.getId();
+        switch (id){
+            case R.id.tvComment:
+                String content=getTextById(R.id.etComment).trim();
+                if(TextUtils.isEmpty(content)){
+                    showToast(R.string.comment_cannot_null);
+                    return;
+                }
+                String text=getTextById(R.id.etComment);
+                hideKeyBoard();
+                setText(R.id.etComment,"");
+                HttpMethods.getInstance().saveSayComment(text,mSayBean.getId(),"",
+                        new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+                            @Override
+                            public void onNext(ResponseBean bean) {
+                                if(bean!=null && !TextUtils.isEmpty(bean.getMsg())){
+                                    showToast(bean.getMsg());
+                                }
+                            }
+                        },getActivity(),false,(BaseActivity)getActivity()));
+                break;
+        }
     }
 
     @Override

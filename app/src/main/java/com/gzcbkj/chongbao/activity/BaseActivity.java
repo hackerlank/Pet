@@ -37,6 +37,7 @@ import com.gzcbkj.chongbao.fragment.AlbumFragment;
 import com.gzcbkj.chongbao.fragment.BaseFragment;
 import com.gzcbkj.chongbao.fragment.CameraFragment;
 import com.gzcbkj.chongbao.fragment.EditProfileFragment;
+import com.gzcbkj.chongbao.fragment.MeFragment;
 import com.gzcbkj.chongbao.fragment.MyDialogFragment;
 import com.gzcbkj.chongbao.fragment.PhotoPreviewFragment;
 import com.gzcbkj.chongbao.http.OnHttpErrorListener;
@@ -381,11 +382,13 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
                         return;
                     }
                     DataManager.getInstance().setObject(bmp);
-                    BaseFragment fragment=getVisibleFragment();
-                    if(fragment!=null && (fragment instanceof AddPetFragment
-                            || fragment instanceof EditProfileFragment)) {
+                    BaseFragment fragment = getVisibleFragment();
+                    if (fragment != null && (fragment instanceof AddPetFragment
+                            || fragment instanceof EditProfileFragment
+                            || fragment instanceof MeFragment)) {
                         Bundle bundle = new Bundle();
-                        bundle.putInt(CameraFragment.USE_CAMERA_TYPE, Constants.TYPE_CAMERA_FOR_AVATER);
+                        bundle.putInt(CameraFragment.USE_CAMERA_TYPE,
+                                fragment instanceof MeFragment ? Constants.TYPE_CAMERA_FOR_WALL : Constants.TYPE_CAMERA_FOR_AVATER);
                         gotoPager(PhotoPreviewFragment.class, bundle);
                     }
                 } catch (Exception e) {
@@ -405,11 +408,13 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
                         return;
                     }
                     DataManager.getInstance().setObject(bmp);
-                    BaseFragment fragment=getVisibleFragment();
-                    if(fragment!=null && (fragment instanceof AddPetFragment
-                            || fragment instanceof EditProfileFragment)) {
+                    BaseFragment fragment = getVisibleFragment();
+                    if (fragment != null && (fragment instanceof AddPetFragment
+                            || fragment instanceof EditProfileFragment
+                            || fragment instanceof MeFragment)) {
                         Bundle bundle = new Bundle();
-                        bundle.putInt(CameraFragment.USE_CAMERA_TYPE, Constants.TYPE_CAMERA_FOR_AVATER);
+                        bundle.putInt(CameraFragment.USE_CAMERA_TYPE,
+                                fragment instanceof MeFragment ? Constants.TYPE_CAMERA_FOR_WALL : Constants.TYPE_CAMERA_FOR_AVATER);
                         gotoPager(PhotoPreviewFragment.class, bundle);
                     }
                 } catch (Exception e) {
@@ -603,7 +608,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
     }
 
 
-    public void showSelectTimeView(int year, int month, int day,long minDate,long maxDate, DatePicker.OnDateChangedListener listener) {
+    public void showSelectTimeView(int year, int month, int day, long minDate, long maxDate, DatePicker.OnDateChangedListener listener) {
         View llSelectTime = findViewById(R.id.llSelectTime);
         llSelectTime.setVisibility(View.VISIBLE);
         llSelectTime.setOnClickListener(new View.OnClickListener() {
@@ -613,10 +618,10 @@ public abstract class BaseActivity extends AppCompatActivity implements OnHttpEr
             }
         });
         DatePicker datePicker = findViewById(R.id.datePicker);
-        if(minDate>0) {
+        if (minDate > 0) {
             datePicker.setMinDate(minDate);
         }
-        if(maxDate>0){
+        if (maxDate > 0) {
             datePicker.setMaxDate(maxDate);
         }
         datePicker.init(year, month, day, listener);

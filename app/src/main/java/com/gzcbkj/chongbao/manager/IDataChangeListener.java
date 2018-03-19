@@ -6,4 +6,6 @@ package com.gzcbkj.chongbao.manager;
 
 public interface IDataChangeListener {
 
+    public void needRefrsh();
+
 }

@@ -68,15 +68,18 @@ public class EditNicknameFragment extends BaseFragment {
                     return;
                 }
                 hideKeyBoard();
-                HttpMethods.getInstance().updateUserInfo(nick,null,new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+                HttpMethods.getInstance().updateUserInfo(nick,null,null,new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
                     @Override
                     public void onNext(ResponseBean bean) {
-                        if(!TextUtils.isEmpty(bean.getMsg())){
-                            showToast(bean.getMsg());
-                        }
                         UserInfoBean userInfoBean= DataManager.getInstance().getMyUserInfo();
                         userInfoBean.setUsername(nick);
                         DataManager.getInstance().saveMyUserInfo(userInfoBean);
+                        if(getView()==null){
+                            return;
+                        }
+                        if(!TextUtils.isEmpty(bean.getMsg())){
+                            showToast(bean.getMsg());
+                        }
                         goBack();
                     }
                 },getActivity(),(BaseActivity) getActivity()));

@@ -36,6 +36,7 @@ public class Constants {
 
 
     public static final int TYPE_CAMERA_FOR_AVATER = 1;
+    public static final int TYPE_CAMERA_FOR_WALL = 2;
     public static final int OBJECT_TYPE_AVATER=1;
     public static final int OBJECT_TYPE_NICKNAME=2;
     public static final int OBJECT_TYPE_PET_TYPE=3;

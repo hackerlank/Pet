@@ -17,6 +17,7 @@
             android:id="@+id/ivPhoto1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:round_rect_radius="5"
             android:scaleType="centerCrop"
             android:src="@drawable/default_1" />
 
@@ -63,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
+            app:round_rect_radius="5"
             android:src="@drawable/default_1" />
 
         <ImageView
@@ -106,6 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
+            app:round_rect_radius="5"
             android:src="@drawable/default_1" />
 
         <ImageView
