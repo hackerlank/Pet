@@ -27,6 +27,7 @@
                 android:id="@+id/ivAvater"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
+                android:src="@drawable/touxiang"
                 app:round_radius="26"/>
 
             <TextView

@@ -306,12 +306,6 @@
     <!-- DynamicDetailFragment -->
     <string name="detail">详情</string>
 
-
-    <!-- FriendOtherFragment -->
-    <string name="friend">好友</string>
-    <string name="followed">关注</string>
-    <string name="following">粉丝</string>
-
     <!-- JilingguanliFragment -->
     <string name="applying">申请中</string>
     <string name="examine_suc">审核通过</string>
@@ -370,4 +364,17 @@
     <string name="minute_ago">分钟前</string>
     <string name="hour_ago">小时前</string>
     <string name="day_ago">天前</string>
+
+    <!--PetFriendGroupFragment-->
+    <string name="group">圈子</string>
+    <string name="friend">好友</string>
+    <string name="followed">关注</string>
+    <string name="following">粉丝</string>
+    <string name="add_friends">添加好友</string>
+    <string name="total">共%1$s个</string>
+    <string name="add_new_friend">添加新朋友</string>
+    <string name="friend_2">朋友</string>
+    <string name="guangchang">广场</string>
+    <string name="dynamic_nearby">附近动态</string>
+
 </resources>

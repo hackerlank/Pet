@@ -18,8 +18,8 @@ public class UserProfileFragment extends BaseFragment {
     @Override
     protected void onViewCreated(View view) {
         setText(R.id.tvTitle,R.string.detail_msg);
-        setViewVisible(R.id.ivRight);
-        setImage(R.id.ivRight,R.drawable.more);
+//        setViewVisible(R.id.ivRight);
+//        setImage(R.id.ivRight,R.drawable.more);
         setViewsOnClickListener(R.id.tvBtn1,R.id.ivRight,R.id.llAlbum);
     }
 

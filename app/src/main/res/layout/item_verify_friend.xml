@@ -13,6 +13,7 @@
         android:layout_below="@id/view1"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:src="@drawable/touxiang"
         app:round_radius="25"/>
 
     <TextView

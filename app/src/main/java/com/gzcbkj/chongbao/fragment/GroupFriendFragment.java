@@ -8,30 +8,30 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
+
 import java.util.ArrayList;
 
 /**
- * Created by huangzhifeng on 2018/2/27.
+ * Created by huangzhifeng on 2018/3/21.
  */
 
-public class FriendOtherFragment extends BaseFragment {
-
+public class GroupFriendFragment extends BaseFragment {
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_friend_other;
+        return R.layout.fragment_group;
     }
 
     @Override
     protected void onViewCreated(View view) {
         initViewPager();
-        setViewsOnClickListener(R.id.tvAddFriend,R.id.tvVerFriend,R.id.llTab1,R.id.llTab2,R.id.llTab3);
+        setViewsOnClickListener(R.id.llTab1,R.id.llTab2,R.id.llTab3);
     }
 
     private void initViewPager(){
         ViewPager viewPager=fv(R.id.viewPager);
-        final ArrayList<FriendItemFragment> fragments=new ArrayList<>();
+        final ArrayList<GroupFriendItemFragment> fragments=new ArrayList<>();
         for(int i=0;i<3;++i){
-            fragments.add(new FriendItemFragment().setCurrentIndex(i));
+            fragments.add(new GroupFriendItemFragment());
         }
         viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
@@ -48,6 +48,7 @@ public class FriendOtherFragment extends BaseFragment {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
 
             @Override
@@ -60,8 +61,7 @@ public class FriendOtherFragment extends BaseFragment {
 
             }
         });
-        viewPager.setCurrentItem(1);
-        initTab(1);
+        initTab(0);
     }
 
     private void initTab(int pos){
@@ -82,12 +82,6 @@ public class FriendOtherFragment extends BaseFragment {
     public void onClick(View view) {
         int id=view.getId();
         switch (id){
-            case R.id.tvAddFriend:
-                gotoPager(AddFriendFragment.class,null);
-                break;
-            case R.id.tvVerFriend:
-                gotoPager(VerifyFriendFragment.class,null);
-                break;
             case R.id.llTab1:
                 ViewPager viewPager=fv(R.id.viewPager);
                 viewPager.setCurrentItem(0);

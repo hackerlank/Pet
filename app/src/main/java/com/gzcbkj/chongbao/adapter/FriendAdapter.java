@@ -14,8 +14,13 @@ import com.gzcbkj.chongbao.bean.ResponseBean;
  */
 
 public class FriendAdapter extends MyBaseAdapter<ResponseBean> {
+    private int mCurrentIndex;
     public FriendAdapter(Context context) {
         super(context);
+    }
+
+    public void setCurrentIndex(int index){
+        mCurrentIndex=index;
     }
 
     @Override
@@ -26,16 +31,18 @@ public class FriendAdapter extends MyBaseAdapter<ResponseBean> {
             view=mLayoutInflater.inflate(R.layout.item_friend,null);
             holder.ivAvater= fv(view,R.id.ivAvater);
             holder.tvName= fv(view,R.id.tvName);
+            holder.line= fv(view,R.id.line);
             view.setTag(holder);
         }else{
             holder =(ViewHolder) view.getTag();
         }
+        holder.line.setVisibility(i==getCount()-1?View.INVISIBLE:View.VISIBLE);
         return view;
     }
 
     class ViewHolder{
         ImageView ivAvater;
         TextView tvName;
-
+        View line;
     }
 }

@@ -1,6 +1,7 @@
 package com.gzcbkj.chongbao.fragment;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.adapter.VerifyFriendAdapter;
@@ -37,6 +38,12 @@ public class VerifyFriendFragment extends BaseFragment implements OnRefreshListe
         getAdapter().setDataList(list);
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                gotoPager(i%2==0?VerifyFriendProfileFragment.class:UserProfileFragment.class,null);
+            }
+        });
     }
 
     @Override

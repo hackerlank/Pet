@@ -32,6 +32,15 @@ public class VerifyFriendAdapter extends MyBaseAdapter<ResponseBean> {
         }else{
             holder=(ViewHolder) view.getTag();
         }
+        if(i%2==0){
+            holder.tvOperator.setBackgroundResource(R.drawable.bg_verify_friend);
+            holder.tvOperator.setTextColor(mContext.getResources().getColor(R.color.color_255_255_255));
+            holder.tvOperator.setText(mContext.getString(R.string.pass));
+        }else{
+            holder.tvOperator.setBackgroundResource(0);
+            holder.tvOperator.setTextColor(mContext.getResources().getColor(R.color.color_ff_73_73));
+            holder.tvOperator.setText(mContext.getString(R.string.added));
+        }
         return view;
     }
 

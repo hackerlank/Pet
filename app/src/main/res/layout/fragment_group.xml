@@ -3,36 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    android:paddingTop="10dp"
     android:orientation="vertical">
-    <TextView
-        android:id="@+id/tvAddFriend"
-        android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:textSize="15sp"
-        android:paddingLeft="15dp"
-        android:text="@string/add_friends"
-        android:background="@color/color_255_255_255"
-        android:textColor="@color/color_11_11_11"
-        android:layout_height="50dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/line"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
-
-    <TextView
-        android:id="@+id/tvVerFriend"
-        android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:textSize="15sp"
-        android:paddingLeft="15dp"
-        android:text="@string/verify_friend"
-        android:background="@color/color_255_255_255"
-        android:textColor="@color/color_11_11_11"
-        android:layout_height="50dp" />
 
 
 
@@ -40,7 +11,6 @@
         android:id="@+id/llTab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="@color/color_255_255_255"
         android:orientation="horizontal">
 
@@ -57,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:textSize="15sp"
-                android:text="@string/friend"
+                android:text="@string/friend_2"
                 android:textColor="@color/color_33_33_33"
                 android:layout_height="wrap_content" />
             <ImageView
@@ -82,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:textSize="15sp"
-                android:text="@string/followed"
+                android:text="@string/guangchang"
                 android:textColor="@color/color_99_99_99"
                 android:layout_height="wrap_content" />
             <ImageView
@@ -108,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:textSize="15sp"
-                android:text="@string/following"
+                android:text="@string/dynamic_nearby"
                 android:textColor="@color/color_99_99_99"
                 android:layout_height="wrap_content" />
             <ImageView

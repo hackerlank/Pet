@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smartrefresh.layout.SmartRefreshLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
 android:id="@+id/smartLayout"
 android:layout_width="match_parent"
-android:layout_height="match_parent">
+android:layout_height="0dp"
+    android:layout_weight="1">
 <ListView
     android:id="@+id/listView"
     android:layout_width="match_parent"
@@ -11,3 +16,15 @@ android:layout_height="match_parent">
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"></ListView>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+<TextView
+android:id="@+id/tvTotal"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@color/background_color"
+android:gravity="center"
+android:paddingTop="10dp"
+android:paddingBottom="10dp"
+android:textColor="@color/color_99_99_99"
+android:textSize="13sp" />
+</LinearLayout>
