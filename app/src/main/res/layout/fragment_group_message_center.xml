@@ -5,6 +5,14 @@
     android:background="@color/background_color"
     android:orientation="vertical">
 
+    <include
+        layout="@layout/layout_top_bar"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/background_color"/>
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smartLayout"
         android:layout_width="match_parent"

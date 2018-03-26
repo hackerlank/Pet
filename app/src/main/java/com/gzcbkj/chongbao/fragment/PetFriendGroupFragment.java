@@ -1,17 +1,12 @@
 package com.gzcbkj.chongbao.fragment;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.manager.DataManager;
-
 import java.util.ArrayList;
 
 /**
@@ -39,7 +34,7 @@ public class PetFriendGroupFragment extends BaseFragment {
 
     private void initFragments() {
         mBaseFragment = new ArrayList<>();
-        mBaseFragment.add(new MessageCenterFragment());
+        mBaseFragment.add(new PetGroupChatMessageFragment());
         mBaseFragment.add(new FriendOtherFragment());
         mBaseFragment.add(new GroupFriendFragment());
     }
@@ -165,6 +160,12 @@ public class PetFriendGroupFragment extends BaseFragment {
         int id = view.getId();
         switch (id) {
             case R.id.ivRight:
+                if(mCurrentFragment==null){
+                    return;
+                }
+                if(mCurrentFragment instanceof GroupFriendFragment){
+                    gotoPager(PublishFrigment.class,null);
+                }
                 break;
         }
     }

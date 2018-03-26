@@ -12,26 +12,28 @@ import com.gzcbkj.chongbao.R;
 import java.util.ArrayList;
 
 /**
- * Created by huangzhifeng on 2018/3/21.
+ * Created by huangzhifeng on 2018/2/27.
  */
 
-public class GroupFriendFragment extends BaseFragment {
+public class FriendOther2Fragment extends BaseFragment {
+
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_group;
+        return R.layout.fragment_friend_other_2;
     }
 
     @Override
     protected void onViewCreated(View view) {
+        setText(R.id.tvTitle,R.string.attention_people);
         initViewPager();
         setViewsOnClickListener(R.id.llTab1,R.id.llTab2,R.id.llTab3);
     }
 
     private void initViewPager(){
         ViewPager viewPager=fv(R.id.viewPager);
-        final ArrayList<GroupFriendItemFragment> fragments=new ArrayList<>();
+        final ArrayList<FriendItemFragment> fragments=new ArrayList<>();
         for(int i=0;i<3;++i){
-            fragments.add(new GroupFriendItemFragment().setIndex(i));
+            fragments.add(new FriendItemFragment().setCurrentIndex(i));
         }
         viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
@@ -48,7 +50,6 @@ public class GroupFriendFragment extends BaseFragment {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -61,7 +62,8 @@ public class GroupFriendFragment extends BaseFragment {
 
             }
         });
-        initTab(0);
+        viewPager.setCurrentItem(1);
+        initTab(1);
     }
 
     private void initTab(int pos){

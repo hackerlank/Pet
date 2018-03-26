@@ -12,6 +12,8 @@ import com.google.gson.reflect.TypeToken;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.adapter.DynamicAdapter;
+import com.gzcbkj.chongbao.adapter.GuangchangAdapter;
+import com.gzcbkj.chongbao.adapter.PetGroupFriendAdapter;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.bean.SayBean;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
@@ -32,10 +34,18 @@ import java.util.ArrayList;
  * Created by huangzhifeng on 2018/3/4.
  */
 
-public class GroupFriendItemFragment extends BaseFragment implements OnRefreshListener,IDataChangeListener {
+public class GroupFriendItemFragment extends BaseFragment implements OnRefreshListener {
 
-    private DynamicAdapter mAdapter;
+    private PetGroupFriendAdapter mAdapter1;
+    private GuangchangAdapter mAdapter2;
     private View mTopView;
+    private int mIndex;
+
+    public GroupFriendItemFragment setIndex(int index) {
+        mIndex = index;
+        return this;
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_group_friend_item;
@@ -44,44 +54,65 @@ public class GroupFriendItemFragment extends BaseFragment implements OnRefreshLi
     @Override
     protected void onViewCreated(View view) {
         ListView listView = fv(R.id.listView);
-        listView.setAdapter(getAdapter());
-        mTopView= LayoutInflater.from(getActivity()).inflate(R.layout.dynamic_top_layout,null);
-        listView.addHeaderView(mTopView);
-        initTopView(DataManager.getInstance().getMyUserInfo());
+        ArrayList<SayBean> list = new ArrayList<>();
+        for (int i = 0; i < 10; ++i) {
+            list.add(new SayBean());
+            ArrayList<SayBean.SayImg> imgs = new ArrayList<>();
+            list.get(i).setSayImgList(imgs);
+            for (int j = 0; j <= i; ++j) {
+                imgs.add(new SayBean.SayImg());
+            }
+        }
+        if (mIndex == 0) {
+            mTopView = LayoutInflater.from(getActivity()).inflate(R.layout.dynamic_top_layout, null);
+            listView.addHeaderView(mTopView);
+            initTopView(DataManager.getInstance().getMyUserInfo());
+            listView.setAdapter(getAdapter1());
+            getAdapter1().setDataList(list);
+        }else{
+            listView.setAdapter(getAdapter2());
+            setViewVisible(R.id.view1);
+            getAdapter2().setDataList(list);
+        }
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
-        ArrayList<SayBean> list= (ArrayList<SayBean>) DataManager.getInstance().getDate("sayList", new TypeToken<ArrayList<SayBean>>(){}.getType());
-        getAdapter().setDataList(list);
-        if(list==null || list.isEmpty()) {
-            smartRefreshLayout.autoRefresh();
-        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i==1){
-                    gotoPager(PublishFrigment.class,null);
-                }else if(i>1) {
                     Bundle bundle=new Bundle();
-                    bundle.putSerializable(Constants.KEY_BASE_BEAN,getAdapter().getItem(i-2));
+                    if(mIndex==0) {
+                        bundle.putSerializable(Constants.KEY_BASE_BEAN, getAdapter1().getItem(i - 1));
+                    }else{
+                        bundle.putSerializable(Constants.KEY_BASE_BEAN, getAdapter1().getItem(i));
+                    }
                     gotoPager(DynamicDetailFragment.class, bundle);
-                }
             }
         });
-        DataManager.getInstance().addDataChangeListener(this);
     }
 
-    private void initTopView(UserInfoBean userInfo){
-        Utils.loadImages(R.drawable.default_1,userInfo.getSpaceImg(),(ImageView) mTopView.findViewById(R.id.ivBg));
-        Utils.loadImages(R.drawable.touxiang,userInfo.getHeadPic(),(ImageView) mTopView.findViewById(R.id.ivAvater));
+    private void initTopView(UserInfoBean userInfo) {
+        Utils.loadImages(R.drawable.default_1, userInfo.getSpaceImg(), (ImageView) mTopView.findViewById(R.id.ivBg));
+        Utils.loadImages(R.drawable.touxiang, userInfo.getHeadPic(), (ImageView) mTopView.findViewById(R.id.ivAvater));
         ((TextView) mTopView.findViewById(R.id.tvName)).setText(userInfo.getUsername());
+        mTopView.findViewById(R.id.tvNewMessage).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoPager(PetGroupMessageFragment.class, null);
+            }
+        });
     }
 
 
+    private PetGroupFriendAdapter getAdapter1() {
+        if (mAdapter1 == null)
+            mAdapter1 = new PetGroupFriendAdapter(getActivity());
+        return mAdapter1;
+    }
 
-    private DynamicAdapter getAdapter(){
-        if(mAdapter==null)
-            mAdapter=new DynamicAdapter(getActivity());
-        return mAdapter;
+    private GuangchangAdapter getAdapter2() {
+        if (mAdapter2 == null)
+            mAdapter2 = new GuangchangAdapter(getActivity());
+        return mAdapter2;
     }
 
     @Override
@@ -95,42 +126,24 @@ public class GroupFriendItemFragment extends BaseFragment implements OnRefreshLi
 
     @Override
     public void onRefresh(final RefreshLayout refreshlayout) {
-        HttpMethods.getInstance().querySpace(new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
-            @Override
-            public void onNext(ResponseBean bean) {
-                if(getView()==null){
-                    return;
+        if (mIndex == 0) {
+            HttpMethods.getInstance().querySpace(new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+                @Override
+                public void onNext(ResponseBean bean) {
+                    if (getView() == null) {
+                        return;
+                    }
+                    if (bean != null) {
+                        initTopView(bean.getUserEntity());
+                    }
                 }
-                if(bean!=null) {
-                    initTopView(bean.getUserEntity());
-                }
-            }
-        },getActivity(),false,(BaseActivity)getActivity()));
-
-        HttpMethods.getInstance().querySayList(1, 20,1,new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
-            @Override
-            public void onNext(ResponseBean bean) {
-                if(getView()==null){
-                    return;
-                }
-                refreshlayout.finishRefresh();
-                if(bean!=null){
-                    DataManager.getInstance().saveData("sayList",bean.getSayList());
-                    getAdapter().setDataList(bean.getSayList());
-                }
-            }
-        },getActivity(),false,(BaseActivity)getActivity()));
-    }
-
-    public void onDestroyView(){
-        super.onDestroyView();
-        DataManager.getInstance().removeDataChangeListener(this);
-    }
-
-    @Override
-    public void needRefrsh() {
-        if(getView()!=null){
-            ((SmartRefreshLayout) fv(R.id.smartLayout)).autoRefresh();
+            }, getActivity(), false, (BaseActivity) getActivity()));
         }
+
     }
+
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
 }

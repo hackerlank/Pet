@@ -16,7 +16,10 @@ public class LocationRingFragment extends BaseFragment {
 
     @Override
     protected void onViewCreated(View view) {
-
+        setViewInvisible(R.id.ivLeft);
+        setText(R.id.tvTitle,R.string.location_ring);
+        setViewVisible(R.id.tvRight);
+        setText(R.id.tvRight,R.string.manager);
     }
 
     @Override

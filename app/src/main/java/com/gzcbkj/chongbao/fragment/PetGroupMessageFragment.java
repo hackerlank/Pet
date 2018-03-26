@@ -2,9 +2,8 @@ package com.gzcbkj.chongbao.fragment;
 
 import android.view.View;
 import android.widget.ListView;
-
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.adapter.MessageAdapter;
+import com.gzcbkj.chongbao.adapter.PetGroupMessageAdapter;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -17,13 +16,13 @@ import java.util.ArrayList;
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class MessageFragment extends BaseFragment implements OnRefreshListener,OnLoadmoreListener {
+public class PetGroupMessageFragment extends BaseFragment implements OnRefreshListener,OnLoadmoreListener {
 
-    private MessageAdapter mAdapter;
+    private PetGroupMessageAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_message;
+        return R.layout.fragment_group_message_center;
     }
 
     @Override
@@ -50,9 +49,9 @@ public class MessageFragment extends BaseFragment implements OnRefreshListener,O
 
     }
 
-    private MessageAdapter getAdapter(){
+    private PetGroupMessageAdapter getAdapter(){
         if(mAdapter==null)
-            mAdapter=new MessageAdapter(getActivity());
+            mAdapter=new PetGroupMessageAdapter(getActivity());
         return mAdapter;
     }
 

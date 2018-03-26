@@ -13,8 +13,8 @@ import com.gzcbkj.chongbao.bean.ResponseBean;
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class MessageAdapter extends MyBaseAdapter<ResponseBean> {
-    public MessageAdapter(Context context) {
+public class PetGroupMessageAdapter extends MyBaseAdapter<ResponseBean> {
+    public PetGroupMessageAdapter(Context context) {
         super(context);
     }
 
