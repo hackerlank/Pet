@@ -56,7 +56,7 @@
         android:id="@+id/tvContent"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignTop="@id/tvPhoneNum"
+        android:layout_alignTop="@id/dynamicPhotosView"
         android:layout_marginLeft="5dp"
         android:text="卡哇伊！"
         android:layout_toRightOf="@id/dynamicPhotosView"

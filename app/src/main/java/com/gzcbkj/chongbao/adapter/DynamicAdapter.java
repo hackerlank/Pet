@@ -1,19 +1,15 @@
 package com.gzcbkj.chongbao.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
 import com.gzcbkj.chongbao.R;
-import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.bean.ArticleBean;
+import com.gzcbkj.chongbao.bean.PublishBean;
 import com.gzcbkj.chongbao.bean.SayBean;
 import com.gzcbkj.chongbao.utils.Utils;
 import com.gzcbkj.chongbao.widgets.DynamicPhotosView;
-
 import java.text.ParseException;
 import java.util.Calendar;
 
@@ -21,7 +17,7 @@ import java.util.Calendar;
  * Created by huangzhifeng on 2018/3/4.
  */
 
-public class DynamicAdapter extends MyBaseAdapter<SayBean> {
+public class DynamicAdapter extends MyBaseAdapter<PublishBean> {
     public DynamicAdapter(Context context) {
         super(context);
     }
@@ -53,7 +49,7 @@ public class DynamicAdapter extends MyBaseAdapter<SayBean> {
             holder.tvPhoneNum.setText("");
             holder.dynamicPhotosView.setPhotoNum(i,null);
         }else{
-            SayBean bean=getItem(i-1);
+            PublishBean bean=getItem(i-1);
             Calendar calendar=Calendar.getInstance();
             try {
                 calendar.setTime(Utils.stringToDate(bean.getCreateTime()));
@@ -73,12 +69,20 @@ public class DynamicAdapter extends MyBaseAdapter<SayBean> {
                 holder.tvTime1.setText(Utils.getNewText(day));
                 holder.tvTime2.setText(Utils.getNewText(month+1)+mContext.getString(R.string.month));
             }
-            setText(holder.tvContent,bean.getContent());
-            holder.dynamicPhotosView.setPhotoNum(i,bean.getSayImgList());
-            if(bean.getSayImgList()==null || bean.getSayImgList().isEmpty()){
+            if(bean.getUserSay()!=null) {
+                SayBean userSay=bean.getUserSay();
+                setText(holder.tvContent, userSay.getContent());
+                holder.dynamicPhotosView.setPhotoNum(i, userSay.getSayImgList());
+                if (userSay.getSayImgList() == null || userSay.getSayImgList().isEmpty()) {
+                    holder.tvPhoneNum.setText("");
+                } else {
+                    holder.tvPhoneNum.setText(mContext.getString(R.string.total_phone, String.valueOf(userSay.getSayImgList().size())));
+                }
+            }else if(bean.getArticle()!=null){
+                ArticleBean article=bean.getArticle();
+                setText(holder.tvContent, article.getTitle());
+                holder.dynamicPhotosView.setPhoto(article.getMainPic());
                 holder.tvPhoneNum.setText("");
-            }else{
-                holder.tvPhoneNum.setText(mContext.getString(R.string.total_phone,String.valueOf(bean.getSayImgList().size())));
             }
         }
 

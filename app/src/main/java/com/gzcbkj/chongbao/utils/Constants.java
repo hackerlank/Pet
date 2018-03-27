@@ -34,6 +34,8 @@ public class Constants {
 
     public static final int MAX_UPLOAD_PHOTO_NUM = 9;
 
+    public static final int PAGE_COUNT=30;
+
 
     public static final int TYPE_CAMERA_FOR_AVATER = 1;
     public static final int TYPE_CAMERA_FOR_WALL = 2;

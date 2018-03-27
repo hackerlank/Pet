@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.adapter.DynamicAdapter;
+import com.gzcbkj.chongbao.bean.PublishBean;
 import com.gzcbkj.chongbao.bean.ResponseBean;
 import com.gzcbkj.chongbao.bean.SayBean;
 import com.gzcbkj.chongbao.bean.UserInfoBean;
@@ -52,7 +53,7 @@ public class MyDynamicFragment extends BaseFragment implements OnRefreshListener
         initTopView(DataManager.getInstance().getMyUserInfo());
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
-        ArrayList<SayBean> list= (ArrayList<SayBean>) DataManager.getInstance().getDate("sayList", new TypeToken<ArrayList<SayBean>>(){}.getType());
+        ArrayList<PublishBean> list= (ArrayList<PublishBean>) DataManager.getInstance().getDate("publishList", new TypeToken<ArrayList<PublishBean>>(){}.getType());
         getAdapter().setDataList(list);
         if(list==null || list.isEmpty()) {
             smartRefreshLayout.autoRefresh();
@@ -64,8 +65,14 @@ public class MyDynamicFragment extends BaseFragment implements OnRefreshListener
                     gotoPager(PublishFrigment.class,null);
                 }else if(i>1) {
                     Bundle bundle=new Bundle();
-                    bundle.putSerializable(Constants.KEY_BASE_BEAN,getAdapter().getItem(i-2));
-                    gotoPager(DynamicDetailFragment.class, bundle);
+                    PublishBean bean=getAdapter().getItem(i-2);
+                    if(bean.getUserSay()!=null) {
+                        bundle.putSerializable(Constants.KEY_BASE_BEAN, bean.getUserSay());
+                        gotoPager(DynamicDetailFragment.class, bundle);
+                    }else if(bean.getArticle()!=null) {
+                        bundle.putSerializable(Constants.KEY_BASE_BEAN, bean.getArticle());
+                        gotoPager(ArticleDetailFragment.class, bundle);
+                    }
                 }
             }
         });
@@ -110,7 +117,7 @@ public class MyDynamicFragment extends BaseFragment implements OnRefreshListener
             }
         },getActivity(),false,(BaseActivity)getActivity()));
 
-        HttpMethods.getInstance().querySayList(1, 20,1,new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+        HttpMethods.getInstance().querySayList(1, Constants.PAGE_COUNT,1,new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
             @Override
             public void onNext(ResponseBean bean) {
                 if(getView()==null){
@@ -118,8 +125,8 @@ public class MyDynamicFragment extends BaseFragment implements OnRefreshListener
                 }
                 refreshlayout.finishRefresh();
                 if(bean!=null){
-                    DataManager.getInstance().saveData("sayList",bean.getSayList());
-                    getAdapter().setDataList(bean.getSayList());
+                    DataManager.getInstance().saveData("publishList",bean.getPublishList());
+                    getAdapter().setDataList(bean.getPublishList());
                 }
             }
         },getActivity(),false,(BaseActivity)getActivity()));

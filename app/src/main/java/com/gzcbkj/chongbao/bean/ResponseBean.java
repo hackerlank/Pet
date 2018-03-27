@@ -13,6 +13,7 @@ public class ResponseBean implements Serializable {
     private UserInfoBean user;
     private UserInfoBean userEntity;
     private ArticleBean article;
+    private ArrayList<PublishBean> publishList;
     private ArrayList<SayBean> sayList;
     private ArrayList<PetTypeBean> petTypeList;
     private ArrayList<PetVarietyBean> PetVarietyList;
@@ -66,6 +67,14 @@ public class ResponseBean implements Serializable {
 
     public void setUserEntity(UserInfoBean userEntity) {
         this.userEntity = userEntity;
+    }
+
+    public ArrayList<PublishBean> getPublishList() {
+        return publishList;
+    }
+
+    public void setPublishList(ArrayList<PublishBean> publishList) {
+        this.publishList = publishList;
     }
 
     public ArrayList<SayBean> getSayList() {

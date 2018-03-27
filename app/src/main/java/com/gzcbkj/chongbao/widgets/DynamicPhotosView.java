@@ -25,6 +25,17 @@ public class DynamicPhotosView extends LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.item_dynamic_photo,this);
     }
 
+    public void setPhoto(String phone){
+        findViewById(R.id.iv).setVisibility(View.GONE);
+        findViewById(R.id.ll1).setVisibility(View.VISIBLE);
+        findViewById(R.id.hLine1).setVisibility(View.GONE);
+        findViewById(R.id.iv1).setVisibility(View.VISIBLE);
+        Utils.loadImage(R.drawable.default_1,phone,(ImageView)findViewById(R.id.iv1));
+        findViewById(R.id.iv3).setVisibility(View.GONE);
+        findViewById(R.id.vLine).setVisibility(View.GONE);
+        findViewById(R.id.ll2).setVisibility(View.GONE);
+    }
+
 
     public void setPhotoNum(int index,ArrayList<SayBean.SayImg> list){
         if(index==0){
