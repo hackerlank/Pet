@@ -657,7 +657,7 @@ public class Utils {
     }
 
     public static String replaceHtmlImage(String html) {
-        String regxpForImgTag = "<img\\s[^>]+/>";
+        String regxpForImgTag = "<img\\s[^>]+>";
         Pattern pattern = Pattern.compile(regxpForImgTag);
         Matcher matcher = pattern.matcher(html);
         while (matcher.find()) {
