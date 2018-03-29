@@ -232,7 +232,7 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
     }
 
     private void firstArticleList() {
-        HttpMethods.getInstance().firstArticleList(1, 30, new ProgressSubscriber(new SubscriberOnNextListener<ArticleListResponse>() {
+        HttpMethods.getInstance().firstArticleList(1, Constants.PAGE_COUNT, new ProgressSubscriber(new SubscriberOnNextListener<ArticleListResponse>() {
             @Override
             public void onNext(ArticleListResponse response) {
                 DataManager.getInstance().saveData(ArticleListResponse.class.getName(),response);

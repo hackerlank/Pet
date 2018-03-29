@@ -119,6 +119,7 @@ public class DataManager implements IDataManager {
         }
         mMyUserInfo = null;
         Preferences.getInstacne().setValues(MY_USER_INFO, "");
+        saveData("publishList", null);
     }
 
     @Override
