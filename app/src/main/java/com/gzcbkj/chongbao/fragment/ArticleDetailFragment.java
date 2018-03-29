@@ -92,7 +92,7 @@ public class ArticleDetailFragment extends BaseFragment implements OnRefreshList
         ((TextView)mTopView.findViewById(R.id.tvTime)).setText(Utils.transformTime(getActivity(),mArticleBean.getCreateTime()));
         ((ImageView)mTopView.findViewById(R.id.ivLike)).setImageResource(mArticleBean.getPraiseFlag()==0?R.drawable.like_grey:R.drawable.like);
         ((TextView)mTopView.findViewById(R.id.tvTitle)).setText(mArticleBean.getTitle());
-        ((TextView)mTopView.findViewById(R.id.tvContent)).setText(Html.fromHtml(mArticleBean.getContent(),mImgGetter,null));
+        ((TextView)mTopView.findViewById(R.id.tvContent)).setText(Html.fromHtml(Utils.replaceHtmlText(mArticleBean.getContent()),mImgGetter,null));
 
         mTopView.findViewById(R.id.ivLike).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -55,6 +55,7 @@ public class HttpMethods {
             public Response intercept(Chain chain) throws IOException {
                 Request request;
                 if (!TextUtils.isEmpty(DataManager.getInstance().getToken())) {
+                    Log.e("aaaaaaaa","token: "+DataManager.getInstance().getToken());
                     request = chain.request()
                             .newBuilder()
                             .addHeader("token", DataManager.getInstance().getToken())
@@ -665,6 +666,29 @@ public class HttpMethods {
         map.put("limit", limit);
         Observable observable = mRetrofit.create(HttpService.class).fosterAndAdoptPetInfoList(map);
 
+        toSubscribe(observable, subscriber);
+    }
+
+
+    /**
+     * @param page
+     * @param limit
+     * @param subscriber
+     */
+    public void queryCollenction(int page, int limit, ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("page", page);
+        map.put("limit", limit);
+        Observable observable = mRetrofit.create(HttpService.class).queryCollenction(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     * @param colectionId
+     * @param subscriber
+     */
+    public void deleteCollection(long colectionId, ProgressSubscriber subscriber) {
+        Observable observable = mRetrofit.create(HttpService.class).deleteCollection(colectionId);
         toSubscribe(observable, subscriber);
     }
 

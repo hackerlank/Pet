@@ -23,6 +23,7 @@ public class ResponseBean implements Serializable {
     private ArrayList<MyPetBean> ownPetList;
     private ArrayList<PetFosterBean> fosterPetList;
     private ArrayList<ArticleCommentBean> articleCommentList;
+    private ArrayList<CollectionBean> colectionList;
 
     public boolean isSuccess() {
         // TODO Auto-generated method stub
@@ -147,5 +148,13 @@ public class ResponseBean implements Serializable {
 
     public void setArticleCommentList(ArrayList<ArticleCommentBean> articleCommentList) {
         this.articleCommentList = articleCommentList;
+    }
+
+    public ArrayList<CollectionBean> getColectionList() {
+        return colectionList;
+    }
+
+    public void setColectionList(ArrayList<CollectionBean> colectionList) {
+        this.colectionList = colectionList;
     }
 }

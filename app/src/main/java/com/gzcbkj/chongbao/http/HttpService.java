@@ -275,4 +275,19 @@ public interface HttpService {
     @POST("fosterPet/fosterAndAdoptPetInfoList")
     Observable<ResponseBean> fosterAndAdoptPetInfoList(@Body HashMap<String, Object> map);
 
+
+    /**
+     * 查询收藏列表
+     * @return
+     */
+    @POST("appusercollection/queryCollenction")
+    Observable<ResponseBean> queryCollenction(@Body HashMap<String, Object> map);
+
+    /**
+     * 取消收藏
+     * @return
+     */
+    @POST("appusercollection/deleteCollection")
+    Observable<ResponseBean> deleteCollection(@Query("colectionId") long collectionId);
+
 }

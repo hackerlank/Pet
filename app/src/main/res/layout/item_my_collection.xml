@@ -80,6 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/like"
+                    android:drawablePadding="5dp"
                     android:text="23"
                     android:textColor="@color/color_66_66_66"
                     android:textSize="12sp" />
@@ -90,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
                     android:drawableLeft="@drawable/comment_icon"
+                    android:drawablePadding="5dp"
                     android:text="10"
                     android:textColor="@color/color_66_66_66"
                     android:textSize="12sp" />
@@ -107,7 +109,7 @@
         android:layout_height="match_parent"
         android:visibility="gone">
 
-        <com.gzcbkj.chongbao.widgets.RatioImageView
+        <com.gzcbkj.chongbao.widgets.RoundRectImageView
             android:id="@+id/ivAvater2"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -201,13 +203,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvShareNum2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/share_grey"
+                    android:drawablePadding="5dp"
                     android:text="213"
                     android:textColor="@color/color_66_66_66"
                     android:textSize="12sp" />
@@ -224,7 +227,8 @@
                     android:id="@+id/tvCollectNum2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/collect_grey"
+                    android:drawableLeft="@drawable/collect"
+                    android:drawablePadding="5dp"
                     android:text="56"
                     android:textColor="@color/color_66_66_66"
                     android:textSize="12sp" />
@@ -242,6 +246,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/like"
+                    android:drawablePadding="5dp"
                     android:text="23"
                     android:textColor="@color/color_66_66_66"
                     android:textSize="12sp" />
@@ -259,6 +264,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/comment_icon"
+                    android:drawablePadding="5dp"
                     android:text="10"
                     android:textColor="@color/color_66_66_66"
                     android:textSize="12sp" />
