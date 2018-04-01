@@ -290,4 +290,57 @@ public interface HttpService {
     @POST("appusercollection/deleteCollection")
     Observable<ResponseBean> deleteCollection(@Query("colectionId") long collectionId);
 
+    /**
+     * 查询最新申请记录数量
+     * @return
+     */
+    @GET("appuserapply/queryApplyNum")
+    Observable<ResponseBean> queryApplyNum();
+
+    /**
+     * 查询申请记录列表
+     * @return
+     */
+    @POST("appuserapply/applyList")
+    Observable<ResponseBean> applyList(@Body HashMap<String, Object> map);
+
+
+    /**
+     * 查询可添加好友
+     * @return
+     */
+    @GET("appuserapply/queryFriends")
+    Observable<ResponseBean> queryFriends();
+
+
+    /**
+     * 申请添加好友
+     * @return
+     */
+    @POST("appuserapply/userApply")
+    Observable<ResponseBean> userApply(@Body HashMap<String, Object> map);
+
+    /**
+     * 用户同意或拒绝好友申请
+     * @return
+     */
+    @POST("appuserapply/updateApply")
+    Observable<ResponseBean> updateApply(@Body HashMap<String, Object> map);
+
+
+    /**
+     * 查询用户关系列表
+     * @return
+     */
+    @POST("appuserRelation/relationlist")
+    Observable<ResponseBean> relationlist(@Body HashMap<String, Object> map);
+
+    /**
+     * 保存查看过的用户
+     * @return
+     */
+    @POST("appuserapply/saveResult")
+    Observable<ResponseBean> saveResult(@Body HashMap<String, Object> map);
 }
+
+

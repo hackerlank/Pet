@@ -25,6 +25,11 @@ public class ResponseBean implements Serializable {
     private ArrayList<ArticleCommentBean> articleCommentList;
     private ArrayList<CollectionBean> colectionList;
 
+    private int num;
+    private ArrayList<UserApplyBean> applyList;
+    private ArrayList<RelationBean> userRelationList;
+
+
     public boolean isSuccess() {
         // TODO Auto-generated method stub
         return code == 0;
@@ -156,5 +161,29 @@ public class ResponseBean implements Serializable {
 
     public void setColectionList(ArrayList<CollectionBean> colectionList) {
         this.colectionList = colectionList;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public ArrayList<UserApplyBean> getApplyList() {
+        return applyList;
+    }
+
+    public void setApplyList(ArrayList<UserApplyBean> applyList) {
+        this.applyList = applyList;
+    }
+
+    public ArrayList<RelationBean> getUserRelationList() {
+        return userRelationList;
+    }
+
+    public void setUserRelationList(ArrayList<RelationBean> userRelationList) {
+        this.userRelationList = userRelationList;
     }
 }

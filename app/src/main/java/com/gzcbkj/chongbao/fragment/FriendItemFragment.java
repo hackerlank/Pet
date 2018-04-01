@@ -5,8 +5,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.adapter.FriendAdapter;
 import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.http.HttpMethods;
+import com.gzcbkj.chongbao.http.OnHttpErrorListener;
+import com.gzcbkj.chongbao.http.ProgressSubscriber;
+import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
+import com.gzcbkj.chongbao.utils.Constants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -35,11 +41,6 @@ public class FriendItemFragment extends BaseFragment implements OnRefreshListene
     protected void onViewCreated(View view) {
         ListView listView = fv(R.id.listView);
         listView.setAdapter(getAdapter());
-        ArrayList<ResponseBean> list=new ArrayList<>();
-        for(int i=0;i<5;++i){
-            list.add(new ResponseBean());
-        }
-        getAdapter().setDataList(list);
         getAdapter().setCurrentIndex(mCurrentIndex);
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
@@ -50,6 +51,7 @@ public class FriendItemFragment extends BaseFragment implements OnRefreshListene
             }
         });
         setTotalStr();
+        smartRefreshLayout.autoRefresh();
     }
 
     private void setTotalStr(){
@@ -86,7 +88,44 @@ public class FriendItemFragment extends BaseFragment implements OnRefreshListene
     }
 
     @Override
-    public void onRefresh(RefreshLayout refreshlayout) {
+    public void onRefresh(final RefreshLayout refreshlayout) {
+        String relationship;
+        if(mCurrentIndex==INDEX_FRIEND){
+            relationship="4";
+        }else if(mCurrentIndex==INDEX_FOLLOWED){
+            relationship="2";
+        }else{
+            relationship="3";
+        }
+        HttpMethods.getInstance().relationlist(1, Constants.PAGE_COUNT,relationship,
+                new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+                    @Override
+                    public void onNext(ResponseBean bean) {
+                        if(getView()==null){
+                            return;
+                        }
+                        refreshlayout.finishRefresh();
+                        getAdapter().setDataList(bean.getUserRelationList());
+                        setTotalStr();
+                    }
+                }, getActivity(), false, new OnHttpErrorListener() {
+                    @Override
+                    public void onConnectError(Throwable e) {
+                        if(getView()==null){
+                            return;
+                        }
+                        refreshlayout.finishRefresh();
+                        ((BaseActivity) getActivity()).connectError(e);
+                    }
 
+                    @Override
+                    public void onServerError(int errorCode, String errorMsg) {
+                        if(getView()==null){
+                            return;
+                        }
+                        refreshlayout.finishRefresh();
+                  //      ((BaseActivity) getActivity()).serverError(errorCode,errorMsg);
+                    }
+                }));
     }
 }

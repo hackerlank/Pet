@@ -693,6 +693,98 @@ public class HttpMethods {
     }
 
 
+    /**
+     * @param subscriber
+     */
+    public void queryApplyNum(ProgressSubscriber subscriber) {
+        Observable observable = mRetrofit.create(HttpService.class).queryApplyNum();
+        toSubscribe(observable, subscriber);
+    }
+
+
+    /**
+     *
+     * @param page
+     * @param limit
+     * @param subscriber
+     */
+    public void applyList(int page,int limit,ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("page", page);
+        map.put("limit", limit);
+        Observable observable = mRetrofit.create(HttpService.class).applyList(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param userId
+     * @param content
+     * @param subscriber
+     */
+    public void userApply(String userId,String content,ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("content", content);
+        Observable observable = mRetrofit.create(HttpService.class).userApply(map);
+        toSubscribe(observable, subscriber);
+    }
+
+
+    /**
+     *
+     * @param applyId
+     * @param applyOperation 3:通过;4:拒绝
+     * @param subscriber
+     */
+    public void updateApply(long applyId,String applyOperation,ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("applyId", applyId);
+        map.put("applyOperation", applyOperation);
+        Observable observable = mRetrofit.create(HttpService.class).updateApply(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param subscriber
+     */
+    public void queryFriends(ProgressSubscriber subscriber) {
+        Observable observable = mRetrofit.create(HttpService.class).queryFriends();
+        toSubscribe(observable, subscriber);
+    }
+
+
+    /**
+     *
+     * @param page
+     * @param limit
+     * @param relationship 2:关注;3:粉丝;4:好友
+     * @param subscriber
+     */
+    public void relationlist(int page,int limit,String relationship,ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("page", page);
+        map.put("limit", limit);
+        map.put("relationship", relationship);
+        Observable observable = mRetrofit.create(HttpService.class).relationlist(map);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     *
+     * @param userId
+     * @param subscriber
+     */
+    public void saveResult(String userId,ProgressSubscriber subscriber) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        Observable observable = mRetrofit.create(HttpService.class).saveResult(map);
+        toSubscribe(observable, subscriber);
+    }
+
+
+
     public <T> void toSubscribe(Observable<T> o, Subscriber<T> s) {
         if (s instanceof ProgressSubscriber) {
             ((ProgressSubscriber) s).setObservable(o);

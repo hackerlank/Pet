@@ -4,14 +4,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.gzcbkj.chongbao.R;
+import com.gzcbkj.chongbao.activity.BaseActivity;
 import com.gzcbkj.chongbao.adapter.VerifyFriendAdapter;
 import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.http.HttpMethods;
+import com.gzcbkj.chongbao.http.ProgressSubscriber;
+import com.gzcbkj.chongbao.http.SubscriberOnNextListener;
+import com.gzcbkj.chongbao.utils.Constants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
-import java.util.ArrayList;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
@@ -31,11 +34,6 @@ public class VerifyFriendFragment extends BaseFragment implements OnRefreshListe
         setText(R.id.tvTitle,R.string.verify_friend);
         ListView listView = fv(R.id.listView);
         listView.setAdapter(getAdapter());
-        ArrayList<ResponseBean> list=new ArrayList<>();
-        for(int i=0;i<10;++i){
-            list.add(new ResponseBean());
-        }
-        getAdapter().setDataList(list);
         SmartRefreshLayout smartRefreshLayout = fv(R.id.smartLayout);
         smartRefreshLayout.setOnRefreshListener(this);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -44,6 +42,7 @@ public class VerifyFriendFragment extends BaseFragment implements OnRefreshListe
                 gotoPager(i%2==0?VerifyFriendProfileFragment.class:UserProfileFragment.class,null);
             }
         });
+        smartRefreshLayout.autoRefresh();
     }
 
     @Override
@@ -65,6 +64,17 @@ public class VerifyFriendFragment extends BaseFragment implements OnRefreshListe
     @Override
     public void onRefresh(final RefreshLayout refreshlayout) {
         refreshlayout.finishRefresh();
+        HttpMethods.getInstance().applyList(1, Constants.PAGE_COUNT,
+                new ProgressSubscriber(new SubscriberOnNextListener<ResponseBean>() {
+                    @Override
+                    public void onNext(ResponseBean bean) {
+                        if(getView()==null){
+                            return;
+                        }
+                        refreshlayout.finishRefresh();
+                        getAdapter().setDataList(bean.getApplyList());
+                    }
+                },getActivity(),false,(BaseActivity)getActivity()));
     }
 
     @Override

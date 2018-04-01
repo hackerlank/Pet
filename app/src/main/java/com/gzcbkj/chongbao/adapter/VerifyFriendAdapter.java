@@ -8,12 +8,14 @@ import android.widget.TextView;
 
 import com.gzcbkj.chongbao.R;
 import com.gzcbkj.chongbao.bean.ResponseBean;
+import com.gzcbkj.chongbao.bean.UserApplyBean;
+import com.gzcbkj.chongbao.utils.Utils;
 
 /**
  * Created by huangzhifeng on 2018/2/27.
  */
 
-public class VerifyFriendAdapter extends MyBaseAdapter<ResponseBean> {
+public class VerifyFriendAdapter extends MyBaseAdapter<UserApplyBean> {
     public VerifyFriendAdapter(Context context) {
         super(context);
     }
@@ -32,10 +34,26 @@ public class VerifyFriendAdapter extends MyBaseAdapter<ResponseBean> {
         }else{
             holder=(ViewHolder) view.getTag();
         }
-        if(i%2==0){
+        UserApplyBean bean=getItem(i);
+        Utils.loadImages(R.drawable.touxiang,bean.getHeadPic(),holder.ivAvater);
+        setText(holder.tvName,bean.getUsername());
+        int operation=bean.getApplyOperation();  ////与用户关系类型；1:待查询申请;2:待验证;3:通过;4:拒绝
+        if(operation==3){
             holder.tvOperator.setBackgroundResource(R.drawable.bg_verify_friend);
             holder.tvOperator.setTextColor(mContext.getResources().getColor(R.color.color_255_255_255));
             holder.tvOperator.setText(mContext.getString(R.string.pass));
+        }else if(operation==1){
+            holder.tvOperator.setBackgroundResource(0);
+            holder.tvOperator.setTextColor(mContext.getResources().getColor(R.color.color_ff_73_73));
+            holder.tvOperator.setText(mContext.getString(R.string.dai_chaxun_apply));
+        }else if(operation==2){
+            holder.tvOperator.setBackgroundResource(0);
+            holder.tvOperator.setTextColor(mContext.getResources().getColor(R.color.color_ff_73_73));
+            holder.tvOperator.setText(mContext.getString(R.string.dai_yanzheng));
+        }else if(operation==4){
+            holder.tvOperator.setBackgroundResource(0);
+            holder.tvOperator.setTextColor(mContext.getResources().getColor(R.color.color_ff_73_73));
+            holder.tvOperator.setText(mContext.getString(R.string.jujue));
         }else{
             holder.tvOperator.setBackgroundResource(0);
             holder.tvOperator.setTextColor(mContext.getResources().getColor(R.color.color_ff_73_73));
